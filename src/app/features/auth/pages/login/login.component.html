@@ -1,0 +1,35 @@
+<str-auth-card
+  title="Bem-vindo de volta"
+  subtitle="Acesse sua conta para continuar."
+  ariaLabel="Área de login"
+>
+  <form [formRoot]="loginForm" class="login-form">
+    <str-input
+      [formField]="loginForm.username"
+      label="Usuário"
+      placeholder="Digite seu usuário ou e-mail"
+      inputId="username"
+    />
+
+    <str-input
+      [formField]="loginForm.password"
+      label="Senha"
+      type="password"
+      placeholder="Digite sua senha"
+      inputId="password"
+    />
+
+    @if (hasError()) {
+      <p class="login-error" role="alert">Usuário ou senha inválidos. Tente novamente.</p>
+    }
+
+    <str-button type="submit" size="lg" iconName="arrow_forward" [loading]="isLoading()">
+      Entrar
+    </str-button>
+
+    <p class="register-row">
+      Não tem uma conta?
+      <button type="button" class="register-link" (click)="goToRegister()">Cadastre-se</button>
+    </p>
+  </form>
+</str-auth-card>

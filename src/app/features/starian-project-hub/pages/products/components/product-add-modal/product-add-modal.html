@@ -1,0 +1,57 @@
+<form [formRoot]="addForm" class="add-form" novalidate aria-labelledby="add-product-dialog-title">
+
+  <header class="add-form__header">
+    <p id="add-product-dialog-title" class="title-font-20">Adicionar produto</p>
+    <p class="add-form__subtitle">Preencha os dados para cadastrar um novo produto.</p>
+  </header>
+
+  <div class="add-form__fields">
+    <str-input
+      [formField]="addForm.title"
+      label="Título"
+      placeholder="Nome do produto"
+      inputId="add-title"
+    />
+
+    <div class="add-form__row">
+      <str-input
+        [formField]="addForm.price"
+        label="Preço (R$)"
+        placeholder="0.00"
+        inputId="add-price"
+        [numbersOnly]="true"
+      />
+
+      <str-select
+        [formField]="addForm.category"
+        label="Categoria"
+        inputId="add-category"
+        [options]="categoryOptions()"
+      />
+    </div>
+
+    <str-input
+      [formField]="addForm.description"
+      label="Descrição"
+      placeholder="Descrição do produto"
+      inputId="add-description"
+    />
+
+    <str-input
+      [formField]="addForm.image"
+      label="URL da imagem"
+      placeholder="https://exemplo.com/imagem.jpg"
+      inputId="add-image"
+    />
+  </div>
+
+  <div class="add-form__actions">
+    <str-button type="button" size="md" variant="secondary" (click)="cancel()">
+      Cancelar
+    </str-button>
+    <str-button type="submit" size="md" iconName="add" [loading]="addLoading()">
+      Adicionar
+    </str-button>
+  </div>
+
+</form>

@@ -1,0 +1,7 @@
+<div class="rating-cell">
+  @for (filled of stars(); track $index) {
+    <span class="star" [class.star--filled]="filled" aria-hidden="true">★</span>
+  }
+  <span class="rating-value">{{ rate() }}</span>
+  <span class="rating-count">({{ count() }})</span>
+</div>

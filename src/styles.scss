@@ -1,0 +1,108 @@
+@use 'assets/styles/typography';
+
+*{
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-optical-sizing: auto;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.str-sort {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.str-sort:focus-visible {
+  outline: 2px solid var(--str-focus-ring, #2563eb);
+  outline-offset: 2px;
+}
+
+.str-sort::after {
+  font-family: 'Material Symbols Rounded', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-left: 4px;
+  vertical-align: middle;
+  color: var(--str-sort-color-hint, #9ca3af);
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+  content: 'arrow_upward_alt';
+}
+
+.str-sort:hover::after {
+  opacity: 1;
+}
+
+.str-sort[data-direction='asc']::after {
+  content: 'arrow_upward_alt';
+  color: var(--str-sort-color-active, #374151);
+  opacity: 1;
+}
+
+.str-sort[data-direction='desc']::after {
+  content: 'arrow_downward_alt';
+  color: var(--str-sort-color-active, #374151);
+  opacity: 1;
+}
+
+.str-sort--active {
+  font-weight: 600;
+}
+
+.str-tooltip {
+  position: absolute;
+  z-index: 99999;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.6px;
+  hyphens: auto;
+  text-align: left;
+  pointer-events: none;
+  width: fit-content;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  backdrop-filter: blur(8px);
+  background-color: #242424;
+  color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.str-tooltip-shortcut {
+  font-weight: 400;
+  background-color: #6e6e6e;
+  padding: 2px 6px;
+  line-height: 150%;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin-left: 4px;
+  display: inline-block;
+}
+
+p-dialog{
+  --p-dialog-header-padding: 8px 12px;
+}

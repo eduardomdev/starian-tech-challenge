@@ -1,0 +1,244 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.products-page {
+  padding: 24px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.products-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.table-wrapper {
+  flex: 1;
+  min-height: 0;
+
+  str-table {
+    height: 100%;
+  }
+}
+
+.products-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+
+  str-button {
+    width: auto;
+    flex-shrink: 0;
+  }
+}
+
+.products-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+// ─── Text search ──────────────────────────────────────────────────────────────
+
+.filter-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 320px;
+  min-width: 160px;
+}
+
+.filter-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// str-input host: injeta padding via CSS custom props para acomodar ícone e botão clear
+.filter-search-input {
+  max-width: 320px;
+  min-width: 160px;
+  flex: 1;
+}
+
+.filter-search-clear {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #9ca3af;
+  padding: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: #00000010;
+    color: #505050;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #0c0c0cb9;
+    outline-offset: 2px;
+  }
+}
+
+// ─── Count & filter indicator ─────────────────────────────────────────────────
+
+.products-count {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.products-count-filtered {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-left: 4px;
+}
+
+.col-id {
+  width: 56px;
+  white-space: nowrap;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.col-product {
+  width: 100%;
+}
+
+.col-category {
+  width: 200px;
+}
+
+.col-price {
+  width: 148px;
+  white-space: nowrap;
+}
+
+.col-rating {
+  width: 230px;
+}
+
+.col-actions {
+  width: 96px;
+}
+
+th {
+  padding: 0 16px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #505050;
+  letter-spacing: 0.05em;
+  text-align: left;
+  vertical-align: middle;
+}
+
+td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 14px;
+  color: #242424;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+// Product cell
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 4px;
+  flex-shrink: 0;
+  border: 1px solid #e0e0e0;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.product-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #242424;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
+
+.product-desc {
+  font-size: 12px;
+  color: #505050;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
+
+// Action buttons
+.actions-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  color: #505050;
+  transition: background 0.15s ease, transform 0.1s ease;
+
+  &:hover {
+    background: #00000008;
+  }
+
+  &:active {
+    transform: scale(0.9);
+    background: #00000012;
+  }
+}

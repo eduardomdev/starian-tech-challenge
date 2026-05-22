@@ -1,0 +1,16 @@
+<header class="card-header">
+	<span class="card-title">{{ title() }}</span>
+
+	<div
+		class="icon-wrapper"
+		[style.background-color]="iconBgColor()"
+		aria-hidden="true"
+	>
+		<str-icon [name]="iconName()" [colorIcon]="iconColor()" size="20" />
+	</div>
+</header>
+
+<div class="card-body">
+	<p class="card-value">{{ value() }}</p>
+	<p class="card-description">{{ description() }}</p>
+</div>

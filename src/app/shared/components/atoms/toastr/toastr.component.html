@@ -1,0 +1,25 @@
+<div class="toastr-container" aria-live="polite" aria-atomic="false">
+  @for (toast of toastr.toasts(); track toast) {
+    <div
+      class="toast"
+      [class.toast--success]="toast.type === 'success'"
+      [class.toast--error]="toast.type === 'error'"
+      role="alert"
+    >
+      <str-icon
+        [name]="toast.type === 'success' ? 'check_circle' : 'error'"
+        [fill]="true"
+        size="20"
+      />
+      <span class="toast__message">{{ toast.message }}</span>
+      <button
+        type="button"
+        class="toast__close"
+        (click)="toastr.dismiss(toast)"
+        aria-label="Fechar notificação"
+      >
+        <str-icon name="close" size="16" />
+      </button>
+    </div>
+  }
+</div>

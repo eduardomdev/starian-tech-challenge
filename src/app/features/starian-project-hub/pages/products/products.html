@@ -1,0 +1,98 @@
+<section class="products-page">
+  <header class="products-header">
+    <p class="title-font-24">Produtos</p>
+    <p class="subtitle-font-16">Controle seu catálogo de produtos de forma simples e eficiente.</p>
+  </header>
+
+  <div class="products-toolbar">
+    <!-- Filters -->
+    <div class="products-filters" role="search" aria-label="Filtros de produtos">
+      <!-- Text search -->
+        <str-input
+          class="filter-search-input"
+          placeholder="Buscar por ID ou título..."
+          ariaLabel="Buscar produto por ID ou título"
+          inputId="filter-product-text"
+          variant="secondary"
+          size="sm"
+          [value]="filterText()"
+          (valueChange)="filterText.set($event)"
+        />
+
+      <!-- Category multi-select -->
+      <str-multi-select
+        label="Categorias"
+        placeholder="Categorias"
+        [options]="availableCategories()"
+        [value]="filterCategories()"
+        (valueChange)="filterCategories.set($event)"
+      />
+    </div>
+
+    <!-- Add button -->
+    <str-button size="sm" iconName="add" iconPosition="left" (click)="openAddModal()">
+      Adicionar produto
+    </str-button>
+  </div>
+
+  <div class="table-wrapper">
+    <str-table strSortGroup [data]="products()" [loading]="loading()" textLoading="Buscando lista de produtos..."
+      [errorLoading]="error()" [trackByFn]="trackById">
+
+      <ng-template #toolbarTemplate>
+        <span class="products-count">
+          Exibindo {{ products().length }} produto{{ products().length !== 1 ? 's' : '' }}
+          @if (hasActiveFilters()) {
+            <span class="products-count-filtered">(filtrado)</span>
+          }
+        </span>
+      </ng-template>
+
+      <ng-template #headerTemplate>
+        <th scope="col" class="col-id" [strSort]="'id'" (strSortChange)="sortService.onSort($event)">Id</th>
+        <th scope="col" class="col-product" [strSort]="'title'" (strSortChange)="sortService.onSort($event)">Produto
+        </th>
+        <th scope="col" class="col-category" [strSort]="'category'" (strSortChange)="sortService.onSort($event)">
+          Categoria</th>
+        <th scope="col" class="col-price" [strSort]="'price'" (strSortChange)="sortService.onSort($event)">Preço</th>
+        <th scope="col" class="col-rating" [strSort]="'rating.rate'" (strSortChange)="sortService.onSort($event)">
+          Avaliação</th>
+        <th scope="col" class="col-actions">Ações</th>
+      </ng-template>
+
+      <ng-template #itemTemplate let-product>
+        <tr>
+          <td class="col-id">#{{ product.id }}</td>
+          <td class="col-product">
+            <div class="product-cell">
+              <img [src]="product.image" [alt]="product.title" class="product-img" width="48" height="48" loading="lazy"
+                decoding="async" />
+              <div class="product-info">
+                <span class="product-title">{{ product.title }}</span>
+                <span class="product-desc" [strTooltip]="product.description" strTooltipPosition="bottom"
+                  tooltipMaxWidth="50%" [whenTruncate]="true" [tooltipShowDelay]="500"> {{ product.description }} </span>
+              </div>
+            </div>
+          </td>
+          <td class="col-category">
+            <str-tag [value]="product.category" [config]="tagConfig()" />
+          </td>
+          <td class="col-price">{{ product.price | currency:'BRL':'symbol':'1.2-2' }}</td>
+          <td class="col-rating">
+            <product-rating [rate]="product.rating.rate" [count]="product.rating.count" />
+          </td>
+          <td class="col-actions">
+            <div class="actions-cell">
+              <button strTooltip="Editar produto" [tooltipShowDelay]="500" strTooltipPosition="bottom" class="action-btn" type="button" [attr.aria-label]="'Editar ' + product.title" (click)="openEditModal(product)">
+                <str-icon name="edit" size="18" />
+              </button>
+              <button strTooltip="Excluir produto" [tooltipShowDelay]="500" strTooltipPosition="bottom" class="action-btn action-btn--delete" type="button" [attr.aria-label]="'Excluir ' + product.title" (click)="openDeleteModal(product)">
+                <str-icon name="delete" size="18" />
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </str-table>
+  </div>
+</section>

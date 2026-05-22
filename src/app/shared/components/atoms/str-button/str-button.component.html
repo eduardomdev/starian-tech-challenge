@@ -1,0 +1,13 @@
+<button [type]="type()" [class]="classes()" [disabled]="loading()" [attr.aria-busy]="loading() || null">
+  @if (iconName() && iconPosition() === 'left') {
+    <str-icon [name]="iconName()" size="20" />
+  }
+
+  <ng-content />
+
+  @if (loading()) {
+    <str-spinner size="sm" />
+  } @else if (iconName() && iconPosition() === 'right') {
+    <str-icon [name]="iconName()" size="20" />
+  }
+</button>

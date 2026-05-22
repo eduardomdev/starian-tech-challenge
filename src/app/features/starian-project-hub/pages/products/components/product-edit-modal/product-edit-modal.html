@@ -1,0 +1,56 @@
+<form [formRoot]="editForm" class="edit-form" novalidate aria-labelledby="edit-product-dialog-title">
+
+  <header class="edit-form__header">
+    <p id="edit-product-dialog-title" class="title-font-20">Editar produto</p>
+    <p class="subtitle-font-14">Atualize as informações do produto abaixo.</p>
+  </header>
+
+  <div class="product-preview">
+    <img [src]="product.image" [alt]="product.title" class="product-preview__img" width="56" height="56"
+      loading="lazy" decoding="async" />
+    <span class="product-preview__id">Produto #{{ product.id }}</span>
+  </div>
+
+  <div class="edit-form__fields">
+    <str-input
+      [formField]="editForm.title"
+      label="Título"
+      placeholder="Nome do produto"
+      inputId="edit-title"
+    />
+
+    <div class="edit-form__row">
+      <str-input
+        [formField]="editForm.price"
+        label="Preço (R$)"
+        placeholder="0.00"
+        inputId="edit-price"
+        [numbersOnly]="true"
+      />
+
+      <str-select
+        [formField]="editForm.category"
+        label="Categoria"
+        inputId="edit-category"
+        [options]="categoryOptions()"
+      />
+    </div>
+
+    <str-input
+      [formField]="editForm.description"
+      label="Descrição"
+      placeholder="Descrição do produto"
+      inputId="edit-description"
+    />
+  </div>
+
+  <div class="edit-form__actions">
+    <str-button type="button" size="md" variant="secondary" (click)="cancel()">
+      Cancelar
+    </str-button>
+    <str-button type="submit" size="md" iconName="check" [loading]="updateLoading()">
+      Salvar alterações
+    </str-button>
+  </div>
+
+</form>

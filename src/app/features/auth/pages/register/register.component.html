@@ -1,0 +1,37 @@
+<str-auth-card
+  title="Crie sua conta"
+  subtitle="Preencha os dados abaixo para começar."
+  ariaLabel="Área de cadastro"
+>
+  <form [formRoot]="registerForm" class="register-form">
+    <str-input
+      [formField]="registerForm.username"
+      label="Usuário"
+      placeholder="Escolha um nome de usuário"
+      inputId="username"
+    />
+
+    <str-input
+      [formField]="registerForm.email"
+      label="E-mail"
+      type="email"
+      placeholder="Digite seu e-mail"
+      inputId="email"
+    />
+
+    <str-input
+      [formField]="registerForm.password"
+      label="Senha"
+      type="password"
+      placeholder="Crie uma senha"
+      inputId="password"
+    />
+
+    <str-button type="submit" size="lg" iconName="arrow_forward" [loading]="isLoading()">Criar conta</str-button>
+
+    <p class="login-row">
+      Já tem uma conta?
+      <button type="button" class="login-link" (click)="goToLogin()">Entrar</button>
+    </p>
+  </form>
+</str-auth-card>

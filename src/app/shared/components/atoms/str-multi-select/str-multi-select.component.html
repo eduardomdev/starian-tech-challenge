@@ -1,0 +1,84 @@
+<div
+  class="str-ms-container"
+  [class.str-ms-container--open]="isOpen()"
+  [class.str-ms-container--disabled]="disabled()"
+>
+
+  <button
+    type="button"
+    class="str-ms-trigger"
+    [class.str-ms-trigger--active]="selectedCount() > 0"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-haspopup]="'listbox'"
+    [attr.aria-label]="(label() || placeholder()) + (selectedCount() > 0 ? ': ' + selectedCount() + ' selecionada(s)' : '')"
+    [disabled]="disabled() || null"
+    (click)="toggle()"
+    (keydown.escape)="close()"
+  >
+    <div class="str-ms-trigger-label">
+      <str-icon name="category" size="16" aria-hidden="true" />
+      <span class="str-ms-trigger-text">{{ placeholder() }}</span>
+    </div>
+
+    @if (selectedCount() > 0) {
+      <span class="str-ms-badge" aria-hidden="true">{{ selectedCount() }}</span>
+    } @else {
+      <str-icon
+        name="expand_more"
+        size="16"
+        [rotate]="isOpen()"
+        aria-hidden="true"
+      />
+    }
+  </button>
+
+  @if (isOpen()) {
+    <div
+      class="str-ms-dropdown"
+      role="dialog"
+      (keydown.escape)="close()"
+    >
+      <fieldset class="str-ms-fieldset">
+        <legend class="sr-only">{{ label() || 'Opções de filtro' }}</legend>
+
+        @if (options().length === 0) {
+          <p class="str-ms-empty">Nenhuma opção disponível</p>
+        } @else {
+          <ul class="str-ms-list" role="listbox" aria-multiselectable="true">
+            @for (option of options(); track option.value) {
+              <li role="presentation">
+                <label
+                  class="str-ms-option"
+                  [class.str-ms-option--selected]="isSelected()(option.value)"
+                >
+                  <input
+                    type="checkbox"
+                    class="str-ms-checkbox"
+                    [checked]="isSelected()(option.value)"
+                    [attr.aria-checked]="isSelected()(option.value)"
+                    role="option"
+                    [attr.aria-selected]="isSelected()(option.value)"
+                    (change)="toggleOption(option.value)"
+                  />
+                  <span class="str-ms-option-label">{{ option.label }}</span>
+                </label>
+              </li>
+            }
+          </ul>
+        }
+      </fieldset>
+
+      <div class="str-ms-dropdown-footer">
+        <button
+          type="button"
+          class="str-ms-clear-btn"
+          [disabled]="selectedCount() === 0"
+          (click)="clearAll()"
+          aria-label="Limpar seleção de {{ label() || 'categorias' }}"
+        >
+          Limpar
+        </button>
+      </div>
+    </div>
+  }
+</div>

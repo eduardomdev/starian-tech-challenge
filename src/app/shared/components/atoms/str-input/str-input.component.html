@@ -1,0 +1,35 @@
+<div class="str-input">
+  @if (label()) {
+    <div class="str-input__label-row">
+      <label [for]="inputId()" class="str-input__label">{{ label() }}</label>
+      <ng-content select="[labelSuffix]" />
+    </div>
+  }
+
+  <div class="str-input__field-wrap">
+    <input
+      [strNumbersOnly]="numbersOnly()"
+      [id]="inputId()"
+      [type]="type()"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [style.height]="sizeHeight()"
+      [attr.maxlength]="maxLength() ?? null"
+      [attr.inputmode]="numbersOnly() ? 'decimal' : null"
+      [attr.aria-label]="ariaLabel() || null"
+      [attr.aria-invalid]="showError() ? 'true' : null"
+      [attr.aria-describedby]="showError() && inputId() ? inputId() + '-error' : null"
+      [attr.required]="required() ? 'true' : null"
+      [class]="fieldClasses()"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+    />
+
+    @if (showError()) {
+      <span [id]="inputId() + '-error'" class="str-input__error" role="alert">
+        {{ firstError() }}
+      </span>
+    }
+  </div>
+</div>

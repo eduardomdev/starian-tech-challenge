@@ -1,0 +1,32 @@
+:host {
+  display: inline-flex;
+}
+
+.rating-cell {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.star {
+  font-size: 16px;
+  color: #d1d5db;
+  line-height: 1;
+
+  &.star--filled {
+    color: #f59e0b;
+  }
+}
+
+.rating-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #242424;
+  margin-left: 6px;
+}
+
+.rating-count {
+  font-size: 12px;
+  margin-left: 4px;
+  color: #505050;
+}

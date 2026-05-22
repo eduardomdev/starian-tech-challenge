@@ -1,0 +1,19 @@
+<section class="dashboard-page">
+  <header class="dashboard-header">
+    <p class="title-font-24">Dashboard</p>
+    <p class="subtitle-font-16">Tudo o que você precisa para gerenciar seu catálogo em um único dashboard.</p>
+  </header>
+
+  <div class="stats-grid">
+    @for (stat of stats(); track stat.title) {
+      <str-stats-card
+        [title]="stat.title"
+        [value]="stat.value"
+        [description]="stat.description"
+        [iconName]="stat.iconName"
+        [iconColor]="stat.iconColor"
+        [iconBgColor]="stat.iconBgColor"
+      />
+    }
+  </div>
+</section>

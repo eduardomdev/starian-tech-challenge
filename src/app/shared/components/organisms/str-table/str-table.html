@@ -1,0 +1,75 @@
+<section class="table-container">
+	<table>
+		@if (caption()) {
+			<caption>{{ caption() }}</caption>
+		}
+		<thead>
+			<tr>
+				<ng-container [ngTemplateOutlet]="headerTemplate()" />
+			</tr>
+		</thead>
+		<tbody>
+			@if (errorLoading()) {
+				<tr>
+					<td colspan="9999">
+						<div class="container-empty">
+							@let errorTemp = errorTemplate();
+							@if (errorTemp) {
+								<ng-container [ngTemplateOutlet]="errorTemp" />
+							} @else {
+								<p class="empty-title">Não foi possível carregar as informações</p>
+								<p class="empty-description">
+									Tivemos um problema para carregar as informações nesse momento. Tente novamente mais
+									tarde.
+								</p>
+							}
+						</div>
+					</td>
+				</tr>
+			} @else {
+				@for (
+					item of data();
+					let index = $index;
+					track trackByFn()(index, item);
+					let first = $first;
+					let last = $last
+				) {
+					<ng-container
+						[ngTemplateOutlet]="itemTemplate()"
+						[ngTemplateOutletContext]="{ $implicit: item, index, first, last }" />
+				} @empty {
+					@if (!loading()) {
+						<tr>
+							<td colspan="9999">
+								<div class="container-empty">
+									@let emptyTemp = emptyDataTemplate();
+									@if (emptyTemp) {
+										<ng-container [ngTemplateOutlet]="emptyTemp" />
+									} @else {
+										<p class="empty-title">{{ emptyText() }}</p>
+										<p class="empty-description">
+											Assim que estiverem disponíveis, eles serão exibidos aqui.
+										</p>
+									}
+								</div>
+							</td>
+						</tr>
+					}
+				}
+			}
+		</tbody>
+	</table>
+</section>
+
+@let toolbar = toolbarTemplate();
+@if (toolbar) {
+	<div class="table-toolbar">
+		<ng-container [ngTemplateOutlet]="toolbar" />
+	</div>
+}
+
+@if (loading()) {
+	<div class="loading-overlay">
+		<str-loading [text]="textLoading()" />
+	</div>
+}

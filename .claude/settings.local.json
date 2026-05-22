@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(node -e \"const fs = require\\('fs'\\); const content = fs.readFileSync\\('./node_modules/@angular/forms/types/_structure-chunk.d.ts', 'utf8'\\); const idx = content.indexOf\\('ValidationError'\\); console.log\\(content.slice\\(idx, idx + 1500\\)\\)\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); const content = fs.readFileSync\\('./node_modules/@angular/forms/fesm2022/signals.mjs', 'utf8'\\); const idx = content.indexOf\\('ValidationError ='\\); console.log\\(content.slice\\(idx, idx+600\\)\\)\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); const content = fs.readFileSync\\('./node_modules/@angular/forms/fesm2022/signals.mjs', 'utf8'\\); const idx = content.indexOf\\('class BaseNgValidationError'\\); console.log\\(content.slice\\(idx, idx+500\\)\\)\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); const content = fs.readFileSync\\('./node_modules/@angular/forms/types/_structure-chunk.d.ts', 'utf8'\\); const idx = content.indexOf\\('namespace ValidationError'\\); console.log\\(content.slice\\(idx, idx+800\\)\\)\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); const content = fs.readFileSync\\('./node_modules/@angular/forms/types/_structure-chunk.d.ts', 'utf8'\\); const idx = content.indexOf\\('WithOptionalFieldTree'\\); console.log\\(content.slice\\(idx-50, idx+300\\)\\)\")",
+      "Bash(node -e \"const fs = require\\('fs'\\); const content = fs.readFileSync\\('./node_modules/@angular/forms/types/_structure-chunk.d.ts', 'utf8'\\); const idx = content.indexOf\\('WithOptionalFieldTree extends'\\); if\\(idx>=0\\) console.log\\(content.slice\\(idx-20, idx+200\\)\\); else { const idx2 = content.indexOf\\('type WithOptionalFieldTree'\\); console.log\\(content.slice\\(idx2, idx2+300\\)\\) }\")",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Eduardo Maciel\\\\starian-tech-challenge\\\\src\\\\app\\\\shared\\\\components\" -Recurse -Force)",
+      "Bash(Select-Object -Property FullName, PSIsContainer)",
+      "Bash(Sort-Object FullName)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(npx tsc *)",
+      "WebFetch(domain:angular.dev)"
+    ]
+  }
+}

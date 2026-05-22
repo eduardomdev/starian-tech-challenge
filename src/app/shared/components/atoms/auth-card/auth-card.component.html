@@ -1,0 +1,22 @@
+<main class="auth-wrapper">
+  <div class="auth-card" role="region" [attr.aria-label]="ariaLabel()">
+    <header class="auth-header">
+      <div class="logo-row">
+        <img
+          class="auth-logo"
+          src="https://media.licdn.com/dms/image/v2/D4D0BAQGibgBlPwj9pA/company-logo_200_200/B4DZdbCrt8H4AM-/0/1749579120051/somos_starian_logo?e=1781136000&v=beta&t=quHkDcGTavujuQIenqfP08aslaBz60bL3swKvLLfIqM"
+          alt="Starian logo"
+          width="56"
+          height="56"
+        />
+        <div class="logo-text">
+          <span class="area-label">Starian Hub</span>
+          <p class="title-font-20">{{ title() }}</p>
+          <p class="subtitle">{{ subtitle() }}</p>
+        </div>
+      </div>
+    </header>
+
+    <ng-content />
+  </div>
+</main>

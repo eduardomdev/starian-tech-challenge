@@ -1,0 +1,37 @@
+.delete-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0.25rem 0;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__desc {
+    font-size: 14px;
+    line-height: 150%;
+    color: #505050;
+    margin: 0;
+    padding: 0.75rem 0;
+
+    strong {
+      color: #242424;
+      font-weight: 600;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+
+    str-button {
+      width: auto;
+    }
+  }
+}

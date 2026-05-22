@@ -1,0 +1,20 @@
+<div class="delete-modal" role="alertdialog" aria-labelledby="delete-dialog-title" aria-describedby="delete-dialog-desc">
+
+  <header class="delete-modal__header">
+    <p id="delete-dialog-title" class="title-font-20">Excluir produto</p>
+    <p id="delete-dialog-desc" class="delete-modal__desc">
+      Deseja realmente excluir o produto <strong>#{{ product.id }}</strong>?
+      Esta ação não poderá ser desfeita.
+    </p>
+  </header>
+
+  <div class="delete-modal__actions">
+    <str-button type="button" size="md" variant="secondary" (click)="cancel()">
+      Cancelar
+    </str-button>
+    <str-button type="button" size="md" iconName="delete" [loading]="deleteLoading()" (click)="confirm()">
+      Excluir
+    </str-button>
+  </div>
+
+</div>

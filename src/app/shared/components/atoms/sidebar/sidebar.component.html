@@ -1,0 +1,113 @@
+<div
+  class="str-sidebar"
+  [class.str-sidebar--collapsed]="!expanded()"
+  [class.str-sidebar--hovered]="shouldShowOnHover()"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+>
+  <div class="str-sidebar__header">
+    <div class="str-sidebar__logo">
+        <div class="str-sidebar__logo-default">
+          <img style="display: block; margin: auto; width: 45px; height: 45px; border-radius: 6px;" src="https://media.licdn.com/dms/image/v2/D4D0BAQGibgBlPwj9pA/company-logo_200_200/B4DZdbCrt8H4AM-/0/1749579120051/somos_starian_logo?e=1781136000&amp;v=beta&amp;t=quHkDcGTavujuQIenqfP08aslaBz60bL3swKvLLfIqM">
+        </div>
+    </div>
+    <button
+      class="str-sidebar__toggle"
+      (click)="toggleExpanded()"
+      [attr.aria-label]="expanded() ? 'Fechar menu' : 'Abrir menu'"
+    >
+      <str-icon [name]="expanded() ? 'right_panel_open' : 'right_panel_close'" colorIcon="#505050"></str-icon>
+    </button>
+  </div>
+
+  <nav class="str-sidebar__nav">
+    @for (section of sections(); track section.name) {
+      @if (section.name) {
+        <div class="str-sidebar__section-header">{{ section.name }}</div>
+      }
+      <div class="str-sidebar__section">
+        @for (item of section.items; track item.label) {
+          <button
+            class="str-sidebar__item"
+            [class.str-sidebar__item--active]="isItemActive()(item)"
+            (click)="onItemClick(item)"
+            [attr.aria-label]="item.label"
+          >
+            @if (item.icon) {
+              <str-icon size="20" [name]="item.icon" class="str-sidebar__item-icon"></str-icon>
+            }
+            <span class="str-sidebar__item-label">{{ item.label }}</span>
+            @if (item.children?.length) {
+              <str-icon
+                name="arrow_drop_down"
+                size="20"
+                class="str-sidebar__item-chevron"
+                [rotate]="isSubmenuOpen(item)"
+              ></str-icon>
+            }
+          </button>
+
+          @if (item.children?.length) {
+            <div
+              class="str-sidebar__submenu"
+              [class.str-sidebar__submenu--open]="isSubmenuOpen(item)"
+            >
+              <div class="str-sidebar__submenu-inner">
+                @for (child of item.children!; track child.label) {
+                  <div class="str-sidebar__sub-wrapper">
+                    <button
+                      class="str-sidebar__item str-sidebar__item--sub"
+                      [class.str-sidebar__item--active]="isItemActive()(child)"
+                      (click)="onNavigate(child.route ?? '')"
+                      [attr.aria-label]="child.label"
+                    >
+                      <span class="str-sidebar__item-label">{{ child.label }}</span>
+                    </button>
+                  </div>
+                }
+              </div>
+            </div>
+
+            @if (isSubmenuOpen(item)) {
+              @for (child of item.children!; track child.label) {
+                @if (child.collapsedIcon) {
+                  <button
+                    class="str-sidebar__item str-sidebar__collapsed-child"
+                    [class.str-sidebar__item--active]="isItemActive()(child)"
+                    (click)="onNavigate(child.route ?? '')"
+                    [attr.aria-label]="child.label"
+                  >
+                    <str-icon
+                      [name]="child.collapsedIcon"
+                      size="20"
+                      class="str-sidebar__item-icon"
+                    ></str-icon>
+                    <span class="str-sidebar__item-label">{{ child.label }}</span>
+                  </button>
+                }
+              }
+            }
+          }
+        }
+      </div>
+    }
+  </nav>
+
+  @if (footerItems().length > 0) {
+    <div class="str-sidebar__footer">
+      @for (item of footerItems(); track item.route) {
+        <button
+          class="str-sidebar__item"
+          [class.str-sidebar__item--active]="isItemActive()(item)"
+          (click)="onNavigate(item.route ?? '')"
+          [attr.aria-label]="item.label"
+        >
+          @if (item.icon) {
+            <str-icon [name]="item.icon" class="str-sidebar__item-icon"></str-icon>
+          }
+          <span class="str-sidebar__item-label">{{ item.label }}</span>
+        </button>
+      }
+    </div>
+  }
+</div>

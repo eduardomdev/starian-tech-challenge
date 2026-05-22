@@ -1,0 +1,17 @@
+<div class="starian-project-hub-template-container">
+  <str-sidebar
+    [(expanded)]="sidebarExpanded"
+    [sections]="sections()"
+    [footerItems]="footerItems()"
+    (navigate)="onNavigate($event)"
+  ></str-sidebar>
+  <main class="starian-project-hub-template-main">
+    <header class="starian-project-hub-template-header">
+      <str-breadcrumb [data]="breadcrumb()" />
+      <str-avatar name="Eduardo Maciel"></str-avatar>
+    </header>
+    <div class="starian-project-hub-template-content">
+      <router-outlet />
+    </div>
+  </main>
+</div>
