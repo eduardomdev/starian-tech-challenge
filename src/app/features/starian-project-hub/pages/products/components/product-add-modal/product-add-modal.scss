@@ -1,47 +1,38 @@
+@use '../../../../../../../styles/imports' as str;
+
 .add-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 0.25rem 0;
+  @include str.flex-col(0);
+  padding: str.$space-4 0;
 
   &__header {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 24px;
+    @include str.flex-col(str.$space-4);
+    margin-bottom: str.$space-24;
   }
 
   &__subtitle {
-    font-size: 14px;
-    line-height: 150%;
-    color: #505050;
+    @include str.type-body;
     margin: 0;
   }
 
   &__fields {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-bottom: 24px;
+    @include str.flex-col(str.$space-24);
+    margin-bottom: str.$space-24;
   }
 
   &__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: str.$space-16;
 
-    @media (max-width: 480px) {
+    @include str.bp-sm {
       grid-template-columns: 1fr;
     }
   }
 
   &__actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 12px;
-    padding-top: 16px;
-    border-top: 1px solid #e0e0e0;
+    @include str.form-actions;
+    padding-top: str.$space-16;
+    border-top: 1px solid str.$color-border;
 
     str-button {
       width: auto;

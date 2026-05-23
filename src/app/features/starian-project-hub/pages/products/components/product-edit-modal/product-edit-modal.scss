@@ -1,37 +1,30 @@
+@use '../../../../../../../styles/imports' as str;
+
 .edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 0.25rem 0;
+  @include str.flex-col(str.$space-24);
+  padding: str.$space-4 0;
 
   &__header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    @include str.flex-col(str.$space-4);
   }
 
   &__fields {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    @include str.flex-col(str.$space-24);
   }
 
   &__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: str.$space-16;
 
-    @media (max-width: 480px) {
+    @include str.bp-sm {
       grid-template-columns: 1fr;
     }
   }
 
   &__actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 0.75rem;
-    padding-top: 0.5rem;
+    @include str.form-actions;
+    padding-top: str.$space-8;
 
     str-button {
       width: auto;
@@ -40,26 +33,24 @@
 }
 
 .product-preview {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.5rem;
+  @include str.flex-row(str.$space-12);
+  padding: str.$space-12 str.$space-16;
+  background: str.$color-bg-muted;
+  border: 1px solid str.$color-border-subtle;
+  border-radius: str.$radius-lg;
 
   &__img {
     width: 56px;
     height: 56px;
     object-fit: contain;
-    border-radius: 0.375rem;
-    background: #fff;
-    padding: 4px;
+    border-radius: str.$radius-md;
+    background: str.$color-bg-surface;
+    padding: str.$space-4;
   }
 
   &__id {
-    font-size: 14px;
-    color: #505050;
-    font-weight: 500;
+    font-size: str.$font-14;
+    color: str.$color-text-secondary;
+    font-weight: str.$fw-medium;
   }
 }

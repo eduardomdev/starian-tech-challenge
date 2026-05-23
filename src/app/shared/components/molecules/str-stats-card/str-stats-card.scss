@@ -1,53 +1,46 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	padding: 20px 24px;
-	background-color: #fff;
-	border: 1px solid #e5e7eb;
-	border-radius: 12px;
+  @include str.card-widget;
+  display: flex;
+  flex-direction: column;
+  gap: str.$space-12;
 }
 
 .card-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .card-title {
-	font-size: 14px;
-	font-weight: 400;
-	color: #6b7280;
+  font-size: str.$font-14;
+  font-weight: str.$fw-regular;
+  color: str.$color-text-muted;
 }
 
 .icon-wrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	flex-shrink: 0;
+  @include str.icon-wrapper;
 }
 
 .card-body {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: str.$space-4;
 }
 
 .card-value {
-	margin: 0;
-	font-size: 28px;
-	font-weight: 700;
-	color: #111827;
-	line-height: 1.2;
-	letter-spacing: -0.5px;
+  margin: 0;
+  font-size: str.$font-24;
+  font-weight: str.$fw-bold;
+  color: str.$color-text-primary;
+  line-height: str.$lh-snug;
+  letter-spacing: -0.5px;
 }
 
 .card-description {
-	margin: 0;
-	font-size: 13px;
-	font-weight: 400;
-	color: #6b7280;
+  margin: 0;
+  font-size: str.$font-12;
+  font-weight: str.$fw-regular;
+  color: str.$color-text-muted;
 }

@@ -1,49 +1,41 @@
+@use '../../../../../styles/imports' as str;
+
 :host {
   display: block;
   height: 100%;
 }
 
 .profile-page {
-  padding: 24px;
+  padding: str.$space-24;
   height: 100%;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  @include str.flex-col(str.$space-24);
 }
 
 .profile-header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  @include str.flex-col(str.$space-4);
   flex-shrink: 0;
 }
 
 .profile-error {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #ef4444;
+  @include str.flex-row(str.$space-8);
+  padding: str.$space-12 str.$space-16;
+  background: str.$color-error-bg;
+  border: 1px solid str.$color-error-border;
+  border-radius: str.$radius-lg;
+  font-size: str.$font-14;
+  color: str.$color-error;
 }
 
 .profile-card {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
+  @include str.card(str.$radius-xl);
   width: 100%;
   overflow: hidden;
 }
 
 .profile-identity {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 24px;
+  @include str.flex-row(str.$space-16);
+  padding: str.$space-24;
 }
 
 .profile-avatar {
@@ -53,63 +45,50 @@
 }
 
 .profile-identity-info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  @include str.flex-col(str.$space-4);
   min-width: 0;
 }
 
 .profile-identity-name-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  @include str.flex-row(str.$space-8, center);
   flex-wrap: wrap;
 }
 
 .profile-username {
-  font-size: 16px;
-  font-weight: 600;
-  color: #242424;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: str.$font-16;
+  font-weight: str.$fw-semibold;
+  color: str.$color-text-primary;
+  @include str.text-truncate;
 }
 
 .profile-email {
-  font-size: 14px;
-  color: #505050;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: str.$font-14;
+  color: str.$color-text-secondary;
+  @include str.text-truncate;
 }
 
 .profile-divider {
   height: 1px;
-  background: #f0f0f0;
+  background: str.$color-border-faint;
 }
 
 .profile-form {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  padding: str.$space-24;
+  @include str.flex-col(str.$space-24);
 }
 
 .profile-form-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: str.$space-16;
 
-  @media (max-width: 768px) {
+  @include str.bp-md {
     grid-template-columns: 1fr;
   }
 }
 
 .profile-form-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
+  @include str.flex-row(str.$space-12, center, flex-end);
 
   str-button {
     flex-shrink: 0;
@@ -117,19 +96,17 @@
 }
 
 .btn-danger {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 16px;
+  @include str.flex-row(str.$space-8);
+  padding: 0 str.$space-16;
   height: 40px;
-  border: 1px solid #fecaca;
-  border-radius: 6px;
+  border: 1px solid str.$color-error-border;
+  border-radius: str.$radius-md;
   background: #fff0f0;
-  color: #dc2626;
-  font-size: 14px;
-  font-weight: 500;
+  color: str.$color-error;
+  font-size: str.$font-14;
+  font-weight: str.$fw-medium;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  transition: background str.$transition-fast, border-color str.$transition-fast, transform 0.1s ease;
   white-space: nowrap;
   flex-shrink: 0;
 
@@ -143,7 +120,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid #dc2626;
+    outline: 2px solid str.$color-error;
     outline-offset: 2px;
   }
 
@@ -154,8 +131,7 @@
 
   &--sm {
     height: 32px;
-    padding: 0 12px;
-    font-size: 13px;
+    padding: 0 str.$space-12;
+    font-size: str.$font-14;
   }
 }
-

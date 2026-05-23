@@ -1,32 +1,37 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes rotation {
-	0% {
-		transform: rotate(0deg);
-	}
-	25% {
-		transform: rotate(160deg);
-	}
-	40% {
-		transform: rotate(220deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(160deg);
+  }
+
+  40% {
+    transform: rotate(220deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .spinner-svg {
-	animation: rotation 0.7s linear infinite;
+  animation: rotation 0.7s linear infinite;
 }
 
 .spinner-svg circle {
-	fill: none;
-	stroke-width: 4;
-	stroke-linecap: round;
-	stroke-dasharray: 20 80;
-	transform-origin: center;
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 20 80;
+  transform-origin: center;
 }

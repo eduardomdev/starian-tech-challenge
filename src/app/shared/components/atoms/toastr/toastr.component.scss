@@ -1,50 +1,52 @@
+﻿@use '../../../../../styles/imports' as str;
+
 .toastr-container {
   position: fixed;
   top: 1.5rem;
   right: 1.5rem;
-  z-index: 9999;
+  z-index: str.$z-toastr;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: str.$space-12;
   pointer-events: none;
 }
 
 .toast {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.875rem 1rem;
-  border-radius: 0.5rem;
+  gap: str.$space-12;
+  padding: 14px str.$space-16;
+  border-radius: str.$radius-lg;
   min-width: 280px;
   max-width: 400px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: str.$shadow-md;
   pointer-events: all;
   animation: toast-in 0.25s ease-out;
 
   &--success {
-    background-color: #f0fdf4;
-    border: 1px solid #86efac;
+    background-color: str.$color-success-bg;
+    border: 1px solid str.$color-success-border;
     color: #166534;
 
     str-icon {
-      color: #16a34a;
+      color: str.$color-success;
     }
   }
 
   &--error {
-    background-color: #fef2f2;
-    border: 1px solid #fca5a5;
+    background-color: str.$color-error-bg;
+    border: 1px solid str.$color-error-border;
     color: #991b1b;
 
     str-icon {
-      color: #dc2626;
+      color: str.$color-error;
     }
   }
 
   &__message {
     flex: 1;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: str.$font-14;
+    font-weight: str.$fw-medium;
     line-height: 1.4;
   }
 
@@ -56,7 +58,7 @@
     display: flex;
     align-items: center;
     opacity: 0.5;
-    transition: opacity 150ms ease;
+    transition: opacity str.$transition-fast;
     color: inherit;
 
     &:hover {
@@ -76,6 +78,7 @@
     opacity: 0;
     transform: translateX(110%);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);

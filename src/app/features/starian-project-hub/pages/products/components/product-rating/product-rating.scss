@@ -1,32 +1,32 @@
+@use '../../../../../../../styles/imports' as str;
+
 :host {
   display: inline-flex;
 }
 
 .rating-cell {
-  display: flex;
-  align-items: center;
-  gap: 1px;
+  @include str.flex-row(str.$space-2);
 }
 
 .star {
-  font-size: 16px;
-  color: #d1d5db;
-  line-height: 1;
+  font-size: str.$font-16;
+  color: str.$color-border-light;
+  line-height: str.$lh-tight;
 
   &.star--filled {
-    color: #f59e0b;
+    color: str.$color-warning;
   }
 }
 
 .rating-value {
-  font-size: 14px;
-  font-weight: 500;
-  color: #242424;
+  font-size: str.$font-14;
+  font-weight: str.$fw-medium;
+  color: str.$color-text-primary;
   margin-left: 6px;
 }
 
 .rating-count {
-  font-size: 12px;
-  margin-left: 4px;
-  color: #505050;
+  font-size: str.$font-12;
+  margin-left: str.$space-4;
+  color: str.$color-text-secondary;
 }

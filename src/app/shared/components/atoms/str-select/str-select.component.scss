@@ -1,3 +1,5 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
   display: block;
 }
@@ -5,12 +7,10 @@
 .str-select {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: str.$space-8;
 
   &__label {
-    font-size: 14px;
-    font-weight: 500;
-    color: #505050;
+    @include str.type-label;
   }
 
   &__field-wrap {
@@ -20,15 +20,15 @@
   &__trigger {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: str.$space-8;
     width: 100%;
     padding: 11px 10px 11px 14px;
-    border: 1.5px solid #e0e0e0;
-    border-radius: 4px;
-    font-size: 14px;
+    border: 1.5px solid str.$color-border;
+    border-radius: str.$radius-sm;
+    font-size: str.$font-14;
     font-family: inherit;
-    color: #242424;
-    background-color: #f4f4f4;
+    color: str.$color-text-primary;
+    background-color: str.$color-bg-input;
     cursor: pointer;
     text-align: left;
     transition: border-color 200ms ease-in, box-shadow 300ms ease-in;
@@ -36,8 +36,8 @@
     &:focus-visible,
     &--open {
       outline: none;
-      border-color: #a8a8a8;
-      box-shadow: 0 0 0 1px #0c0c0cb9;
+      border-color: str.$color-focus-input;
+      box-shadow: 0 0 0 1px str.$color-focus-shadow;
     }
 
     &:disabled {
@@ -46,40 +46,33 @@
     }
 
     &--invalid {
-      border-color: #db1c1c;
+      border-color: str.$color-error;
 
       &:focus-visible,
       &.str-select__trigger--open {
-        border-color: #db1c1c;
-        box-shadow: 0 0 0 1px #0c0c0cb9;
+        border-color: str.$color-error;
+        box-shadow: 0 0 0 1px str.$color-focus-shadow;
       }
     }
   }
 
   &__trigger-text {
     flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    @include str.text-truncate;
 
-    &--placeholder { color: #9ca3af; }
+    &--placeholder {
+      color: str.$color-text-placeholder;
+    }
   }
 
   &__dropdown {
+    @include str.dropdown;
     position: absolute;
     top: calc(100% + 4px);
     left: 0;
     right: 0;
-    z-index: 200;
     list-style: none;
-    margin: 0;
-    padding: 6px 0;
-    background: #fff;
-    border: 1.5px solid #e0e0e0;
-    border-radius: 6px;
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 8%),
-      0 2px 4px -2px rgb(0 0 0 / 5%);
+    padding: str.$space-8 0;
     max-height: 240px;
     overflow-y: auto;
   }
@@ -88,36 +81,35 @@
     display: flex;
     align-items: center;
     padding: 9px 14px;
-    font-size: 14px;
-    color: #242424;
+    font-size: str.$font-14;
+    color: str.$color-text-primary;
     cursor: pointer;
     user-select: none;
-    transition: background 0.1s ease;
+    transition: background str.$transition-fast;
 
-    &:hover { background-color: #f3f4f6; }
-
+    &:hover,
     &:focus-visible {
       outline: none;
-      background-color: #f3f4f6;
+      background-color: str.$color-bg-muted;
     }
 
     &--selected {
-      font-weight: 500;
-      background-color: #f3f4f6;
+      font-weight: str.$fw-medium;
+      background-color: str.$color-bg-muted;
     }
   }
 
   &__empty {
     padding: 10px 14px;
-    font-size: 13px;
-    color: #9ca3af;
+    font-size: str.$font-12;
+    color: str.$color-text-placeholder;
   }
 
   &__error {
     position: absolute;
     top: calc(100% + 2px);
     left: 0;
-    font-size: 12px;
-    color: #db1c1c;
+    font-size: str.$font-12;
+    color: str.$color-error;
   }
 }

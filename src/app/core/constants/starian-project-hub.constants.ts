@@ -10,7 +10,7 @@ export const STARIAN_PROJECT_HUB_SECTIONS: SidebarSection[] = [
         route: '/starian-hub/dashboard',
       },
       {
-        label: 'Products',
+        label: 'Produtos',
         icon: 'trolley',
         route: '/starian-hub/products',
       },
@@ -20,12 +20,12 @@ export const STARIAN_PROJECT_HUB_SECTIONS: SidebarSection[] = [
 
 export const STARIAN_PROJECT_HUB_FOOTER_ITEMS: SidebarItem[] = [
   {
-    label: 'Profile',
+    label: 'Perfil',
     icon: 'person',
     route: '/starian-hub/profile',
   },
   {
-    label: 'Logout',
+    label: 'Sair',
     icon: 'logout',
     route: '/login',
   },

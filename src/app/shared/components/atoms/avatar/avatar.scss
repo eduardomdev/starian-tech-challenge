@@ -1,19 +1,21 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 50%;
-  background-color: #0064d5;
+  border-radius: str.$radius-full;
+  background-color: str.$color-avatar-bg;
   flex-shrink: 0;
 }
 
 .avatar-initials {
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
+  color: str.$color-avatar-text;
+  font-size: str.$font-12;
+  font-weight: str.$fw-semibold;
   letter-spacing: 0.5px;
-  line-height: 1;
+  line-height: str.$lh-tight;
   user-select: none;
 }

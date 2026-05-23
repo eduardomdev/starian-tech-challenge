@@ -1,3 +1,5 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
   display: block;
 }
@@ -6,68 +8,62 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: str.$space-8;
   width: 100%;
   border: none;
-  border-radius: 4px;
+  border-radius: str.$radius-sm;
   font-family: inherit;
-  font-weight: 400;
+  font-weight: str.$fw-regular;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color str.$transition-fast;
 
   &--sm {
     height: 32px;
-    padding: 0 12px;
-    font-size: 13px;
+    padding: 0 str.$space-12;
+    font-size: str.$font-12;
   }
 
   &--md {
     height: 40px;
-    padding: 0 16px;
-    font-size: 14px;
+    padding: 0 str.$space-16;
+    font-size: str.$font-14;
   }
 
   &--lg {
     height: 48px;
-    padding: 0 20px;
-    font-size: 16px;
+    padding: 0 str.$space-24;
+    font-size: str.$font-16;
   }
 
   &--primary {
-    background-color: #0c0c0c;
-    color: #ffffff;
+    background-color: str.$color-interactive-primary;
+    color: str.$color-text-inverse;
 
     &:hover:not(:disabled) {
-      background-color: #2a2a2a;
+      background-color: str.$color-interactive-hover;
     }
 
     &:active:not(:disabled) {
-      background-color: #050505;
+      background-color: str.$color-interactive-active;
     }
 
-    &:focus-visible {
-      outline: 3px solid #162952;
-      outline-offset: 3px;
-    }
+    @include str.focus-ring(str.$color-focus-ring, 3px, 3px);
   }
 
   &--secondary {
     background-color: transparent;
-    color: #0c0c0c;
-    border: 1.5px solid #0c0c0c;
+    color: str.$color-interactive-primary;
+    border: 1.5px solid str.$color-interactive-primary;
 
     &:hover:not(:disabled) {
-      background-color: rgb(12 12 12 / 6%);
+      background-color: str.$overlay-hover;
     }
 
     &:active:not(:disabled) {
-      background-color: rgb(12 12 12 / 12%);
+      background-color: str.$overlay-press;
     }
 
-    &:focus-visible {
-      outline: 3px solid #162952;
-      outline-offset: 3px;
-    }
+    @include str.focus-ring(str.$color-focus-ring, 3px, 3px);
   }
 
   &:disabled {

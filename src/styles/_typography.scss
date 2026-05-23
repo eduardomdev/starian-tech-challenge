@@ -1,0 +1,47 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+.text-title-page,
+.title-font-24 {
+  @include m.type-title-page;
+}
+
+.text-title-section,
+.title-font-20 {
+  @include m.type-title-section;
+}
+
+.text-subtitle,
+.subtitle-font-16 {
+  @include m.type-subtitle;
+}
+
+.text-subtitle-sm,
+.subtitle-font-14 {
+  font-size: v.$font-14;
+  font-weight: v.$fw-regular;
+  line-height: v.$lh-snug;
+  color: v.$color-text-secondary;
+  margin: 0;
+}
+
+.text-label {
+  @include m.type-label;
+}
+
+.text-body {
+  @include m.type-body;
+}
+
+.text-meta {
+  @include m.type-meta;
+}
+
+.text-error {
+  color: v.$color-error;
+  font-size: v.$font-12;
+}
+
+.text-truncate {
+  @include m.text-truncate;
+}

@@ -32,7 +32,7 @@ export const routes: Routes = [
       },
       {
         path: 'products',
-        data: { breadcrumb: [{ name: 'Starian Hub' }, { name: 'Products' }] },
+        data: { breadcrumb: [{ name: 'Starian Hub' }, { name: 'Produtos' }] },
         loadComponent: () =>
           import('./features/starian-project-hub/pages/products/products').then(
             m => m.ProductsPageComponent
@@ -40,7 +40,7 @@ export const routes: Routes = [
       },
       {
         path: 'profile',
-        data: { breadcrumb: [{ name: 'Starian Hub' }, { name: 'Profile' }] },
+        data: { breadcrumb: [{ name: 'Starian Hub' }, { name: 'Perfil' }] },
         loadComponent: () =>
           import('./features/starian-project-hub/pages/profile/profile').then(
             m => m.ProfilePageComponent

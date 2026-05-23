@@ -76,7 +76,7 @@ export class ProductsPageComponent implements OnInit {
   }
 
   protected clearTextFilter(): void {
-    this.filterService.clearTextFilter();
+    this.filterService.clearFilters();
   }
 
   protected openAddModal(): void {

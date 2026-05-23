@@ -1,12 +1,12 @@
+@use '../../../../../styles/imports' as str;
+
 .login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  @include str.flex-col(str.$space-24);
 }
 
 .register-row {
-  font-size: 13px;
-  color: #6b7280;
+  font-size: str.$font-14;
+  color: str.$color-text-muted;
   text-align: center;
 }
 
@@ -14,18 +14,14 @@
   background: none;
   border: none;
   padding: 0;
-  font-size: 13px;
-  color: #0c0c0c;
+  font-size: str.$font-14;
+  color: str.$color-interactive-primary;
   cursor: pointer;
   text-decoration: none;
 
   &:hover {
-    color: #6b7280;
+    color: str.$color-text-muted;
   }
 
-  &:focus-visible {
-    outline: 2px solid #0c0c0c;
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
+  @include str.focus-ring(str.$color-interactive-primary);
 }

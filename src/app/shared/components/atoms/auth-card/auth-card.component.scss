@@ -1,3 +1,5 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
   display: block;
 }
@@ -7,21 +9,19 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f0f2f5;
-  padding: 24px;
+  background-color: str.$color-bg-auth;
+  padding: str.$space-24;
 }
 
 .auth-card {
-  background: #ffffff;
-  border-radius: 16px;
+  @include str.card(str.$radius-3xl);
   padding: 40px 44px;
   width: 100%;
   max-width: 480px;
-  border: 1px solid #e0e0e0;
 }
 
 .auth-header {
-  margin-bottom: 20px;
+  margin-bottom: str.$space-24;
 }
 
 .logo-row {
@@ -34,23 +34,23 @@
 
 .auth-logo {
   display: block;
-  border-radius: 4px;
+  border-radius: str.$radius-sm;
 }
 
 .logo-text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: str.$space-4;
 }
 
 .area-label {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: str.$font-12;
+  font-weight: str.$fw-medium;
   letter-spacing: 0.1em;
-  color: #9ca3af;
+  color: str.$color-text-placeholder;
 }
 
 .subtitle {
-  font-size: 14px;
-  color: #6b7280;
+  font-size: str.$font-14;
+  color: str.$color-text-muted;
 }

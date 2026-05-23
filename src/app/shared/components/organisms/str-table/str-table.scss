@@ -1,102 +1,86 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	border: 1px solid #e0e0e0;
-	border-radius: 8px;
-	overflow: hidden;
-	background-color: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid str.$color-border;
+  border-radius: str.$radius-lg;
+  overflow: hidden;
+  background-color: str.$color-bg-surface;
 }
 
 .table-toolbar {
-	flex-shrink: 0;
-	background-color: #f9f9f9;
-	border-top: 1px solid #e0e0e0;
-	padding: 8px 16px;
-	text-align: left;
+  flex-shrink: 0;
+  background-color: str.$color-bg-muted;
+  border-top: 1px solid str.$color-border;
+  padding: str.$space-8 str.$space-16;
+  text-align: left;
 }
 
 .table-container {
-	flex: 1;
-	min-height: 0;
-	width: 100%;
-	overflow: auto;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow: auto;
 
-	&::-webkit-scrollbar {
-		width: 8px;
-		height: 8px;
-	}
-
-	&::-webkit-scrollbar-track {
-		background-color: #f9f9f9;
-	}
-
-	&::-webkit-scrollbar-thumb {
-		background-color: rgba(0, 0, 0, 0.15);
-		border-radius: 4px;
-
-		&:hover {
-			background-color: rgba(0, 0, 0, 0.25);
-		}
-	}
+  @include str.scrollbar-custom;
 }
 
 table {
-	width: 100%;
-	table-layout: fixed;
-	border-collapse: collapse;
-	font-size: 14px;
-	font-family: inherit;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: str.$font-14;
+  font-family: inherit;
 }
 
 thead {
-	position: sticky;
-	top: 0;
-	z-index: 1;
-	background-color: #f9f9f9;
-	outline: 1px solid #e0e0e0;
-	color: #505050;
-	font-size: 14px;
-	font-weight: 400;
-	white-space: nowrap;
-	
+  position: sticky;
+  top: 0;
+  z-index: str.$z-sticky;
+  background-color: str.$color-bg-muted;
+  outline: 1px solid str.$color-border;
+  color: str.$color-text-secondary;
+  font-size: str.$font-14;
+  font-weight: str.$fw-regular;
+  white-space: nowrap;
 
-	tr {
-		height: 40px;
-	}
+  tr {
+    height: 40px;
+  }
 }
 
 tbody {
-	color: #242424;
-	font-size: 14px;
+  color: str.$color-text-primary;
+  font-size: str.$font-14;
 }
 
 .skeleton-cell {
-	padding: 10px 16px;
+  padding: 10px str.$space-16;
 }
 
 .container-empty {
-	display: grid;
-	place-items: center;
-	place-content: center;
-	user-select: none;
-	padding: 40px 16px;
-	text-align: center;
-	gap: 4px;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  user-select: none;
+  padding: 40px str.$space-16;
+  text-align: center;
+  gap: str.$space-4;
 }
 
 .empty-title {
-	margin: 0;
-	color: #242424;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 150%;
+  margin: 0;
+  color: str.$color-text-primary;
+  font-size: str.$font-16;
+  font-weight: str.$fw-regular;
+  line-height: str.$lh-relaxed;
 }
 
 .empty-description {
-	margin: 0;
-	color: #505050;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 21px;
+  margin: 0;
+  color: str.$color-text-secondary;
+  font-size: str.$font-14;
+  font-weight: str.$fw-regular;
 }

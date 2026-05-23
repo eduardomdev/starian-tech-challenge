@@ -1,3 +1,5 @@
+@use '../../../../styles/imports' as str;
+
 :host {
   display: block;
   height: 100%;
@@ -17,16 +19,17 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: str.$color-bg-page;
 }
 
 .layout-header {
-  padding: 12px 24px;
-  background-color: #ffffff;
+  padding: str.$space-12 str.$space-24;
+  background-color: str.$color-bg-surface;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e0e0e0;
+  justify-content: space-between;
+  border-bottom: 1px solid str.$color-border;
+  flex-shrink: 0;
 }
 
 .layout-content {
@@ -43,17 +46,17 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: str.$radius-full;
 
   &:focus-visible {
-    outline: 2px solid #2563eb;
+    outline: 2px solid str.$blue-400;
     outline-offset: 3px;
   }
 }
 
 p-breadcrumb {
-    --p-breadcrumb-item-gap: 0.5rem;
-    --p-breadcrumb-transition-duration: 0.3s;
-    --p-breadcrumb-item-border-radius: 4px;
-    --p-breadcrumb-item-color: #333;
+  --p-breadcrumb-item-gap: 0.5rem;
+  --p-breadcrumb-transition-duration: 0.3s;
+  --p-breadcrumb-item-border-radius: #{str.$radius-sm};
+  --p-breadcrumb-item-color: #{str.$color-text-secondary};
 }

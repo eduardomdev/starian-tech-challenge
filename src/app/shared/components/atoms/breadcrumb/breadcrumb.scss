@@ -1,3 +1,5 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
   display: block;
 }
@@ -5,7 +7,7 @@
 .breadcrumb-list {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: str.$space-8;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -16,27 +18,27 @@
 .breadcrumb-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: str.$space-8;
   white-space: nowrap;
 
   &:not(:last-child)::after {
-    content: '›';
-    color: var(--neutral-medium, #9e9e9e);
-    font-size: 16px;
-    line-height: 1;
+    content: "›";
+    color: str.$color-text-placeholder;
+    font-size: str.$font-16;
+    line-height: str.$lh-tight;
   }
 }
 
 .breadcrumb-ancestor {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--neutral-medium, #9e9e9e);
+  font-size: str.$font-14;
+  line-height: str.$lh-relaxed;
+  color: str.$color-text-placeholder;
 }
 
 .breadcrumb-current {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--neutral-high, #212121);
+  font-size: str.$font-14;
+  line-height: str.$lh-relaxed;
+  color: str.$color-text-primary;
   overflow: hidden;
   text-overflow: ellipsis;
 }

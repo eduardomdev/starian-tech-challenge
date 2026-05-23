@@ -1,3 +1,5 @@
+@use '../../../../../../../styles/imports' as str;
+
 :host {
   display: block;
   height: 100%;
@@ -5,58 +7,37 @@
 }
 
 .top-rated-card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 20px 24px;
-  background-color: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  @include str.card-widget;
+  @include str.flex-col(str.$space-16);
   height: 100%;
   min-width: 0;
   box-sizing: border-box;
 }
 
 .card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include str.flex-row(0, center, space-between);
 }
 
-
 .card-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #111827;
-  margin: 0;
+  @include str.type-title-widget;
 }
 
 .icon-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #fef3c7;
-  flex-shrink: 0;
+  @include str.icon-wrapper;
+  background-color: str.$color-warning-bg;
 }
 
 .product-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  @include str.flex-col(0);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .product-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  @include str.flex-row(str.$space-12);
   padding: 10px 0;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid str.$color-border-faint;
 
   &:last-child {
     border-bottom: none;
@@ -69,9 +50,9 @@
 }
 
 .product-rank {
-  font-size: 13px;
-  font-weight: 600;
-  color: #9ca3af;
+  font-size: str.$font-14;
+  font-weight: str.$fw-semibold;
+  color: str.$color-text-placeholder;
   min-width: 20px;
   text-align: center;
   flex-shrink: 0;
@@ -81,35 +62,31 @@
   width: 44px;
   height: 44px;
   object-fit: contain;
-  border-radius: 8px;
-  background-color: #f9fafb;
-  border: 1px solid #f3f4f6;
-  padding: 4px;
+  border-radius: str.$radius-lg;
+  background-color: str.$color-bg-muted;
+  border: 1px solid str.$color-border-faint;
+  padding: str.$space-4;
   flex-shrink: 0;
 }
 
 .product-info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  @include str.flex-col(str.$space-4);
   flex: 1;
   min-width: 0;
 }
 
 .product-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: #111827;
+  font-size: str.$font-14;
+  font-weight: str.$fw-medium;
+  color: str.$color-text-primary;
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include str.text-truncate;
 }
 
 .product-price {
-  font-size: 13px;
-  font-weight: 600;
-  color: #16a34a;
+  font-size: str.$font-14;
+  font-weight: str.$fw-semibold;
+  color: str.$color-success;
   flex-shrink: 0;
   white-space: nowrap;
 }

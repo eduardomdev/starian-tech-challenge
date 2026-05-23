@@ -1,13 +1,15 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 12px;
-	color: #505050;
-	font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: str.$space-12;
+  color: str.$color-text-secondary;
+  font-size: str.$font-14;
 }
 
 .loading-text {
-	font-size: 14px;
-	color: #505050;
+  font-size: str.$font-14;
+  color: str.$color-text-secondary;
 }

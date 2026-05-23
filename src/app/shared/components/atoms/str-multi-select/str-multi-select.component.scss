@@ -1,17 +1,11 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
   display: block;
 }
 
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  @include str.sr-only;
 }
 
 .str-ms-container {
@@ -24,28 +18,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 6px;
-  padding: 4px 10px 4px 14px;
+  gap: str.$space-8;
+  padding: str.$space-4 10px str.$space-4 14px;
   width: fit-content;
   min-width: 180px;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 4px;
+  border: 1.5px solid str.$color-border;
+  border-radius: str.$radius-sm;
   height: 32px;
-  font-size: 14px;
+  font-size: str.$font-14;
   font-family: inherit;
-  color: #242424;
-  background-color: #fff;
+  color: str.$color-text-primary;
+  background-color: str.$color-bg-surface;
   cursor: pointer;
   text-align: left;
   white-space: nowrap;
-  transition:
-    border-color 200ms ease-in,
-    box-shadow 300ms ease-in;
+  transition: border-color 200ms ease-in, box-shadow 300ms ease-in;
 
   &:focus-visible {
     outline: none;
-    border-color: #a8a8a8;
-    box-shadow: 0 0 0 1px #0c0c0cb9;
+    border-color: str.$color-focus-input;
+    box-shadow: 0 0 0 1px str.$color-focus-shadow;
   }
 
   &:disabled {
@@ -55,29 +47,29 @@
 
   &--active {
     background-color: #e9f2fe;
-    border-color: #1868db;
-    color: #1868db;
+    border-color: str.$color-interactive-accent;
+    color: str.$color-interactive-accent;
 
     .str-ms-trigger-text {
-      font-weight: 500;
+      font-weight: str.$fw-medium;
     }
   }
 
   .str-ms-container--open & {
-    border-color: #a8a8a8;
-    box-shadow: 0 0 0 1px #0c0c0cb9;
+    border-color: str.$color-focus-input;
+    box-shadow: 0 0 0 1px str.$color-focus-shadow;
   }
 
   .str-ms-container--open &--active {
-    border-color: #1868db;
-    box-shadow: 0 0 0 1px #1868db4d;
+    border-color: str.$color-interactive-accent;
+    box-shadow: 0 0 0 1px rgba(str.$blue-600, 0.3);
   }
 }
 
 .str-ms-trigger-label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: str.$space-8;
   flex: 1;
   min-width: 0;
 }
@@ -94,32 +86,25 @@
   width: 20px;
   height: 20px;
   border-radius: 16px;
-  background-color: #1868db;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 600;
+  background-color: str.$color-interactive-accent;
+  color: str.$color-text-inverse;
+  font-size: str.$font-12;
+  font-weight: str.$fw-semibold;
   line-height: 1;
   flex-shrink: 0;
 }
 
 .str-ms-dropdown {
+  @include str.dropdown;
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  z-index: 200;
   min-width: 100%;
-  background: #ffffff;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 6px;
-  box-shadow:
-    0 4px 6px -1px rgb(0 0 0 / 0.08),
-    0 2px 4px -2px rgb(0 0 0 / 0.05);
-  overflow: hidden;
 }
 
 .str-ms-dropdown-footer {
-  border-top: 1px solid #e0e0e0;
-  padding: 8px 14px;
+  border-top: 1px solid str.$color-border;
+  padding: str.$space-8 14px;
 }
 
 .str-ms-clear-btn {
@@ -128,25 +113,25 @@
   height: 28px;
   padding: 0 10px;
   border: none;
-  border-radius: 6px;
+  border-radius: str.$radius-md;
   background: transparent;
-  font-size: 13px;
+  font-size: str.$font-12;
   font-family: inherit;
-  color: #505050;
+  color: str.$color-text-secondary;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background str.$transition-fast;
 
   &:hover:not(:disabled) {
-    background: #00000008;
+    background: str.$overlay-hover;
   }
 
   &:active:not(:disabled) {
-    background: #00000012;
+    background: str.$overlay-press;
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px #0c0c0cb9;
+    box-shadow: 0 0 0 2px str.$color-focus-shadow;
   }
 
   &:disabled {
@@ -164,32 +149,32 @@
 .str-ms-list {
   list-style: none;
   margin: 0;
-  padding: 6px 0;
+  padding: str.$space-8 0;
   max-height: 240px;
   overflow-y: auto;
 }
 
 .str-ms-empty {
   padding: 10px 14px;
-  font-size: 13px;
-  color: #9ca3af;
+  font-size: str.$font-12;
+  color: str.$color-text-placeholder;
   margin: 0;
 }
 
 .str-ms-option {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
+  gap: str.$space-8;
+  padding: str.$space-8 str.$space-12;
   cursor: pointer;
-  transition: background 0.1s ease;
+  transition: background str.$transition-fast;
 
   &:hover {
-    background-color: #f9fafb;
+    background-color: str.$color-bg-muted;
   }
 
   &--selected {
-    background-color: #f3f4f6;
+    background-color: str.$color-border-faint;
   }
 }
 
@@ -197,18 +182,18 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  accent-color: #242424;
+  accent-color: str.$color-text-primary;
   cursor: pointer;
 
   &:focus-visible {
-    outline: 2px solid #0c0c0cb9;
+    outline: 2px solid str.$color-focus-shadow;
     outline-offset: 2px;
   }
 }
 
 .str-ms-option-label {
-  font-size: 14px;
-  color: #242424;
+  font-size: str.$font-14;
+  color: str.$color-text-primary;
   line-height: 1.4;
   user-select: none;
 }

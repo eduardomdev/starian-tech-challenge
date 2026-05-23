@@ -1,12 +1,14 @@
+﻿@use '../../../../../styles/imports' as str;
+
 :host {
   display: inline-flex;
 }
 
 .tag {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
+  padding: str.$space-4 str.$space-12;
+  border-radius: str.$radius-sm;
+  font-size: str.$font-12;
+  font-weight: str.$fw-medium;
   white-space: nowrap;
 }

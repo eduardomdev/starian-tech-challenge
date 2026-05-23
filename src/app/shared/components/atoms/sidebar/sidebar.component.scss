@@ -1,14 +1,15 @@
-$sidebar-width: 260px;
-$sidebar-collapsed-width: 80px;
-$sidebar-bg: #ffffff;
-$transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+@use '../../../../../styles/imports' as str;
+
+$sidebar-width: str.$sidebar-width;
+$sidebar-collapsed-width: str.$sidebar-collapsed-width;
+$t: str.$transition-sidebar;
 
 :host {
   display: block;
   height: 100%;
   width: $sidebar-width;
   flex-shrink: 0;
-  transition: width $transition-speed;
+  transition: width $t;
   position: relative;
 
   &.host--collapsed {
@@ -17,18 +18,17 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .str-sidebar {
-  display: flex;
-  flex-direction: column;
+  @include str.flex-col;
   height: 100%;
-  background-color: $sidebar-bg;
+  background-color: str.$color-bg-surface;
   width: $sidebar-width;
   overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1001;
-  transition: width $transition-speed, box-shadow $transition-speed;
-  border-right: 1px solid #e0e0e0;
+  z-index: str.$z-sidebar;
+  transition: width $t, box-shadow $t;
+  border-right: 1px solid str.$color-border;
 
   &--collapsed {
     width: $sidebar-collapsed-width;
@@ -51,8 +51,8 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
     .str-sidebar__collapsed-child {
       opacity: 1;
       height: auto;
-      padding-top: 8px;
-      padding-bottom: 8px;
+      padding-top: str.$space-8;
+      padding-bottom: str.$space-8;
       overflow: visible;
     }
 
@@ -75,7 +75,7 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &--collapsed.str-sidebar--hovered {
     width: $sidebar-width;
-    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+    box-shadow: str.$shadow-sidebar;
 
     .str-sidebar__nav {
       overflow-y: auto;
@@ -122,11 +122,8 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .str-sidebar__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 16px 28px 25px;
-  gap: 8px;
+  @include str.flex-row(str.$space-8, center, space-between);
+  padding: str.$space-24 str.$space-16 28px str.$space-24;
   flex-shrink: 0;
 }
 
@@ -138,38 +135,23 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .str-sidebar__logo-default {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include str.flex-center;
   width: 24px;
   height: 24px;
-  color: #333333;
+  color: str.$color-text-secondary;
   flex-shrink: 0;
 }
 
 .str-sidebar__toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  color: #333333;
-  border-radius: 4px;
-  transition: background-color 200ms ease-in-out, color 200ms ease-in-out, opacity $transition-speed, width $transition-speed, min-width $transition-speed;
-  padding: 0;
+  @include str.btn-ghost(32px);
+  color: str.$color-text-secondary;
+  transition: background-color str.$transition-base, color str.$transition-base,
+    opacity $t, width $t, min-width $t;
   flex-shrink: 0;
   overflow: hidden;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: #000000;
-  }
-
-  &:active {
-    background-color: rgba(0, 0, 0, 0.1);
+    color: str.$color-text-primary;
   }
 }
 
@@ -177,84 +159,76 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0px 0px 8px 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  padding: 0 0 str.$space-8 0;
+  @include str.flex-col(str.$space-8);
   min-height: 0;
 }
 
 .str-sidebar__section-header {
-  padding: 12px 28px 4px;
-  font-size: 11px;
-  line-height: 1;
-  font-weight: 500;
+  padding: str.$space-12 28px str.$space-4;
+  font-size: str.$font-10;
+  line-height: str.$lh-tight;
+  font-weight: str.$fw-medium;
   height: 28px;
   box-sizing: border-box;
   text-transform: uppercase;
-  color: #999999;
+  color: str.$color-text-placeholder;
   letter-spacing: 0.5px;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: opacity $transition-speed;
+  transition: opacity $t;
 }
 
 .str-sidebar__section {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 0 16px;
+  @include str.flex-col(str.$space-2);
+  padding: 0 str.$space-16;
 }
 
 .str-sidebar__item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 10px;
+  @include str.flex-row(str.$space-12);
+  padding: str.$space-8 10px;
   border: none;
   background: none;
   cursor: pointer;
-  color: #333333;
-  border-radius: 4px;
+  color: str.$color-text-secondary;
+  border-radius: str.$radius-sm;
   transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: str.$font-14;
+  font-weight: str.$fw-regular;
   text-align: left;
   white-space: nowrap;
   width: 100%;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: #000000;
+    background-color: str.$overlay-hover;
+    color: str.$color-text-primary;
   }
 
   &--active {
-    background-color: #00000012;
-    color: #242424;
-    font-weight: 500;
+    background-color: str.$overlay-press;
+    color: str.$color-text-primary;
+    font-weight: str.$fw-medium;
 
     &:hover {
-      background-color: #00000012;
+      background-color: str.$overlay-press;
     }
   }
 
   &--sub {
-    color: #666666;
+    color: str.$color-text-muted;
 
     &:hover {
-      color: #333333;
+      color: str.$color-text-secondary;
     }
 
     &.str-sidebar__item--active {
-      color: #00000012;
+      color: str.$overlay-press;
     }
   }
 }
 
 .str-sidebar__item-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include str.flex-center;
   min-width: 24px;
   width: 26px;
   height: 24px;
@@ -264,16 +238,14 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
 .str-sidebar__item-label {
   flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  transition: opacity $transition-speed;
+  @include str.text-truncate;
+  transition: opacity $t;
 }
 
 .str-sidebar__item-chevron {
   flex-shrink: 0;
   color: inherit;
-  transition: opacity $transition-speed;
+  transition: opacity $t;
 }
 
 .str-sidebar__submenu {
@@ -281,8 +253,8 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   grid-template-rows: 0fr;
   opacity: 0;
   transition:
-    grid-template-rows 280ms cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 220ms cubic-bezier(0.4, 0, 0.2, 1);
+    grid-template-rows str.$transition-submenu-rows,
+    opacity str.$transition-submenu-opacity;
 
   &--open {
     grid-template-rows: 1fr;
@@ -292,9 +264,7 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
 .str-sidebar__submenu-inner {
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  @include str.flex-col(str.$space-2);
 }
 
 .str-sidebar__collapsed-child {
@@ -309,19 +279,17 @@ $transition-speed: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
 .str-sidebar__sub-wrapper {
   .str-sidebar__item--sub {
-    font-size: 14px;
+    font-size: str.$font-14;
     margin-left: 0;
     width: 100%;
-    padding: 12px 8px 12px 46px;
-    color: #666666;
+    padding: str.$space-12 str.$space-8 str.$space-12 46px;
+    color: str.$color-text-muted;
   }
 }
 
 .str-sidebar__footer {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 8px 18px;
-  border-top: 1px solid #e0e0e0;
+  @include str.flex-col(str.$space-2);
+  padding: str.$space-8 18px;
+  border-top: 1px solid str.$color-border;
   flex-shrink: 0;
 }
