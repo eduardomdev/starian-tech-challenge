@@ -9,7 +9,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			@if (errorLoading()) {
+			@if (loading()) {
+				@let skelTemplate = skeletonTemplate();
+				@for (row of skeletonRows(); track row) {
+					@if (skelTemplate) {
+						<ng-container [ngTemplateOutlet]="skelTemplate" />
+					} @else {
+						<tr class="skeleton-row">
+							<td colspan="9999" class="skeleton-cell">
+								<str-skeleton height="20px" />
+							</td>
+						</tr>
+					}
+				}
+
+			} @else if (errorLoading()) {
 				<tr>
 					<td colspan="9999">
 						<div class="container-empty">
@@ -38,23 +52,21 @@
 						[ngTemplateOutlet]="itemTemplate()"
 						[ngTemplateOutletContext]="{ $implicit: item, index, first, last }" />
 				} @empty {
-					@if (!loading()) {
-						<tr>
-							<td colspan="9999">
-								<div class="container-empty">
-									@let emptyTemp = emptyDataTemplate();
-									@if (emptyTemp) {
-										<ng-container [ngTemplateOutlet]="emptyTemp" />
-									} @else {
-										<p class="empty-title">{{ emptyText() }}</p>
-										<p class="empty-description">
-											Assim que estiverem disponíveis, eles serão exibidos aqui.
-										</p>
-									}
-								</div>
-							</td>
-						</tr>
-					}
+					<tr>
+						<td colspan="9999">
+							<div class="container-empty">
+								@let emptyTemp = emptyDataTemplate();
+								@if (emptyTemp) {
+									<ng-container [ngTemplateOutlet]="emptyTemp" />
+								} @else {
+									<p class="empty-title">{{ emptyText() }}</p>
+									<p class="empty-description">
+										Assim que estiverem disponíveis, eles serão exibidos aqui.
+									</p>
+								}
+							</div>
+						</td>
+					</tr>
 				}
 			}
 		</tbody>
@@ -65,11 +77,5 @@
 @if (toolbar) {
 	<div class="table-toolbar">
 		<ng-container [ngTemplateOutlet]="toolbar" />
-	</div>
-}
-
-@if (loading()) {
-	<div class="loading-overlay">
-		<str-loading [text]="textLoading()" />
 	</div>
 }

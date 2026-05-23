@@ -1,3 +1,77 @@
 <section class="profile-page">
-  <p>Profile</p>
+
+  <header class="profile-header">
+    <p class="title-font-24">Perfil</p>
+    <p class="subtitle-font-16">Gerencie suas informações pessoais.</p>
+  </header>
+
+  @if (!loading() && loadError()) {
+    <div class="profile-error" role="alert">
+      <str-icon name="error" size="20" colorIcon="#ef4444" />
+      <span>Não foi possível carregar os dados do perfil. Tente novamente.</span>
+    </div>
+  }
+
+  <div class="profile-card">
+
+    @if (loading()) {
+      <app-profile-skeleton />
+    } @else {
+      <div class="profile-identity">
+        <str-avatar [name]="user()?.username ?? ''" class="profile-avatar" />
+        <div class="profile-identity-info">
+          <div class="profile-identity-name-row">
+            <span class="profile-username">{{ user()?.username }}</span>
+            <str-tag value="admin" [config]="roleTagConfig()" />
+          </div>
+          <span class="profile-email">{{ user()?.email }}</span>
+        </div>
+      </div>
+
+      <div class="profile-divider" role="separator"></div>
+
+      <form [formRoot]="profileForm" class="profile-form" aria-label="Formulário de edição de perfil" novalidate>
+        <div class="profile-form-grid">
+          <str-input
+            [formField]="profileForm.username"
+            label="Usuário"
+            placeholder="Digite seu usuário"
+            inputId="profile-username"
+            ariaLabel="Nome de usuário"
+          />
+          <str-input
+            [formField]="profileForm.email"
+            label="E-mail"
+            type="email"
+            placeholder="Digite seu e-mail"
+            inputId="profile-email"
+            ariaLabel="Endereço de e-mail"
+          />
+          <str-input
+            [formField]="profileForm.password"
+            label="Senha"
+            type="password"
+            placeholder="Digite sua nova senha"
+            inputId="profile-password"
+            ariaLabel="Senha da conta"
+          />
+        </div>
+
+        <div class="profile-form-actions">
+          <button type="button" class="btn-danger" (click)="openDeleteModal()">
+            <str-icon name="delete" size="18" />
+            Excluir conta
+          </button>
+          <str-button
+            type="submit"
+            iconName="save"
+            iconPosition="right"
+            [loading]="updateLoading()"
+          >
+            Salvar alterações
+          </str-button>
+        </div>
+      </form>
+    }
+  </div>
 </section>

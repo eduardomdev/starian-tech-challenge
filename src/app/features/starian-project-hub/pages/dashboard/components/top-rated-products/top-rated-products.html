@@ -1,0 +1,35 @@
+<article class="top-rated-card" aria-labelledby="top-rated-title">
+  <header class="card-header">
+    <h2 class="card-title" id="top-rated-title">Melhores Avaliados</h2>
+    <div class="icon-wrapper" aria-hidden="true">
+      <str-icon name="star" [fill]="true" colorIcon="#f59e0b" size="20" />
+    </div>
+  </header>
+
+  @if (loading()) {
+    <app-top-rated-skeleton />
+  } @else {
+    <ul class="product-list" aria-label="Produtos melhor avaliados">
+      @for (product of topProducts(); track product.id; let i = $index) {
+        <li class="product-item">
+          <span class="product-rank" aria-label="Posição">{{ i + 1 }}</span>
+          <img
+            class="product-image"
+            [src]="product.image"
+            [alt]="product.title"
+            width="44"
+            height="44"
+            loading="lazy"
+          />
+          <div class="product-info">
+            <p class="product-name">{{ product.title }}</p>
+            <product-rating [rate]="product.rating.rate" [count]="product.rating.count" />
+          </div>
+          <span class="product-price" aria-label="Preço: {{ product.price | currency }}">
+            {{ product.price | currency }}
+          </span>
+        </li>
+      }
+    </ul>
+  }
+</article>

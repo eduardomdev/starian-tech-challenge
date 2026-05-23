@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { APP_ROUTES } from '@core/constants/app-routes.constant';
 import { FormField, FormRoot, email, form, maxLength, required } from '@angular/forms/signals';
 import { StrInputComponent } from '../../../../shared/components/atoms/str-input/str-input.component';
 import { StrButtonComponent } from '../../../../shared/components/atoms/str-button/str-button.component';
@@ -50,6 +51,6 @@ export class RegisterComponent {
   });
 
   protected goToLogin(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate([APP_ROUTES.login]);
   }
 }

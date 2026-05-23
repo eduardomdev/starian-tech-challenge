@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { TableComponent } from '@shared/components/organisms/str-table/str-table';
 import { IconComponent } from '@shared/components/atoms/icon/icon';
 import { TagComponent } from '@shared/components/atoms/str-tag/str-tag';
@@ -10,11 +10,13 @@ import { SortService } from '@shared/directives/str-sort/str-sort.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ProductAddModalComponent } from './components/product-add-modal/product-add-modal';
 import { ProductEditModalComponent } from './components/product-edit-modal/product-edit-modal';
-import { ProductDeleteModalComponent } from './components/product-delete-modal/product-delete-modal';
+import { ConfirmModalComponent, type ConfirmModalData } from '@shared/components/molecules/confirm-modal/confirm-modal.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
 import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
 import { StrMultiSelectComponent } from '@shared/components/atoms/str-multi-select/str-multi-select.component';
+import { ProductsTableRowSkeletonComponent } from './products-table-row-skeleton';
 import { FilterProductsService } from '../../services/filter-products.service';
+import { ProductsIntegrationService } from '../../services/products-integration.service';
 
 import type { Product } from '../../../../shared/interfaces/products.interface';
 import { ProductsService } from '@shared/services/products.service';
@@ -35,16 +37,18 @@ import { StrTooltipDirective } from '@shared/directives/str-tooltip/str-tooltip.
     StrButtonComponent,
     StrInputComponent,
     StrMultiSelectComponent,
+    ProductsTableRowSkeletonComponent,
   ],
   providers: [SortService],
   templateUrl: './products.html',
   styleUrl: './products.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsPageComponent {
+export class ProductsPageComponent implements OnInit {
   private readonly productsService = inject(ProductsService);
   private readonly filterService = inject(FilterProductsService);
   private readonly dialogService = inject(DialogService);
+  private readonly integrationService = inject(ProductsIntegrationService);
 
   protected readonly sortService = inject(SortService);
   protected readonly tagConfig = signal(PRODUCTS_TAG_CONFIG);
@@ -62,6 +66,14 @@ export class ProductsPageComponent {
   );
 
   protected readonly trackById = (_: number, item: Product) => item.id;
+
+  ngOnInit(): void {
+    this.loadProducts();
+  }
+
+  private loadProducts(): void {
+    this.productsService.products.reload();
+  }
 
   protected clearTextFilter(): void {
     this.filterService.clearTextFilter();
@@ -89,13 +101,19 @@ export class ProductsPageComponent {
   }
 
   protected openDeleteModal(product: Product): void {
-    this.dialogService.open(ProductDeleteModalComponent, {
+    this.dialogService.open(ConfirmModalComponent, {
       width: '420px',
       modal: true,
       draggable: false,
       resizable: false,
       focusOnShow: true,
-      data: product,
+      data: {
+        title: 'Excluir produto',
+        description: `Deseja realmente excluir o produto #${product.id}? Esta ação não poderá ser desfeita.`,
+        confirmLabel: 'Excluir',
+        loading: this.integrationService.deleteLoading,
+        onConfirm: (close) => this.integrationService.delete(product.id, close),
+      } satisfies ConfirmModalData,
     });
   }
 }

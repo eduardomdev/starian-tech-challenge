@@ -8,7 +8,14 @@
   <main class="starian-project-hub-template-main">
     <header class="starian-project-hub-template-header">
       <str-breadcrumb [data]="breadcrumb()" />
-      <str-avatar name="Eduardo Maciel"></str-avatar>
+      <button
+        class="avatar-btn"
+        type="button"
+        aria-label="Ir para o perfil"
+        (click)="navigateToProfile()"
+      >
+        <str-avatar [name]="userName()" />
+      </button>
     </header>
     <div class="starian-project-hub-template-content">
       <router-outlet />

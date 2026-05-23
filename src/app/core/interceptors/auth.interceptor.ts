@@ -3,6 +3,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { TokenService } from '@core/tokens/token.service';
+import { APP_ROUTES } from '@core/constants/app-routes.constant';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenService = inject(TokenService);
@@ -18,7 +19,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: unknown) => {
       if (error instanceof Object && 'status' in error && error.status === 401) {
         tokenService.removeToken();
-        router.navigate(['/login']);
+        router.navigate([APP_ROUTES.login]);
       }
       return throwError(() => error);
     })

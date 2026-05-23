@@ -8,17 +8,6 @@
 	background-color: #fff;
 }
 
-.loading-overlay {
-	position: absolute;
-	inset: 0;
-	z-index: 10;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #f9f9f9;
-	backdrop-filter: blur(3px);
-}
-
 .table-toolbar {
 	flex-shrink: 0;
 	background-color: #f9f9f9;
@@ -80,6 +69,10 @@ thead {
 tbody {
 	color: #242424;
 	font-size: 14px;
+}
+
+.skeleton-cell {
+	padding: 10px 16px;
 }
 
 .container-empty {

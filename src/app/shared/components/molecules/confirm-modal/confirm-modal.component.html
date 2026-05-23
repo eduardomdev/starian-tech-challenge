@@ -1,0 +1,17 @@
+<div class="confirm-modal" role="alertdialog" aria-labelledby="confirm-dialog-title" aria-describedby="confirm-dialog-desc">
+
+  <header class="confirm-modal__header">
+    <p id="confirm-dialog-title" class="title-font-20">{{ data.title }}</p>
+    <p id="confirm-dialog-desc" class="confirm-modal__desc">{{ data.description }}</p>
+  </header>
+
+  <div class="confirm-modal__actions">
+    <str-button type="button" size="md" variant="secondary" (click)="cancel()">
+      Cancelar
+    </str-button>
+    <str-button type="button" size="md" iconName="delete" [loading]="loading()" (click)="confirm()">
+      {{ data.confirmLabel ?? 'Confirmar' }}
+    </str-button>
+  </div>
+
+</div>

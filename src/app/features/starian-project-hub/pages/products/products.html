@@ -5,45 +5,27 @@
   </header>
 
   <div class="products-toolbar">
-    <!-- Filters -->
     <div class="products-filters" role="search" aria-label="Filtros de produtos">
-      <!-- Text search -->
-        <str-input
-          class="filter-search-input"
-          placeholder="Buscar por ID ou título..."
-          ariaLabel="Buscar produto por ID ou título"
-          inputId="filter-product-text"
-          variant="secondary"
-          size="sm"
-          [value]="filterText()"
-          (valueChange)="filterText.set($event)"
-        />
-
-      <!-- Category multi-select -->
-      <str-multi-select
-        label="Categorias"
-        placeholder="Categorias"
-        [options]="availableCategories()"
-        [value]="filterCategories()"
-        (valueChange)="filterCategories.set($event)"
-      />
+      <str-input class="filter-search-input" placeholder="Buscar por ID ou título..."
+        ariaLabel="Buscar produto por ID ou título" inputId="filter-product-text" variant="secondary" size="sm"
+        [value]="filterText()" (valueChange)="filterText.set($event)" />
+      <str-multi-select label="Categorias" placeholder="Categorias" [options]="availableCategories()"
+        [value]="filterCategories()" (valueChange)="filterCategories.set($event)" />
     </div>
 
-    <!-- Add button -->
     <str-button size="sm" iconName="add" iconPosition="left" (click)="openAddModal()">
       Adicionar produto
     </str-button>
   </div>
 
   <div class="table-wrapper">
-    <str-table strSortGroup [data]="products()" [loading]="loading()" textLoading="Buscando lista de produtos..."
-      [errorLoading]="error()" [trackByFn]="trackById">
+    <str-table strSortGroup [data]="products()" [loading]="loading()" [errorLoading]="error()" [trackByFn]="trackById">
 
       <ng-template #toolbarTemplate>
         <span class="products-count">
           Exibindo {{ products().length }} produto{{ products().length !== 1 ? 's' : '' }}
           @if (hasActiveFilters()) {
-            <span class="products-count-filtered">(filtrado)</span>
+          <span class="products-count-filtered">(filtrado)</span>
           }
         </span>
       </ng-template>
@@ -59,6 +41,9 @@
           Avaliação</th>
         <th scope="col" class="col-actions">Ações</th>
       </ng-template>
+      <ng-template #skeletonTemplate>
+        <tr appProductsTableRowSkeleton></tr>
+      </ng-template>
 
       <ng-template #itemTemplate let-product>
         <tr>
@@ -70,7 +55,8 @@
               <div class="product-info">
                 <span class="product-title">{{ product.title }}</span>
                 <span class="product-desc" [strTooltip]="product.description" strTooltipPosition="bottom"
-                  tooltipMaxWidth="50%" [whenTruncate]="true" [tooltipShowDelay]="500"> {{ product.description }} </span>
+                  tooltipMaxWidth="50%" [whenTruncate]="true" [tooltipShowDelay]="500"> {{ product.description }}
+                </span>
               </div>
             </div>
           </td>
@@ -83,10 +69,14 @@
           </td>
           <td class="col-actions">
             <div class="actions-cell">
-              <button strTooltip="Editar produto" [tooltipShowDelay]="500" strTooltipPosition="bottom" class="action-btn" type="button" [attr.aria-label]="'Editar ' + product.title" (click)="openEditModal(product)">
+              <button strTooltip="Editar produto" [tooltipShowDelay]="500" strTooltipPosition="bottom"
+                class="action-btn" type="button" [attr.aria-label]="'Editar ' + product.title"
+                (click)="openEditModal(product)">
                 <str-icon name="edit" size="18" />
               </button>
-              <button strTooltip="Excluir produto" [tooltipShowDelay]="500" strTooltipPosition="bottom" class="action-btn action-btn--delete" type="button" [attr.aria-label]="'Excluir ' + product.title" (click)="openDeleteModal(product)">
+              <button strTooltip="Excluir produto" [tooltipShowDelay]="500" strTooltipPosition="bottom"
+                class="action-btn action-btn--delete" type="button" [attr.aria-label]="'Excluir ' + product.title"
+                (click)="openDeleteModal(product)">
                 <str-icon name="delete" size="18" />
               </button>
             </div>

@@ -13,7 +13,13 @@
         [iconName]="stat.iconName"
         [iconColor]="stat.iconColor"
         [iconBgColor]="stat.iconBgColor"
+        [loading]="loading()"
       />
     }
+  </div>
+
+  <div class="dashboard-widgets">
+    <app-top-rated-products />
+    <app-by-category />
   </div>
 </section>

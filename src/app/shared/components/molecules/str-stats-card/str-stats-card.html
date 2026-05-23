@@ -11,6 +11,10 @@
 </header>
 
 <div class="card-body">
-	<p class="card-value">{{ value() }}</p>
-	<p class="card-description">{{ description() }}</p>
+	@if (loading()) {
+		<app-stats-card-skeleton />
+	} @else {
+		<p class="card-value">{{ value() }}</p>
+		<p class="card-description">{{ description() }}</p>
+	}
 </div>

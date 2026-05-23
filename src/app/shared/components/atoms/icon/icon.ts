@@ -20,10 +20,9 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     }
     .rotate-icon {
       transform: rotate(180deg);
-      transition: 320ms;
     }
     .icon-container {
-      transition: 320ms;
+      transition: transform 320ms, color 320ms;
     }
   `,
 	changeDetection: ChangeDetectionStrategy.OnPush,

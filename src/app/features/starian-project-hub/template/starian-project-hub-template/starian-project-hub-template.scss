@@ -35,6 +35,22 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
+.avatar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 3px;
+  }
+}
+
 p-breadcrumb {
     --p-breadcrumb-item-gap: 0.5rem;
     --p-breadcrumb-transition-duration: 0.3s;

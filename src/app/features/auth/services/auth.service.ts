@@ -5,6 +5,7 @@ import { EMPTY, catchError, finalize, tap } from 'rxjs';
 import { ToastrService } from '@shared/components/atoms/toastr/toastr.service';
 import { UserService } from '@shared/services/user.service';
 import { TokenService } from '@core/tokens/token.service';
+import { APP_ROUTES } from '@core/constants/app-routes.constant';
 import { CreateUserPayload, LoginPayload } from '@shared/interfaces/auth.interface';
 import { nextUserId } from '@shared/utils/storage-id';
 
@@ -27,7 +28,7 @@ export class AuthService {
       .pipe(
         tap(() => {
           this.toastr.success('Usuário cadastrado com sucesso.');
-          this.router.navigate(['/login']);
+          this.router.navigate([APP_ROUTES.login]);
         }),
         catchError(() => {
           this.toastr.error('Erro ao cadastrar usuário. Tente novamente.');
@@ -46,7 +47,7 @@ export class AuthService {
       .pipe(
         tap(({ token }) => {
           this.tokenService.setToken(token);
-          this.router.navigate(['/starian-hub']);
+          this.router.navigate([APP_ROUTES.hub]);
         }),
         catchError(() => {
           this.loginError.set(true);

@@ -1,0 +1,55 @@
+<article class="by-category-card" aria-labelledby="by-category-title">
+  <header class="card-header">
+    <h2 class="card-title" id="by-category-title">Por Categoria</h2>
+    <div class="icon-wrapper" aria-hidden="true">
+      <str-icon name="donut_large" colorIcon="#2563eb" size="20" />
+    </div>
+  </header>
+
+  @if (loading()) {
+    <app-by-category-skeleton />
+  } @else {
+    <div class="chart-body">
+      <div class="chart-wrapper" role="img" aria-label="Gráfico de pizza por categoria">
+        <ngx-charts-pie-chart
+          [view]="chartView()"
+          [results]="chartData()"
+          [scheme]="colorScheme()"
+          [doughnut]="true"
+          [arcWidth]="0.35"
+          [legend]="false"
+          [labels]="false"
+          [gradient]="false"
+        />
+      </div>
+
+      <ul class="legend-list" aria-label="Legenda do gráfico por categoria">
+        @for (item of categoryStats(); track item.key) {
+          <li class="legend-item">
+            <span class="legend-dot" [style.background-color]="item.color" aria-hidden="true"></span>
+            <div class="legend-info">
+              <span class="legend-label">{{ item.label }}</span>
+              <div class="legend-meta">
+                <span
+                  ngx-charts-count-up
+                  [countTo]="item.count"
+                  [countDuration]="0.8"
+                  [countSuffix]="' produtos'"
+                  [attr.aria-label]="item.count + ' produtos'"
+                ></span>
+                <span class="legend-separator" aria-hidden="true">·</span>
+                <span
+                  ngx-charts-count-up
+                  [countTo]="item.percent"
+                  [countDuration]="0.8"
+                  [countSuffix]="'%'"
+                  [attr.aria-label]="item.percent + '%'"
+                ></span>
+              </div>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+</article>

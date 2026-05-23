@@ -8,28 +8,47 @@
 
   <div class="str-input__field-wrap">
     <input
+      class="str-input__field"
+      [class.str-input__field--secondary]="variant() === 'secondary'"
+      [class.str-input__field--invalid]="showError()"
+      [class.str-input__field--has-toggle]="isPassword()"
       [strNumbersOnly]="numbersOnly()"
       [id]="inputId()"
-      [type]="type()"
+      [type]="resolvedType()"
       [value]="value()"
       [placeholder]="placeholder()"
       [disabled]="disabled()"
+      [required]="required()"
       [style.height]="sizeHeight()"
       [attr.maxlength]="maxLength() ?? null"
       [attr.inputmode]="numbersOnly() ? 'decimal' : null"
       [attr.aria-label]="ariaLabel() || null"
-      [attr.aria-invalid]="showError() ? 'true' : null"
+      [attr.aria-invalid]="showError() || null"
       [attr.aria-describedby]="showError() && inputId() ? inputId() + '-error' : null"
-      [attr.required]="required() ? 'true' : null"
-      [class]="fieldClasses()"
       (input)="onInput($event)"
       (blur)="onBlur()"
     />
 
-    @if (showError()) {
-      <span [id]="inputId() + '-error'" class="str-input__error" role="alert">
-        {{ firstError() }}
-      </span>
+    @if (isPassword()) {
+      <button
+        type="button"
+        class="str-input__toggle"
+        [attr.aria-label]="showPassword() ? 'Ocultar senha' : 'Mostrar senha'"
+        [attr.aria-pressed]="showPassword()"
+        (click)="togglePassword()"
+      >
+        <str-icon
+          [name]="showPassword() ? 'visibility_off' : 'visibility'"
+          size="18"
+          colorIcon="#9ca3af"
+        />
+      </button>
     }
   </div>
+
+  @if (showError()) {
+    <span [id]="inputId() + '-error'" class="str-input__error" role="alert">
+      {{ firstError() }}
+    </span>
+  }
 </div>
