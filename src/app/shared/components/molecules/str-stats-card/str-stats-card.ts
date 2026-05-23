@@ -10,11 +10,11 @@ import { StatsCardSkeletonComponent } from './stats-card-skeleton';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatsCardComponent {
-  public title = input.required<string>();
-  public value = input.required<string>();
-  public description = input.required<string>();
-  public iconName = input.required<string>();
-  public iconColor = input<string>('#7c3aed');
-  public iconBgColor = input<string>('#ede9fe');
-  public loading = input<boolean>(false);
+  readonly title = input.required<string>();
+  readonly value = input.required<string>();
+  readonly description = input.required<string>();
+  readonly iconName = input.required<string>();
+  readonly iconColor = input<string>('#7c3aed');
+  readonly iconBgColor = input<string>('#ede9fe');
+  readonly loading = input<boolean>(false);
 }

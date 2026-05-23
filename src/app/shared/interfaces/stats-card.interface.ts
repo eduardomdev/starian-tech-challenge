@@ -1,4 +1,5 @@
 export interface StatCard {
+  key: string;
   title: string;
   value: string;
   description: string;

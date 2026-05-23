@@ -4,7 +4,7 @@ import { TopRatedProductsComponent } from './components/top-rated-products/top-r
 import { ByCategoryComponent } from './components/by-category/by-category';
 import { ProductsService } from '@shared/services/products.service';
 import type { StatCard } from '@shared/interfaces/stats-card.interface';
-import { computeProductStats } from '@shared/helpers/product-stats.helper';
+import { computeProductStats, type ProductStats } from '@shared/helpers/product-stats.helper';
 import { STAT_CARDS } from '@core/constants/stat-cards.constant';
 
 @Component({
@@ -21,16 +21,11 @@ export class DashboardPageComponent implements OnInit {
   protected readonly loading = this.productsService.products.isLoading;
 
   protected readonly stats = computed<StatCard[]>(() => {
-    const products = this.products();
-    const values = computeProductStats(products);
-    return STAT_CARDS.map((card, i) => ({ ...card, value: values[i] }));
+    const values = computeProductStats(this.products());
+    return STAT_CARDS.map((card) => ({ ...card, value: values[card.key as keyof ProductStats] ?? '-' }));
   });
 
-  ngOnInit() {
-    this.loadDashboards();
-  }
-
-  loadDashboards(): void {
+  ngOnInit(): void {
     this.productsService.products.reload();
   }
 }

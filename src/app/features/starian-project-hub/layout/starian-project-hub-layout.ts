@@ -7,6 +7,7 @@ import { StrBreadcrumbComponent } from '../../../shared/components/atoms/breadcr
 import { StrAvatarComponent } from '../../../shared/components/atoms/avatar/avatar';
 import { BreadcrumbService } from '../../../shared/components/atoms/breadcrumb/breadcrumb.service';
 import { UserService } from '@shared/services/user.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { APP_ROUTES } from '@core/constants/app-routes.constant';
 import { getFullName } from '@shared/utils/user.utils';
 
@@ -20,6 +21,7 @@ import { getFullName } from '@shared/utils/user.utils';
 export class StarianProjectHubLayoutComponent {
   private readonly router = inject(Router);
   private readonly userService = inject(UserService);
+  private readonly authService = inject(AuthService);
 
   protected readonly sidebarExpanded = signal(true);
   protected readonly sections = signal<SidebarSection[]>(STARIAN_PROJECT_HUB_SECTIONS);
@@ -32,6 +34,10 @@ export class StarianProjectHubLayoutComponent {
   });
 
   protected onNavigate(route: string): void {
+    if (route === APP_ROUTES.login) {
+      this.authService.logout();
+      return;
+    }
     this.router.navigate([route]);
   }
 

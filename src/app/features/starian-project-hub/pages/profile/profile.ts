@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { email, form, FormField, FormRoot, maxLength, required } from '@angular/forms/signals';
 import { DialogService } from 'primeng/dynamicdialog';
 
@@ -31,7 +31,7 @@ import type { UpdateUserPayload } from '@shared/interfaces/user.interface';
     ProfileSkeletonComponent,
   ],
 })
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit {
   private readonly userService = inject(UserService);
   private readonly integrationService = inject(UserIntegrationService);
   private readonly dialogService = inject(DialogService);
@@ -78,12 +78,6 @@ export class ProfilePageComponent {
   );
 
   constructor() {
-    this.syncFormWithUser();
-  }
-
-  private syncFormWithUser(): void {
-    this.userService.currentUser.reload();
-
     effect(() => {
       const userData = this.user();
       if (userData) {
@@ -94,6 +88,10 @@ export class ProfilePageComponent {
         });
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.userService.currentUser.reload();
   }
 
   protected openDeleteModal(): void {

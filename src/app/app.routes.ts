@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { StarianProjectHubLayoutComponent } from './features/starian-project-hub/layout/starian-project-hub-layout';
 import { authenticatedGuard } from '@core/guards/authenticated.guard';
+import { unauthenticatedGuard } from '@core/guards/unauthenticated.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
+    canMatch: [unauthenticatedGuard],
     loadComponent: () =>
       import('./features/auth/pages/login/login.component').then(
         m => m.LoginComponent
@@ -12,6 +14,7 @@ export const routes: Routes = [
   },
   {
     path: 'register',
+    canMatch: [unauthenticatedGuard],
     loadComponent: () =>
       import('./features/auth/pages/register/register.component').then(
         m => m.RegisterComponent

@@ -1,24 +1,33 @@
 import type { Product } from '@shared/interfaces/products.interface';
 
-export function computeProductStats(products: Product[]): string[] {
+export interface ProductStats {
+  total: string;
+  categories: string;
+  avgPrice: string;
+  bestRate: string;
+}
+
+export function computeProductStats(products: Product[]): ProductStats {
   const total = products.length;
 
-  if (total === 0) return ['0', '0', 'R$ 0,00', '0'];
+  if (total === 0) {
+    return { total: '0', categories: '0', avgPrice: 'R$ 0,00', bestRate: '0' };
+  }
 
-  const categories = new Set<string>();
+  const categorySet = new Set<string>();
   let sumPrice = 0;
   let bestRate = -Infinity;
 
   for (const { category, price, rating } of products) {
-    categories.add(category);
+    categorySet.add(category);
     sumPrice += price;
     if (rating.rate > bestRate) bestRate = rating.rate;
   }
 
-  return [
-    String(total),
-    String(categories.size),
-    (sumPrice / total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
-    String(bestRate),
-  ];
+  return {
+    total: String(total),
+    categories: String(categorySet.size),
+    avgPrice: (sumPrice / total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+    bestRate: String(bestRate),
+  };
 }

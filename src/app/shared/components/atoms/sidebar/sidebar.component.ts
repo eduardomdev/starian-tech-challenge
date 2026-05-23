@@ -11,7 +11,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
@@ -20,8 +20,7 @@ import { SidebarItem, SidebarSection } from './sidebar.models';
 
 @Component({
   selector: 'str-sidebar',
-  standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [NgOptimizedImage, IconComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

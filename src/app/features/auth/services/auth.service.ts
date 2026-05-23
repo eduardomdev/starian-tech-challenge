@@ -39,6 +39,11 @@ export class AuthService {
       .subscribe();
   }
 
+  logout(): void {
+    this.tokenService.removeToken();
+    this.router.navigate([APP_ROUTES.login]);
+  }
+
   login(data: LoginPayload): void {
     this.loginLoading.set(true);
     this.loginError.set(false);

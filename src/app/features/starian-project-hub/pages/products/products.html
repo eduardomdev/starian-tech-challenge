@@ -50,8 +50,7 @@
           <td class="col-id">#{{ product.id }}</td>
           <td class="col-product">
             <div class="product-cell">
-              <img [src]="product.image" [alt]="product.title" class="product-img" width="48" height="48" loading="lazy"
-                decoding="async" />
+              <img [src]="product.image" [alt]="product.title" class="product-img" width="48" height="48" loading="lazy" decoding="async" />
               <div class="product-info">
                 <span class="product-title">{{ product.title }}</span>
                 <span class="product-desc" [strTooltip]="product.description" strTooltipPosition="bottom"

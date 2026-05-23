@@ -65,7 +65,7 @@ export class StrMultiSelectComponent {
     this.value.set([]);
   }
 
-  onDocumentClick(event: MouseEvent): void {
+  protected onDocumentClick(event: MouseEvent): void {
     if (!this.el.nativeElement.contains(event.target)) {
       this.close();
     }
