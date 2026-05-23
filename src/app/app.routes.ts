@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { StarianProjectHubTemplateComponent } from './features/starian-project-hub/template/starian-project-hub-template/starian-project-hub-template';
+import { StarianProjectHubLayoutComponent } from './features/starian-project-hub/layout/starian-project-hub-layout';
 import { authenticatedGuard } from '@core/guards/authenticated.guard';
 
 export const routes: Routes = [
@@ -20,7 +20,7 @@ export const routes: Routes = [
   {
     path: 'starian-hub',
     canMatch: [authenticatedGuard],
-    component: StarianProjectHubTemplateComponent,
+    component: StarianProjectHubLayoutComponent,
     children: [
       {
         path: 'dashboard',

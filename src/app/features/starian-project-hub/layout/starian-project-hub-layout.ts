@@ -1,23 +1,23 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { StrSidebarComponent } from '../../../../shared/components/atoms/sidebar/sidebar.component';
-import { SidebarSection, SidebarItem } from '../../../../shared/components/atoms/sidebar/sidebar.models';
-import { STARIAN_PROJECT_HUB_SECTIONS, STARIAN_PROJECT_HUB_FOOTER_ITEMS } from '../../../../core/constants/starian-project-hub.constants';
-import { StrBreadcrumbComponent } from '../../../../shared/components/atoms/breadcrumb/breadcrumb';
-import { StrAvatarComponent } from '../../../../shared/components/atoms/avatar/avatar';
-import { BreadcrumbService } from '../../../../shared/components/atoms/breadcrumb/breadcrumb.service';
+import { StrSidebarComponent } from '../../../shared/components/atoms/sidebar/sidebar.component';
+import { SidebarSection, SidebarItem } from '../../../shared/components/atoms/sidebar/sidebar.models';
+import { STARIAN_PROJECT_HUB_SECTIONS, STARIAN_PROJECT_HUB_FOOTER_ITEMS } from '../../../core/constants/starian-project-hub.constants';
+import { StrBreadcrumbComponent } from '../../../shared/components/atoms/breadcrumb/breadcrumb';
+import { StrAvatarComponent } from '../../../shared/components/atoms/avatar/avatar';
+import { BreadcrumbService } from '../../../shared/components/atoms/breadcrumb/breadcrumb.service';
 import { UserService } from '@shared/services/user.service';
 import { APP_ROUTES } from '@core/constants/app-routes.constant';
 import { getFullName } from '@shared/utils/user.utils';
 
 @Component({
-  selector: 'app-starian-project-hub-template',
+  selector: 'app-starian-project-hub-layout',
   imports: [RouterOutlet, StrSidebarComponent, StrBreadcrumbComponent, StrAvatarComponent],
-  templateUrl: './starian-project-hub-template.html',
-  styleUrl: './starian-project-hub-template.scss',
+  templateUrl: './starian-project-hub-layout.html',
+  styleUrl: './starian-project-hub-layout.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StarianProjectHubTemplateComponent {
+export class StarianProjectHubLayoutComponent {
   private readonly router = inject(Router);
   private readonly userService = inject(UserService);
 

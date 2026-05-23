@@ -16,7 +16,7 @@
     (keydown.escape)="close()"
   >
     <div class="str-ms-trigger-label">
-      <str-icon name="category" size="16" aria-hidden="true" />
+      <str-icon [name]="iconName()" size="16" aria-hidden="true" />
       <span class="str-ms-trigger-text">{{ placeholder() }}</span>
     </div>
 
@@ -74,7 +74,7 @@
           class="str-ms-clear-btn"
           [disabled]="selectedCount() === 0"
           (click)="clearAll()"
-          aria-label="Limpar seleção de {{ label() || 'categorias' }}"
+          aria-label="Limpar seleção"
         >
           Limpar
         </button>

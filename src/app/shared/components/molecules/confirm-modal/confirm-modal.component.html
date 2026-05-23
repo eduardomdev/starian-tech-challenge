@@ -9,7 +9,7 @@
     <str-button type="button" size="md" variant="secondary" (click)="cancel()">
       Cancelar
     </str-button>
-    <str-button type="button" size="md" iconName="delete" [loading]="loading()" (click)="confirm()">
+    <str-button type="button" size="md" [loading]="loading()" (click)="confirm()">
       {{ data.confirmLabel ?? 'Confirmar' }}
     </str-button>
   </div>

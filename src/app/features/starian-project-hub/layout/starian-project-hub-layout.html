@@ -1,12 +1,12 @@
-<div class="starian-project-hub-template-container">
+<div class="layout-container">
   <str-sidebar
     [(expanded)]="sidebarExpanded"
     [sections]="sections()"
     [footerItems]="footerItems()"
     (navigate)="onNavigate($event)"
   ></str-sidebar>
-  <main class="starian-project-hub-template-main">
-    <header class="starian-project-hub-template-header">
+  <main class="layout-main">
+    <header class="layout-header">
       <str-breadcrumb [data]="breadcrumb()" />
       <button
         class="avatar-btn"
@@ -17,7 +17,7 @@
         <str-avatar [name]="userName()" />
       </button>
     </header>
-    <div class="starian-project-hub-template-content">
+    <div class="layout-content">
       <router-outlet />
     </div>
   </main>

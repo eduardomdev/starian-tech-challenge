@@ -33,6 +33,7 @@ export class StrMultiSelectComponent {
   readonly value = model<string[]>([]);
   readonly placeholder = input<string>('Selecione opções');
   readonly label = input<string>('');
+  readonly iconName = input<string>('label');
   readonly disabled = input<boolean>(false);
 
   protected readonly isOpen = signal(false);

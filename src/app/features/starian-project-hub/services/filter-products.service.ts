@@ -4,14 +4,6 @@ import { PRODUCTS_TAG_CONFIG } from '@core/constants/tag-products.constant';
 import type { Product } from '@shared/interfaces/products.interface';
 import type { StrMultiSelectOption } from '@shared/components/atoms/str-multi-select/str-multi-select.component';
 
-/**
- * Encapsula a lógica de filtro de produtos.
- *
- * Em um cenário real, essa filtragem seria realizada no back-end
- * como parâmetros de query (e.g. GET /products?text=...&categories=...).
- * Como este é um teste técnico com dados mockados, a lógica foi
- * implementada no front-end mantendo a mesma separação de responsabilidades.
- */
 @Injectable({ providedIn: 'root' })
 export class FilterProductsService {
   private readonly productsService = inject(ProductsService);
@@ -20,46 +12,41 @@ export class FilterProductsService {
   readonly filterCategories = signal<string[]>([]);
 
   readonly availableCategories = computed<StrMultiSelectOption[]>(() => {
-    const allProducts = this.productsService.products.value() ?? [];
-    const seen = new Set<string>();
-    const result: StrMultiSelectOption[] = [];
+    const products = this.productsService.products.value() ?? [];
+    const seen = new Set(products.map(({ category }) => category));
 
-    for (const p of allProducts) {
-      if (!seen.has(p.category)) {
-        seen.add(p.category);
-        result.push({
-          value: p.category,
-          label: PRODUCTS_TAG_CONFIG[p.category]?.label ?? p.category,
-        });
-      }
-    }
-
-    return result;
+    return [...seen].map((category) => ({
+      value: category,
+      label: PRODUCTS_TAG_CONFIG[category]?.label ?? category,
+    }));
   });
 
   readonly filteredProducts = computed<Product[]>(() => {
-    const rawProducts = this.productsService.products.value() ?? [];
-    const text = this.filterText().toLowerCase().trim();
-    const categories = this.filterCategories();
+    const products = this.productsService.products.value() ?? [];
+    const text = this.filterText().trim().toLowerCase();
+    const categories = new Set(this.filterCategories());
 
-    return rawProducts.filter((p) => {
-      const matchesText =
-        !text ||
-        p.title.toLowerCase().includes(text) ||
-        String(p.id).includes(text);
+    if (!text && categories.size === 0) return products;
 
-      const matchesCategory =
-        categories.length === 0 || categories.includes(p.category);
-
-      return matchesText && matchesCategory;
-    });
+    return products.filter((p) =>
+      this.matchesText(p, text) && this.matchesCategories(p, categories),
+    );
   });
 
   readonly hasActiveFilters = computed(
     () => this.filterText().trim().length > 0 || this.filterCategories().length > 0,
   );
 
-  clearTextFilter(): void {
+  clearFilters(): void {
     this.filterText.set('');
+    this.filterCategories.set([]);
+  }
+
+  private matchesText({ title, id }: Product, text: string): boolean {
+    return !text || title.toLowerCase().includes(text) || String(id).includes(text);
+  }
+
+  private matchesCategories({ category }: Product, categories: Set<string>): boolean {
+    return categories.size === 0 || categories.has(category);
   }
 }

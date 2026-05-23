@@ -9,7 +9,7 @@
       <str-input class="filter-search-input" placeholder="Buscar por ID ou título..."
         ariaLabel="Buscar produto por ID ou título" inputId="filter-product-text" variant="secondary" size="sm"
         [value]="filterText()" (valueChange)="filterText.set($event)" />
-      <str-multi-select label="Categorias" placeholder="Categorias" [options]="availableCategories()"
+      <str-multi-select label="Categorias" placeholder="Filtrar categorias" [options]="availableCategories()"
         [value]="filterCategories()" (valueChange)="filterCategories.set($event)" />
     </div>
 
