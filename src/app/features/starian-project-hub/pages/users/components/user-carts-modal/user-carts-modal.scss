@@ -37,8 +37,6 @@
   }
 }
 
-// ── Table ────────────────────────────────────────────────────────────────────
-
 .carts-table-wrapper {
   overflow-x: auto;
   border: 1px solid str.$color-border;
@@ -100,8 +98,6 @@
   width: 88px;
 }
 
-// ── Actions ──────────────────────────────────────────────────────────────────
-
 .actions-cell {
   @include str.flex-row(str.$space-8);
 }
@@ -116,8 +112,6 @@
     transform: scale(0.9);
   }
 }
-
-// ── States ───────────────────────────────────────────────────────────────────
 
 .carts-state {
   @include str.flex-col(str.$space-12);
@@ -138,8 +132,6 @@
     width: auto;
   }
 }
-
-// ── Skeleton ─────────────────────────────────────────────────────────────────
 
 .carts-list {
   @include str.flex-col(0);
