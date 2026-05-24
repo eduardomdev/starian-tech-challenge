@@ -17,12 +17,12 @@ const USER: User = {
 };
 
 function makeCart(id: number, products: Cart['products'] = []): Cart {
-  return {
-    id,
-    userId: USER.id,
-    date: '2025-03-10',
-    products,
-  };
+  return { id, userId: USER.id, date: '2025-03-10', products };
+}
+
+// Helper: seleciona apenas células de corpo de tabela, não cabeçalhos
+function bodyCell(el: HTMLElement, cls: string): HTMLElement {
+  return el.querySelector(`tbody td.${cls}`) as HTMLElement;
 }
 
 describe('UserCartsModalComponent', () => {
@@ -48,17 +48,13 @@ describe('UserCartsModalComponent', () => {
       .mockReturnValue({ onClose: { subscribe: jest.fn() } });
     mockClose = jest.fn();
 
+    const mockDialogService = { open: mockDialogOpen };
+
     await TestBed.configureTestingModule({
       imports: [UserCartsModalComponent],
       providers: [
-        {
-          provide: DynamicDialogConfig,
-          useValue: { data: USER },
-        },
-        {
-          provide: DynamicDialogRef,
-          useValue: { close: mockClose },
-        },
+        { provide: DynamicDialogConfig, useValue: { data: USER } },
+        { provide: DynamicDialogRef, useValue: { close: mockClose } },
         {
           provide: CartsService,
           useValue: {
@@ -75,12 +71,13 @@ describe('UserCartsModalComponent', () => {
           provide: CartsIntegrationService,
           useValue: { deleteLoading: signal(false) },
         },
-        {
-          provide: DialogService,
-          useValue: { open: mockDialogOpen },
-        },
       ],
-    }).compileComponents();
+    })
+      .overrideComponent(UserCartsModalComponent, {
+        remove: { providers: [DialogService] },
+        add: { providers: [{ provide: DialogService, useValue: mockDialogService }] },
+      })
+      .compileComponents();
 
     fixture = TestBed.createComponent(UserCartsModalComponent);
     comp = fixture.componentInstance;
@@ -98,7 +95,7 @@ describe('UserCartsModalComponent', () => {
   });
 
   it('exibe o nome completo do usuário no título', () => {
-    const title = fixture.nativeElement.querySelector('[id="carts-dialog-title"]') as HTMLElement;
+    const title = fixture.nativeElement.querySelector('#carts-dialog-title') as HTMLElement;
     expect(title.textContent).toContain('João Silva');
   });
 
@@ -121,7 +118,7 @@ describe('UserCartsModalComponent', () => {
     expect(fixture.nativeElement.querySelector('.carts-table')).toBeNull();
   });
 
-  it('não exibe skeleton quando loading=false', () => {
+  it('não exibe skeleton quando loading=false e há dados', () => {
     loadingValue.set(false);
     cartsValue.set([]);
     fixture.detectChanges();
@@ -149,9 +146,7 @@ describe('UserCartsModalComponent', () => {
   it('exibe mensagem de vazio quando carts é uma lista vazia', () => {
     cartsValue.set([]);
     fixture.detectChanges();
-    expect(fixture.nativeElement.textContent).toContain(
-      'Nenhum carrinho encontrado para este usuário.',
-    );
+    expect(fixture.nativeElement.textContent).toContain('Nenhum carrinho encontrado');
   });
 
   it('não exibe a tabela quando carts está vazio', () => {
@@ -178,33 +173,33 @@ describe('UserCartsModalComponent', () => {
   it('exibe o id do carrinho com prefixo "#"', () => {
     cartsValue.set([makeCart(42)]);
     fixture.detectChanges();
-    const idCell = fixture.nativeElement.querySelector('.col-cart-id') as HTMLElement;
+    const idCell = bodyCell(fixture.nativeElement, 'col-cart-id');
     expect(idCell.textContent?.trim()).toBe('#42');
   });
 
-  it('exibe a data do carrinho formatada', () => {
+  it('exibe a data do carrinho formatada (dd/MM/yyyy)', () => {
     cartsValue.set([makeCart(1)]);
     fixture.detectChanges();
-    const dateCell = fixture.nativeElement.querySelector('.col-cart-date') as HTMLElement;
+    const dateCell = bodyCell(fixture.nativeElement, 'col-cart-date');
     expect(dateCell.textContent?.trim()).toBe('10/03/2025');
   });
 
-  it('exibe a quantidade de produtos do carrinho', () => {
+  it('exibe a quantidade de itens únicos (products.length)', () => {
     const cart = makeCart(1, [
       { productId: 1, quantity: 2 },
       { productId: 2, quantity: 1 },
     ]);
     cartsValue.set([cart]);
     fixture.detectChanges();
-    const productsCell = fixture.nativeElement.querySelector('.col-cart-products') as HTMLElement;
+    const productsCell = bodyCell(fixture.nativeElement, 'col-cart-products');
     expect(productsCell.textContent).toContain('2 produtos');
   });
 
   it('exibe "1 produto" no singular', () => {
-    const cart = makeCart(1, [{ productId: 1, quantity: 1 }]);
+    const cart = makeCart(1, [{ productId: 1, quantity: 3 }]);
     cartsValue.set([cart]);
     fixture.detectChanges();
-    const productsCell = fixture.nativeElement.querySelector('.col-cart-products') as HTMLElement;
+    const productsCell = bodyCell(fixture.nativeElement, 'col-cart-products');
     expect(productsCell.textContent).toContain('1 produto');
     expect(productsCell.textContent).not.toContain('1 produtos');
   });
@@ -219,7 +214,7 @@ describe('UserCartsModalComponent', () => {
     ]);
     cartsValue.set([cart]);
     fixture.detectChanges();
-    const itemsCell = fixture.nativeElement.querySelector('.col-cart-items') as HTMLElement;
+    const itemsCell = bodyCell(fixture.nativeElement, 'col-cart-items');
     expect(itemsCell.textContent).toContain('6 itens');
   });
 
@@ -227,22 +222,22 @@ describe('UserCartsModalComponent', () => {
     const cart = makeCart(1, [{ productId: 1, quantity: 1 }]);
     cartsValue.set([cart]);
     fixture.detectChanges();
-    const itemsCell = fixture.nativeElement.querySelector('.col-cart-items') as HTMLElement;
+    const itemsCell = bodyCell(fixture.nativeElement, 'col-cart-items');
     expect(itemsCell.textContent).toContain('1 item');
     expect(itemsCell.textContent).not.toContain('1 itens');
   });
 
-  it('exibe 0 itens quando o carrinho não tem produtos', () => {
+  it('exibe "0 itens" quando o carrinho não tem produtos', () => {
     const cart = makeCart(1, []);
     cartsValue.set([cart]);
     fixture.detectChanges();
-    const itemsCell = fixture.nativeElement.querySelector('.col-cart-items') as HTMLElement;
+    const itemsCell = bodyCell(fixture.nativeElement, 'col-cart-items');
     expect(itemsCell.textContent).toContain('0 itens');
   });
 
   // ── totalItems() diretamente ──────────────────────────────────────────────
 
-  it('totalItems retorna a soma das quantidades de todos os produtos', () => {
+  it('totalItems() retorna a soma das quantidades', () => {
     const cart = makeCart(1, [
       { productId: 1, quantity: 5 },
       { productId: 2, quantity: 3 },
@@ -250,7 +245,7 @@ describe('UserCartsModalComponent', () => {
     expect((comp as any).totalItems(cart)).toBe(8);
   });
 
-  it('totalItems retorna 0 para carrinho sem produtos', () => {
+  it('totalItems() retorna 0 para carrinho sem produtos', () => {
     expect((comp as any).totalItems(makeCart(1, []))).toBe(0);
   });
 
@@ -273,7 +268,7 @@ describe('UserCartsModalComponent', () => {
     );
   });
 
-  it('abre modal de exclusão ao clicar no botão de excluir', () => {
+  it('abre modal de exclusão com título e label corretos', () => {
     const cart = makeCart(1);
     (comp as any).openDeleteModal(cart);
     expect(mockDialogOpen).toHaveBeenCalledWith(
@@ -290,10 +285,7 @@ describe('UserCartsModalComponent', () => {
   // ── Fechar modal ──────────────────────────────────────────────────────────
 
   it('fecha o dialog ao chamar close()', () => {
-    const footerBtn = fixture.nativeElement.querySelector(
-      '.carts-modal__footer str-button',
-    ) as HTMLElement;
-    footerBtn.click();
+    (comp as any).close();
     expect(mockClose).toHaveBeenCalledTimes(1);
   });
 

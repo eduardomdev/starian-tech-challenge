@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { CartProductsPanelComponent } from './cart-products-panel';
 import type { Product } from '@shared/interfaces/products.interface';
 import type { SelectedItem } from '../../../../services/cart-form/cart-form.service';
@@ -203,17 +204,10 @@ describe('CartProductsPanelComponent', () => {
     const emitted: string[] = [];
     comp.searchQueryChange.subscribe((v) => emitted.push(v));
 
-    const strInput = fixture.nativeElement.querySelector('str-input') as HTMLElement;
-    strInput.dispatchEvent(
-      Object.assign(new CustomEvent('valueChange'), { detail: 'teclado' }),
-    );
+    const strInputDe = fixture.debugElement.query(By.css('str-input'));
+    strInputDe.triggerEventHandler('valueChange', 'teclado');
 
-    // Verifica também via template binding
-    fixture.componentRef.setInput('searchQuery', 'teclado');
-    fixture.detectChanges();
-
-    const searchDisplay = fixture.nativeElement.querySelector('str-input') as HTMLElement;
-    expect(searchDisplay).not.toBeNull();
+    expect(emitted).toEqual(['teclado']);
   });
 
   // ── Acessibilidade ────────────────────────────────────────────────────────

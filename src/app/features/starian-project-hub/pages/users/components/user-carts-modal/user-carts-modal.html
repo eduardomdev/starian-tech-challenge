@@ -43,7 +43,7 @@
                 <td class="col-cart-id">#{{ cart.id }}</td>
                 <td class="col-cart-date">{{ cart.date | date: 'dd/MM/yyyy' }}</td>
                 <td class="col-cart-products">{{ cart.products.length }} produto{{ cart.products.length !== 1 ? 's' : '' }}</td>
-                <td class="col-cart-items">{{ totalItems(cart) }} item{{ totalItems(cart) !== 1 ? 's' : '' }}</td>
+                <td class="col-cart-items">{{ totalItems(cart) }} {{ totalItems(cart) !== 1 ? 'itens' : 'item' }}</td>
                 <td class="col-cart-actions">
                   <div class="actions-cell">
                     <button
