@@ -1,6 +1,6 @@
 <article class="top-rated-card" aria-labelledby="top-rated-title">
   <header class="card-header">
-    <h2 class="card-title" id="top-rated-title">Melhores Avaliados</h2>
+    <h2 class="card-title" id="top-rated-title">Melhores avaliados</h2>
     <div class="icon-wrapper" aria-hidden="true">
       <str-icon name="star" [fill]="true" colorIcon="#f59e0b" size="20" />
     </div>
@@ -25,8 +25,8 @@
             <p class="product-name">{{ product.title }}</p>
             <product-rating [rate]="product.rating.rate" [count]="product.rating.count" />
           </div>
-          <span class="product-price" aria-label="Preço: {{ product.price | currency }}">
-            {{ product.price | currency }}
+          <span class="product-price" aria-label="Preço: {{ product.price | currency:'BRL':'symbol':'1.2-2' }}">
+            {{ product.price | currency:'BRL':'symbol':'1.2-2' }}
           </span>
         </li>
       }

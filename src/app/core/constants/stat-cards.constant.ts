@@ -3,7 +3,7 @@ import type { StatCard } from '@shared/interfaces/stats-card.interface';
 export const STAT_CARDS: Omit<StatCard, 'value'>[] = [
   {
     key: 'total',
-    title: 'Total de Produtos',
+    title: 'Total de produtos',
     description: 'No catálogo',
     iconName: 'deployed_code',
     iconColor: '#7c3aed',
@@ -19,7 +19,7 @@ export const STAT_CARDS: Omit<StatCard, 'value'>[] = [
   },
   {
     key: 'avgPrice',
-    title: 'Preço Médio',
+    title: 'Preço médio',
     description: 'Entre todos os produtos',
     iconName: 'attach_money',
     iconColor: '#d97706',
@@ -27,7 +27,7 @@ export const STAT_CARDS: Omit<StatCard, 'value'>[] = [
   },
   {
     key: 'bestRate',
-    title: 'Melhor Avaliado',
+    title: 'Melhor avaliado',
     description: 'Item mais bem avaliado',
     iconName: 'star',
     iconColor: '#dc2626',
