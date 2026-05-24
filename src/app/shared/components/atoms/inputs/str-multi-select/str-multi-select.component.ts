@@ -8,7 +8,7 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { IconComponent } from '../icon/icon';
+import { IconComponent } from '@shared/components/atoms/icon/icon';
 
 export interface StrMultiSelectOption {
   label: string;
@@ -57,7 +57,7 @@ export class StrMultiSelectComponent {
     if (current.includes(optionValue)) {
       this.value.set(current.filter((v) => v !== optionValue));
       return;
-    } 
+    }
     this.value.set([...current, optionValue]);
   }
 

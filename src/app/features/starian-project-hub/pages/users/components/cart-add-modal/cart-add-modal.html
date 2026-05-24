@@ -2,63 +2,124 @@
 
   <header class="cart-form__header">
     <p id="cart-add-dialog-title" class="title-font-20">Adicionar carrinho</p>
-    <p class="cart-form__subtitle">Preencha os dados para criar um novo carrinho.</p>
+    <p class="cart-form__subtitle">Selecione os produtos e defina as quantidades.</p>
   </header>
 
-  <div class="cart-form__fields">
-    <div class="cart-form__products-section">
-      <div class="cart-form__products-header">
-        <p class="cart-form__products-label">Produtos</p>
-        <str-button
-          type="button"
-          size="sm"
-          variant="secondary"
-          iconName="add"
-          [iconPosition]="'left'"
-          (click)="addRow()"
-          aria-label="Adicionar produto ao carrinho"
-        >
-          Adicionar produto
-        </str-button>
+  <div class="cart-form__body">
+
+    <!-- Produtos disponíveis -->
+    <section class="cart-section" aria-labelledby="add-available-label">
+      <div class="cart-section__header">
+        <p id="add-available-label" class="cart-section__label">Produtos disponíveis</p>
+        @if (!form.productsLoading() && form.filteredProducts().length > 0) {
+          <span class="cart-section__badge">{{ form.filteredProducts().length }}</span>
+        }
       </div>
 
-      @if (productRows().length === 0) {
-        <p class="cart-form__empty-products">Nenhum produto adicionado.</p>
-      } @else {
-        <div class="cart-form__products-list" role="list" aria-label="Produtos do carrinho">
-          @for (row of productRows(); track $index; let i = $index) {
-            <div class="product-row" role="listitem">
-              <span class="product-row__index" aria-hidden="true">{{ i + 1 }}</span>
-              <str-input
-                label="ID do produto"
-                [placeholder]="'Ex: ' + (i + 1)"
-                [inputId]="'cart-add-pid-' + i"
-                [numbersOnly]="true"
-                [value]="row.productId"
-                (valueChange)="updateRow(i, 'productId', $event)"
+      <str-input
+        placeholder="Buscar por nome ou categoria..."
+        inputId="cart-add-search"
+        ariaLabel="Buscar produto"
+        size="sm"
+        [value]="form.searchQuery()"
+        (valueChange)="form.searchQuery.set($event)"
+      />
+
+      <div class="cart-section__list" role="list" aria-label="Produtos disponíveis">
+
+        @if (form.productsLoading()) {
+          @for (i of [0, 1, 2]; track i) {
+            <div class="product-item product-item--skeleton" aria-hidden="true">
+              <str-skeleton width="40px" height="40px" radius="4px" />
+              <div class="product-item__info">
+                <str-skeleton height="12px" width="160px" />
+                <str-skeleton height="10px" width="90px" />
+              </div>
+              <str-skeleton height="30px" width="90px" radius="6px" />
+            </div>
+          }
+        } @else if (form.productsError()) {
+          <p class="cart-section__empty">Erro ao carregar produtos.</p>
+        } @else if (form.filteredProducts().length === 0 && form.selectedItems().length === form.allProducts().length) {
+          <p class="cart-section__empty">Todos os produtos foram selecionados.</p>
+        } @else if (form.filteredProducts().length === 0) {
+          <p class="cart-section__empty">
+            Nenhum resultado para "{{ form.searchQuery() }}".
+          </p>
+        } @else {
+          @for (product of form.filteredProducts(); track product.id) {
+            <div class="product-item" role="listitem">
+              <img
+                class="product-item__img"
+                [src]="product.image"
+                [alt]="product.title"
+                loading="lazy"
               />
-              <str-input
-                label="Quantidade"
-                placeholder="1"
-                [inputId]="'cart-add-qty-' + i"
-                [numbersOnly]="true"
-                [value]="row.quantity"
-                (valueChange)="updateRow(i, 'quantity', $event)"
+              <div class="product-item__info">
+                <span class="product-item__title">{{ product.title }}</span>
+                <span class="product-item__meta">
+                  {{ product.category }} · ${{ product.price | number:'1.2-2' }}
+                </span>
+              </div>
+              <str-button
+                type="button"
+                size="sm"
+                variant="secondary"
+                iconName="add"
+                iconPosition="left"
+                [attr.aria-label]="'Adicionar ' + product.title"
+                (click)="form.addProduct(product)"
+              >
+                Adicionar
+              </str-button>
+            </div>
+          }
+        }
+
+      </div>
+    </section>
+
+    <!-- Itens selecionados -->
+    @if (form.selectedItems().length > 0) {
+      <section class="cart-section" aria-labelledby="add-selected-label">
+        <div class="cart-section__header">
+          <p id="add-selected-label" class="cart-section__label">Produtos selecionados</p>
+          <span class="cart-section__badge">{{ form.selectedItems().length }}</span>
+        </div>
+
+        <div class="cart-section__list cart-section__list--selected" role="list" aria-label="Produtos selecionados">
+          @for (item of form.selectedItems(); track item.product.id) {
+            <div class="selected-item" role="listitem">
+              <img
+                class="product-item__img"
+                [src]="item.product.image"
+                [alt]="item.product.title"
+                loading="lazy"
+              />
+              <div class="product-item__info">
+                <span class="product-item__title">{{ item.product.title }}</span>
+                <span class="product-item__meta">${{ item.product.price | number:'1.2-2' }}</span>
+              </div>
+              <str-quantity-toggle
+                [quantity]="item.quantity"
+                [label]="item.product.title"
+                (decrease)="form.decreaseQuantity(item.product.id)"
+                (increase)="form.increaseQuantity(item.product.id)"
               />
               <button
                 type="button"
-                class="remove-row-btn"
-                [attr.aria-label]="'Remover produto ' + (i + 1)"
-                (click)="removeRow(i)"
-                [disabled]="productRows().length === 1"
+                class="remove-btn"
+                [attr.aria-label]="'Remover ' + item.product.title + ' do carrinho'"
+                (click)="form.removeProduct(item.product.id)"
               >
-                <str-icon name="delete" size="18" />
+                <str-icon name="delete" size="16" />
               </button>
             </div>
           }
         </div>
-      }
-    </div>
+      </section>
+    }
+
   </div>
 
   <div class="cart-form__actions">

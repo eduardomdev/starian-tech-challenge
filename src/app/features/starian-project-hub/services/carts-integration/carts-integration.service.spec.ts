@@ -15,7 +15,16 @@ const CART: Cart = {
 
 const PAYLOAD: CartPayload = {
   userId: 7,
-  products: [{ productId: 3, quantity: 2 }],
+  products: [
+    {
+      id: 3,
+      title: 'Camiseta',
+      price: 29.9,
+      description: 'Uma camiseta confortável',
+      category: 'clothing',
+      image: 'https://example.com/img.jpg',
+    },
+  ],
 };
 
 describe('CartsIntegrationService', () => {

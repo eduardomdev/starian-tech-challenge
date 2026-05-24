@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormField, FormRoot, form, maxLength, required } from '@angular/forms/signals';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
+import { StrInputComponent } from '@shared/components/atoms/inputs/str-input/str-input.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
-import { StrSelectComponent } from '@shared/components/atoms/str-select/str-select.component';
+import { StrSelectComponent } from '@shared/components/atoms/inputs/str-select/str-select.component';
 import { PRODUCT_CATEGORIES } from '@core/constants/product-categories.constant';
 import { ProductsIntegrationService } from '../../../../services/products-integration/products-integration.service';
 

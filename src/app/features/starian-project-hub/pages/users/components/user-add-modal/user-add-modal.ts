@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormField, FormRoot, email, form, maxLength, required } from '@angular/forms/signals';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
+import { StrInputComponent } from '@shared/components/atoms/inputs/str-input/str-input.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
 import { ToastrService } from '@shared/components/atoms/toastr/toastr.service';
 import { UserIntegrationService } from '../../../../services/user-integration/user-integration.service';

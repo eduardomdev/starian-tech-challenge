@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { Router } from '@angular/router';
 import { APP_ROUTES } from '@core/constants/app-routes.constant';
 import { FormField, FormRoot, email, form, maxLength, required } from '@angular/forms/signals';
-import { StrInputComponent } from '../../../../shared/components/atoms/str-input/str-input.component';
+import { StrInputComponent } from '../../../../shared/components/atoms/inputs/str-input/str-input.component';
 import { StrButtonComponent } from '../../../../shared/components/atoms/str-button/str-button.component';
 import { AuthCardComponent } from '../../../../shared/components/atoms/auth-card/auth-card.component';
 

@@ -1,4 +1,4 @@
-import type { StrSelectOption } from '@shared/components/atoms/str-select/str-select.component';
+import type { StrSelectOption } from '@shared/components/atoms/inputs/str-select/str-select.component';
 
 export const PRODUCT_CATEGORIES: StrSelectOption[] = [
   { label: 'Eletrônicos', value: 'electronics' },

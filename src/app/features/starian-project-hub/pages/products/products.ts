@@ -12,8 +12,8 @@ import { ProductAddModalComponent } from './components/product-add-modal/product
 import { ProductEditModalComponent } from './components/product-edit-modal/product-edit-modal';
 import { ConfirmModalComponent, type ConfirmModalData } from '@shared/components/molecules/confirm-modal/confirm-modal.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
-import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
-import { StrMultiSelectComponent } from '@shared/components/atoms/str-multi-select/str-multi-select.component';
+import { StrInputComponent } from '@shared/components/atoms/inputs/str-input/str-input.component';
+import { StrMultiSelectComponent } from '@shared/components/atoms/inputs/str-multi-select/str-multi-select.component';
 import { ProductsTableRowSkeletonComponent } from './products-table-row-skeleton';
 import { FilterProductsService } from '../../services/filter-products/filter-products.service';
 import { ProductsIntegrationService } from '../../services/products-integration/products-integration.service';

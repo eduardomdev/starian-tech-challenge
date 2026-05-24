@@ -1,0 +1,19 @@
+<button
+  type="button"
+  class="qty-toggle__btn"
+  [attr.aria-label]="'Diminuir quantidade de ' + label()"
+  (click)="decrease.emit()"
+>
+  <str-icon name="remove" size="16" />
+</button>
+
+<span class="qty-toggle__value" aria-live="polite">{{ quantity() }}</span>
+
+<button
+  type="button"
+  class="qty-toggle__btn"
+  [attr.aria-label]="'Aumentar quantidade de ' + label()"
+  (click)="increase.emit()"
+>
+  <str-icon name="add" size="16" />
+</button>

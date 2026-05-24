@@ -1,0 +1,41 @@
+@use '../../../../../styles/imports' as str;
+
+:host {
+  @include str.flex-row(0, center);
+  flex-shrink: 0;
+  border: 1px solid str.$color-border;
+  border-radius: str.$radius-md;
+  overflow: hidden;
+}
+
+.qty-toggle {
+  &__btn {
+    @include str.flex-center;
+    width: 26px;
+    height: 26px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: str.$color-text-secondary;
+    transition: background str.$transition-fast, color str.$transition-fast;
+
+    &:hover {
+      background: str.$overlay-hover;
+      color: str.$color-text-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid str.$color-focus-shadow;
+      outline-offset: -2px;
+    }
+  }
+
+  &__value {
+    font-size: str.$font-12;
+    font-weight: str.$fw-medium;
+    color: str.$color-text-primary;
+    min-width: 24px;
+    text-align: center;
+    line-height: 26px;
+  }
+}

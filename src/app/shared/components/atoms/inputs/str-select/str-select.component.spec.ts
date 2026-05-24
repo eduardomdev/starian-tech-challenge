@@ -174,7 +174,6 @@ describe('StrSelectComponent', () => {
     fixture.detectChanges();
     expect(dropdown()).not.toBeNull();
 
-    // simula clique em elemento externo ao componente
     const outside = document.createElement('div');
     document.body.appendChild(outside);
     outside.dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -191,7 +190,6 @@ describe('StrSelectComponent', () => {
     trigger().click();
     fixture.detectChanges();
 
-    // clique dentro do próprio componente
     fixture.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
 

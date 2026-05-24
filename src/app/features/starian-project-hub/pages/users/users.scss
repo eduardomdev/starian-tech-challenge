@@ -9,7 +9,7 @@
   padding: str.$space-24;
   height: 100%;
   box-sizing: border-box;
-  @include str.flex-col(str.$space-24);
+  @include str.flex-col(str.$space-16);
 }
 
 .users-header {

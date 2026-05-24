@@ -10,8 +10,16 @@ export interface Cart {
   products: CartProduct[];
 }
 
+export interface CartProductPayload {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+}
+
 export interface CartPayload {
   userId: number;
-  date?: string;
-  products: CartProduct[];
+  products: CartProductPayload[];
 }

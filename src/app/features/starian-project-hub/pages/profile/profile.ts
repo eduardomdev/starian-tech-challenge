@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject, OnInit, s
 import { email, form, FormField, FormRoot, maxLength, required } from '@angular/forms/signals';
 import { DialogService } from 'primeng/dynamicdialog';
 
-import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
+import { StrInputComponent } from '@shared/components/atoms/inputs/str-input/str-input.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
 import { IconComponent } from '@shared/components/atoms/icon/icon';
 import { StrAvatarComponent } from '@shared/components/atoms/avatar/avatar';

@@ -7,7 +7,7 @@ import { SortService } from '@shared/directives/str-sort/str-sort.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmModalComponent, type ConfirmModalData } from '@shared/components/molecules/confirm-modal/confirm-modal.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
-import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
+import { StrInputComponent } from '@shared/components/atoms/inputs/str-input/str-input.component';
 import { StrTooltipDirective } from '@shared/directives/str-tooltip/str-tooltip.directive';
 import { UsersTableRowSkeletonComponent } from './users-table-row-skeleton';
 import { UserAddModalComponent } from './components/user-add-modal/user-add-modal';

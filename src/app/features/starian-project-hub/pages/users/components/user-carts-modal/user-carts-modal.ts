@@ -50,7 +50,7 @@ export class UserCartsModalComponent implements OnInit {
 
   protected openAddModal(): void {
     const ref = this.dialogService.open(CartAddModalComponent, {
-      width: '560px',
+      width: '800px',
       modal: true,
       draggable: false,
       resizable: false,
@@ -65,7 +65,7 @@ export class UserCartsModalComponent implements OnInit {
 
   protected openEditModal(cart: Cart): void {
     const ref = this.dialogService.open(CartEditModalComponent, {
-      width: '560px',
+      width: '800px',
       modal: true,
       draggable: false,
       resizable: false,

@@ -2,7 +2,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { ProductsService } from '@shared/services/products.service';
 import { PRODUCTS_TAG_CONFIG } from '@core/constants/tag-products.constant';
 import type { Product } from '@shared/interfaces/products.interface';
-import type { StrMultiSelectOption } from '@shared/components/atoms/str-multi-select/str-multi-select.component';
+import type { StrMultiSelectOption } from '@shared/components/atoms/inputs/str-multi-select/str-multi-select.component';
 
 @Injectable({ providedIn: 'root' })
 export class FilterProductsService {
@@ -36,6 +36,21 @@ export class FilterProductsService {
   readonly hasActiveFilters = computed(
     () => this.filterText().trim().length > 0 || this.filterCategories().length > 0,
   );
+
+  /**
+   * Filtra uma lista de produtos por texto livre (título e categoria).
+   * Reutilizável por qualquer contexto que precise de busca textual simples,
+   * sem depender do estado interno do serviço.
+   */
+  filterByText(products: Product[], query: string): Product[] {
+    const text = query.trim().toLowerCase();
+    if (!text) return products;
+    return products.filter(
+      (p) =>
+        p.title.toLowerCase().includes(text) ||
+        p.category.toLowerCase().includes(text),
+    );
+  }
 
   clearFilters(): void {
     this.filterText.set('');

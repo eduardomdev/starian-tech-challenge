@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { ValidationError } from '@angular/forms/signals';
 import type { FormValueControl } from '@angular/forms/signals';
-import { IconComponent } from '../icon/icon';
+import { IconComponent } from '@shared/components/atoms/icon/icon';
 
 export interface StrSelectOption {
   label: string;
