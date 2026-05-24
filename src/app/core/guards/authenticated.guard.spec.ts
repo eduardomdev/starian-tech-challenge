@@ -1,7 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, UrlTree } from '@angular/router';
+import { provideRouter, Route, UrlSegment, UrlTree } from '@angular/router';
 import { authenticatedGuard } from './authenticated.guard';
 import { TokenService } from '@core/tokens/token.service';
+
+const EMPTY_ROUTE: Route = {};
+const EMPTY_SEGMENTS: UrlSegment[] = [];
 
 describe('authenticatedGuard', () => {
   let tokenService: TokenService;
@@ -19,14 +22,14 @@ describe('authenticatedGuard', () => {
   it('retorna true para usuário autenticado, permitindo acesso à rota', () => {
     tokenService.setToken('valid-token');
     const result = TestBed.runInInjectionContext(() =>
-      authenticatedGuard({} as any, {} as any),
+      authenticatedGuard(EMPTY_ROUTE, EMPTY_SEGMENTS),
     );
     expect(result).toBe(true);
   });
 
   it('retorna UrlTree redirecionando para /login quando não autenticado', () => {
     const result = TestBed.runInInjectionContext(() =>
-      authenticatedGuard({} as any, {} as any),
+      authenticatedGuard(EMPTY_ROUTE, EMPTY_SEGMENTS),
     );
     expect(result).toBeInstanceOf(UrlTree);
     expect((result as UrlTree).toString()).toBe('/login');
@@ -36,7 +39,7 @@ describe('authenticatedGuard', () => {
     tokenService.setToken('token');
     tokenService.removeToken();
     const result = TestBed.runInInjectionContext(() =>
-      authenticatedGuard({} as any, {} as any),
+      authenticatedGuard(EMPTY_ROUTE, EMPTY_SEGMENTS),
     );
     expect(result).toBeInstanceOf(UrlTree);
   });
