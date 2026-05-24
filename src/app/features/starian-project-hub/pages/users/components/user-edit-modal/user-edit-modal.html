@@ -6,35 +6,12 @@
   </header>
 
   <div class="edit-form__fields">
-    <div class="edit-form__row">
-      <str-input
-        [formField]="editForm.firstname"
-        label="Primeiro nome"
-        placeholder="Ex: John"
-        inputId="edit-firstname"
-      />
-      <str-input
-        [formField]="editForm.lastname"
-        label="Último nome"
-        placeholder="Ex: Doe"
-        inputId="edit-lastname"
-      />
-    </div>
-
-    <div class="edit-form__row">
-      <str-input
-        [formField]="editForm.username"
-        label="Username"
-        placeholder="Ex: johndoe"
-        inputId="edit-username"
-      />
-      <str-input
-        [formField]="editForm.phone"
-        label="Telefone"
-        placeholder="Ex: 1-570-236-7033"
-        inputId="edit-phone"
-      />
-    </div>
+    <str-input
+      [formField]="editForm.username"
+      label="Username"
+      placeholder="Ex: johndoe"
+      inputId="edit-username"
+    />
 
     <str-input
       [formField]="editForm.email"

@@ -7,7 +7,7 @@
 .str-select {
   display: flex;
   flex-direction: column;
-  gap: str.$space-8;
+  gap: str.$space-4;
 
   &__label {
     @include str.type-label;

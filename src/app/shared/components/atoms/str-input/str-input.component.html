@@ -44,11 +44,11 @@
         />
       </button>
     }
-  </div>
 
-  @if (showError()) {
-    <span [id]="inputId() + '-error'" class="str-input__error" role="alert">
-      {{ firstError() }}
-    </span>
-  }
+    @if (showError()) {
+      <span [id]="inputId() + '-error'" class="str-input__error" role="alert">
+        {{ firstError() }}
+      </span>
+    }
+  </div>
 </div>

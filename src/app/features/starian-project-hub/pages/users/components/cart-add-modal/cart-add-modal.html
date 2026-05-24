@@ -6,26 +6,20 @@
   </header>
 
   <div class="cart-form__fields">
-    <str-input
-      label="Data"
-      placeholder="AAAA-MM-DD"
-      inputId="cart-add-date"
-      [value]="cartDate()"
-      (valueChange)="cartDate.set($event)"
-    />
-
     <div class="cart-form__products-section">
       <div class="cart-form__products-header">
         <p class="cart-form__products-label">Produtos</p>
-        <button
+        <str-button
           type="button"
-          class="add-product-btn"
+          size="sm"
+          variant="secondary"
+          iconName="add"
+          [iconPosition]="'left'"
           (click)="addRow()"
           aria-label="Adicionar produto ao carrinho"
         >
-          <str-icon name="add" size="16" />
           Adicionar produto
-        </button>
+        </str-button>
       </div>
 
       @if (productRows().length === 0) {

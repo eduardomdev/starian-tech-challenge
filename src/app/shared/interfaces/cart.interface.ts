@@ -12,6 +12,6 @@ export interface Cart {
 
 export interface CartPayload {
   userId: number;
-  date: string;
+  date?: string;
   products: CartProduct[];
 }

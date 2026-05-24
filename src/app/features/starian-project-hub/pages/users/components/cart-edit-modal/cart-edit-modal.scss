@@ -25,6 +25,10 @@
 
   &__products-header {
     @include str.flex-row(str.$space-12, center, space-between);
+
+    str-button {
+      width: auto;
+    }
   }
 
   &__products-label {
@@ -56,28 +60,6 @@
     str-button {
       width: auto;
     }
-  }
-}
-
-.add-product-btn {
-  @include str.flex-row(str.$space-4, center);
-  padding: str.$space-4 str.$space-8;
-  font-size: str.$font-12;
-  font-weight: str.$fw-medium;
-  color: str.$color-interactive-accent;
-  background: none;
-  border: 1px solid str.$color-interactive-accent;
-  border-radius: str.$radius-md;
-  cursor: pointer;
-  transition: background str.$transition-fast;
-
-  &:hover {
-    background: str.$overlay-hover;
-  }
-
-  &:focus-visible {
-    outline: 2px solid str.$color-focus-shadow;
-    outline-offset: 2px;
   }
 }
 

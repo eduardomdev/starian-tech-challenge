@@ -31,19 +31,13 @@ export class CartAddModalComponent {
 
   private readonly userId = (this.config.data as CartAddConfig).userId;
 
-  protected readonly cartDate = signal(new Date().toISOString().substring(0, 10));
   protected readonly productRows = signal<CartProductRow[]>([{ productId: '', quantity: '1' }]);
   protected readonly submitted = signal(false);
 
-  protected readonly isValid = computed(() => {
-    if (!this.cartDate()) return false;
-    return this.productRows().every(
+  protected readonly isValid = computed(() =>
+    this.productRows().every(
       (r) => Number(r.productId) > 0 && Number(r.quantity) > 0,
-    );
-  });
-
-  protected readonly dateError = computed(() =>
-    this.submitted() && !this.cartDate() ? 'Data é obrigatória.' : null,
+    ),
   );
 
   protected updateRow(index: number, field: keyof CartProductRow, value: string): void {
@@ -70,7 +64,7 @@ export class CartAddModalComponent {
     }));
 
     this.integrationService.add(
-      { userId: this.userId, date: this.cartDate(), products },
+      { userId: this.userId, products },
       (created) => this.ref.close(created),
     );
   }

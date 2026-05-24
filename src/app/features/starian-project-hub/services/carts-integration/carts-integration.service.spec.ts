@@ -15,7 +15,6 @@ const CART: Cart = {
 
 const PAYLOAD: CartPayload = {
   userId: 7,
-  date: '2025-01-15',
   products: [{ productId: 3, quantity: 2 }],
 };
 
