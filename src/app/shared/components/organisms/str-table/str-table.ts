@@ -3,6 +3,7 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	TemplateRef,
+	ViewEncapsulation,
 	computed,
 	contentChild,
 	input,
@@ -18,6 +19,7 @@ import type { TableRowContext } from '@shared/interfaces/str-table.interface';
 	templateUrl: './str-table.html',
 	styleUrl: './str-table.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 	host: {
 		'[attr.aria-busy]': 'loading()',
 	},

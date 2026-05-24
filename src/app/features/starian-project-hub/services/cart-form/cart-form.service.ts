@@ -6,16 +6,11 @@ import { FilterProductsService } from '../filter-products/filter-products.servic
 import type { Product } from '@shared/interfaces/products.interface';
 import type { CartProductPayload } from '@shared/interfaces/cart.interface';
 
-/** Represents a product selected by the user with its desired quantity. */
 export interface SelectedItem {
   readonly product: Product;
   readonly quantity: number;
 }
 
-/**
- * Encapsulates the shared state and mutation logic for cart add/edit forms.
- * Must be provided at the component level (not root) to keep state isolated per dialog.
- */
 @Injectable()
 export class CartFormService {
   private readonly productsService = inject(ProductsService);

@@ -106,7 +106,6 @@
   @include str.btn-ghost(32px);
   color: str.$color-text-secondary;
   border-radius: str.$radius-md;
-  background: str.$color-bg-surface;
 
   &:active {
     transform: scale(0.9);

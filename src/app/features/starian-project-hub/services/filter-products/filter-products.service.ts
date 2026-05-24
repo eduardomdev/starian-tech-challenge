@@ -37,11 +37,6 @@ export class FilterProductsService {
     () => this.filterText().trim().length > 0 || this.filterCategories().length > 0,
   );
 
-  /**
-   * Filtra uma lista de produtos por texto livre (título e categoria).
-   * Reutilizável por qualquer contexto que precise de busca textual simples,
-   * sem depender do estado interno do serviço.
-   */
   filterByText(products: Product[], query: string): Product[] {
     const text = query.trim().toLowerCase();
     if (!text) return products;
