@@ -4,6 +4,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { StrInputComponent } from '@shared/components/atoms/inputs/str-input/str-input.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
 import { UserIntegrationService } from '../../../../services/user-integration/user-integration.service';
+import { UserEditSkeletonComponent } from './user-edit-skeleton';
 import type { User } from '@shared/interfaces/user.interface';
 
 interface UserEditModel {
@@ -17,7 +18,7 @@ interface UserEditModel {
   templateUrl: './user-edit-modal.html',
   styleUrl: './user-edit-modal.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormRoot, FormField, StrInputComponent, StrButtonComponent],
+  imports: [FormRoot, FormField, StrInputComponent, StrButtonComponent, UserEditSkeletonComponent],
 })
 export class UserEditModalComponent {
   private readonly ref = inject(DynamicDialogRef);

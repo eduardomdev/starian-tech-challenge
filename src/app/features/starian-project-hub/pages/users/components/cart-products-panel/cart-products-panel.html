@@ -1,0 +1,100 @@
+<!-- Produtos disponíveis -->
+<section class="cart-section" aria-labelledby="panel-available-label">
+  <div class="cart-section__header">
+    <p id="panel-available-label" class="cart-section__label">Produtos disponíveis</p>
+    @if (!productsLoading() && filteredProducts().length > 0) {
+      <span class="cart-section__badge">{{ filteredProducts().length }}</span>
+    }
+  </div>
+
+  <str-input
+    placeholder="Buscar por nome ou categoria..."
+    [inputId]="searchInputId()"
+    ariaLabel="Buscar produto"
+    size="sm"
+    [value]="searchQuery()"
+    (valueChange)="searchQueryChange.emit($event)"
+  />
+
+  <div class="cart-section__list" role="list" aria-label="Produtos disponíveis">
+    @if (productsLoading()) {
+      <ng-content select="[skeleton]" />
+    } @else if (productsError()) {
+      <p class="cart-section__empty">Erro ao carregar produtos.</p>
+    } @else if (filteredProducts().length === 0 && selectedItems().length === allProducts().length) {
+      <p class="cart-section__empty">Todos os produtos foram selecionados.</p>
+    } @else if (filteredProducts().length === 0) {
+      <p class="cart-section__empty">
+        Nenhum resultado para "{{ searchQuery() }}".
+      </p>
+    } @else {
+      @for (product of filteredProducts(); track product.id) {
+        <div class="product-item" role="listitem">
+          <img
+            class="product-item__img"
+            [src]="product.image"
+            [alt]="product.title"
+            loading="lazy"
+          />
+          <div class="product-item__info">
+            <span class="product-item__title">{{ product.title }}</span>
+            <span class="product-item__meta">
+              {{ product.category }} · {{ product.price | number:'1.2-2' }}
+            </span>
+          </div>
+          <str-button
+            type="button"
+            size="sm"
+            variant="secondary"
+            iconName="add"
+            iconPosition="left"
+            [attr.aria-label]="'Adicionar ' + product.title"
+            (click)="addProduct.emit(product)"
+          >
+            Adicionar
+          </str-button>
+        </div>
+      }
+    }
+  </div>
+</section>
+
+@if (selectedItems().length > 0) {
+  <section class="cart-section" aria-labelledby="panel-selected-label">
+    <div class="cart-section__header">
+      <p id="panel-selected-label" class="cart-section__label">Produtos selecionados</p>
+      <span class="cart-section__badge">{{ selectedItems().length }}</span>
+    </div>
+
+    <div class="cart-section__list cart-section__list--selected" role="list" aria-label="Produtos selecionados">
+      @for (item of selectedItems(); track item.product.id) {
+        <div class="selected-item" role="listitem">
+          <img
+            class="product-item__img"
+            [src]="item.product.image"
+            [alt]="item.product.title"
+            loading="lazy"
+          />
+          <div class="product-item__info">
+            <span class="product-item__title">{{ item.product.title }}</span>
+            <span class="product-item__meta">{{ item.product.price | number:'1.2-2' }}</span>
+          </div>
+          <str-quantity-toggle
+            [quantity]="item.quantity"
+            [label]="item.product.title"
+            (decrease)="decreaseQuantity.emit(item.product.id)"
+            (increase)="increaseQuantity.emit(item.product.id)"
+          />
+          <button
+            type="button"
+            class="remove-btn"
+            [attr.aria-label]="'Remover ' + item.product.title + ' do carrinho'"
+            (click)="removeProduct.emit(item.product.id)"
+          >
+            <str-icon name="delete" size="16" />
+          </button>
+        </div>
+      }
+    </div>
+  </section>
+}

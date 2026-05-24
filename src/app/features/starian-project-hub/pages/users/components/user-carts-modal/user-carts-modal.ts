@@ -3,8 +3,8 @@ import { DatePipe } from '@angular/common';
 import { DynamicDialogConfig, DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { IconComponent } from '@shared/components/atoms/icon/icon';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
-import { StrSkeletonComponent } from '@shared/components/atoms/str-skeleton/str-skeleton';
 import { StrTooltipDirective } from '@shared/directives/str-tooltip/str-tooltip.directive';
+import { UserCartsSkeletonComponent } from './user-carts-skeleton';
 import { ConfirmModalComponent, type ConfirmModalData } from '@shared/components/molecules/confirm-modal/confirm-modal.component';
 import { CartsService } from '@shared/services/carts.service';
 import { CartsIntegrationService } from '../../../../services/carts-integration/carts-integration.service';
@@ -18,7 +18,7 @@ import type { Cart } from '@shared/interfaces/cart.interface';
   templateUrl: './user-carts-modal.html',
   styleUrl: './user-carts-modal.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, IconComponent, StrButtonComponent, StrSkeletonComponent, StrTooltipDirective],
+  imports: [DatePipe, IconComponent, StrButtonComponent, UserCartsSkeletonComponent, StrTooltipDirective],
   providers: [DialogService],
 })
 export class UserCartsModalComponent implements OnInit {

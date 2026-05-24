@@ -6,16 +6,12 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-
-import { StrInputComponent } from '@shared/components/atoms/inputs/str-input/str-input.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
-import { IconComponent } from '@shared/components/atoms/icon/icon';
-import { StrSkeletonComponent } from '@shared/components/atoms/str-skeleton/str-skeleton';
 import { CartsIntegrationService } from '../../../../services/carts-integration/carts-integration.service';
+import { CartEditSkeletonComponent } from './cart-edit-skeleton';
 import { CartFormService } from '../../../../services/cart-form/cart-form.service';
-import { StrQuantityToggleComponent } from '@shared/components/atoms/str-quantity-toggle/str-quantity-toggle.component';
+import { CartProductsPanelComponent } from '../cart-products-panel/cart-products-panel';
 
 import type { Product } from '@shared/interfaces/products.interface';
 import type { Cart } from '@shared/interfaces/cart.interface';
@@ -27,14 +23,7 @@ import type { SelectedItem } from '../../../../services/cart-form/cart-form.serv
   styleUrl: './cart-edit-modal.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CartFormService],
-  imports: [
-    StrInputComponent,
-    StrButtonComponent,
-    IconComponent,
-    StrSkeletonComponent,
-    DecimalPipe,
-    StrQuantityToggleComponent,
-  ],
+  imports: [StrButtonComponent, CartEditSkeletonComponent, CartProductsPanelComponent],
 })
 export class CartEditModalComponent {
   private readonly dialogRef = inject(DynamicDialogRef);

@@ -5,6 +5,7 @@ import { StrInputComponent } from '@shared/components/atoms/inputs/str-input/str
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
 import { ToastrService } from '@shared/components/atoms/toastr/toastr.service';
 import { UserIntegrationService } from '../../../../services/user-integration/user-integration.service';
+import { UserAddSkeletonComponent } from './user-add-skeleton';
 
 interface UserAddModel {
   username: string;
@@ -17,7 +18,7 @@ interface UserAddModel {
   templateUrl: './user-add-modal.html',
   styleUrl: './user-add-modal.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormRoot, FormField, StrInputComponent, StrButtonComponent],
+  imports: [FormRoot, FormField, StrInputComponent, StrButtonComponent, UserAddSkeletonComponent],
 })
 export class UserAddModalComponent {
   private readonly ref = inject(DynamicDialogRef);

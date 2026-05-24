@@ -1,14 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-
-import { StrInputComponent } from '@shared/components/atoms/inputs/str-input/str-input.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
-import { IconComponent } from '@shared/components/atoms/icon/icon';
-import { StrSkeletonComponent } from '@shared/components/atoms/str-skeleton/str-skeleton';
 import { CartsIntegrationService } from '../../../../services/carts-integration/carts-integration.service';
 import { CartFormService } from '../../../../services/cart-form/cart-form.service';
-import { StrQuantityToggleComponent } from '@shared/components/atoms/str-quantity-toggle/str-quantity-toggle.component';
+import { CartAddSkeletonComponent } from './cart-add-skeleton';
+import { CartProductsPanelComponent } from '../cart-products-panel/cart-products-panel';
 
 interface CartAddConfig {
   userId: number;
@@ -20,7 +16,7 @@ interface CartAddConfig {
   styleUrl: './cart-add-modal.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CartFormService],
-  imports: [StrInputComponent, StrButtonComponent, IconComponent, StrSkeletonComponent, DecimalPipe, StrQuantityToggleComponent],
+  imports: [StrButtonComponent, CartAddSkeletonComponent, CartProductsPanelComponent],
 })
 export class CartAddModalComponent {
   private readonly ref = inject(DynamicDialogRef);

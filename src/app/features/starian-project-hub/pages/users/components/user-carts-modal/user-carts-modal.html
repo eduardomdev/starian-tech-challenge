@@ -13,19 +13,7 @@
   <div class="carts-modal__content">
 
     @if (loading()) {
-      <div class="carts-list" aria-busy="true">
-        @for (i of [0, 1, 2]; track i) {
-          <div class="cart-skeleton-row" aria-hidden="true">
-            <str-skeleton height="14px" width="40px" />
-            <str-skeleton height="14px" width="90px" />
-            <str-skeleton height="14px" width="64px" />
-            <div class="skeleton-actions">
-              <str-skeleton height="32px" width="32px" radius="6px" />
-              <str-skeleton height="32px" width="32px" radius="6px" />
-            </div>
-          </div>
-        }
-      </div>
+      <app-user-carts-skeleton />
     } @else if (error()) {
       <div class="carts-state carts-state--error" role="alert">
         <p class="carts-state__text">Erro ao carregar os carrinhos. Tente novamente.</p>

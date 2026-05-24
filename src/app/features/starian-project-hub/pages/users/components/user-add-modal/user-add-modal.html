@@ -1,3 +1,6 @@
+@if (addLoading()) {
+  <app-user-add-skeleton />
+} @else {
 <form [formRoot]="addForm" class="add-form" novalidate aria-labelledby="add-user-dialog-title">
 
   <header class="add-form__header">
@@ -39,3 +42,4 @@
   </div>
 
 </form>
+}

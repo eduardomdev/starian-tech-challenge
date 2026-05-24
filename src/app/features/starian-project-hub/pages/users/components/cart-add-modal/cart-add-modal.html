@@ -6,120 +6,22 @@
   </header>
 
   <div class="cart-form__body">
-
-    <!-- Produtos disponíveis -->
-    <section class="cart-section" aria-labelledby="add-available-label">
-      <div class="cart-section__header">
-        <p id="add-available-label" class="cart-section__label">Produtos disponíveis</p>
-        @if (!form.productsLoading() && form.filteredProducts().length > 0) {
-          <span class="cart-section__badge">{{ form.filteredProducts().length }}</span>
-        }
-      </div>
-
-      <str-input
-        placeholder="Buscar por nome ou categoria..."
-        inputId="cart-add-search"
-        ariaLabel="Buscar produto"
-        size="sm"
-        [value]="form.searchQuery()"
-        (valueChange)="form.searchQuery.set($event)"
-      />
-
-      <div class="cart-section__list" role="list" aria-label="Produtos disponíveis">
-
-        @if (form.productsLoading()) {
-          @for (i of [0, 1, 2]; track i) {
-            <div class="product-item product-item--skeleton" aria-hidden="true">
-              <str-skeleton width="40px" height="40px" radius="4px" />
-              <div class="product-item__info">
-                <str-skeleton height="12px" width="160px" />
-                <str-skeleton height="10px" width="90px" />
-              </div>
-              <str-skeleton height="30px" width="90px" radius="6px" />
-            </div>
-          }
-        } @else if (form.productsError()) {
-          <p class="cart-section__empty">Erro ao carregar produtos.</p>
-        } @else if (form.filteredProducts().length === 0 && form.selectedItems().length === form.allProducts().length) {
-          <p class="cart-section__empty">Todos os produtos foram selecionados.</p>
-        } @else if (form.filteredProducts().length === 0) {
-          <p class="cart-section__empty">
-            Nenhum resultado para "{{ form.searchQuery() }}".
-          </p>
-        } @else {
-          @for (product of form.filteredProducts(); track product.id) {
-            <div class="product-item" role="listitem">
-              <img
-                class="product-item__img"
-                [src]="product.image"
-                [alt]="product.title"
-                loading="lazy"
-              />
-              <div class="product-item__info">
-                <span class="product-item__title">{{ product.title }}</span>
-                <span class="product-item__meta">
-                  {{ product.category }} · ${{ product.price | number:'1.2-2' }}
-                </span>
-              </div>
-              <str-button
-                type="button"
-                size="sm"
-                variant="secondary"
-                iconName="add"
-                iconPosition="left"
-                [attr.aria-label]="'Adicionar ' + product.title"
-                (click)="form.addProduct(product)"
-              >
-                Adicionar
-              </str-button>
-            </div>
-          }
-        }
-
-      </div>
-    </section>
-
-    <!-- Itens selecionados -->
-    @if (form.selectedItems().length > 0) {
-      <section class="cart-section" aria-labelledby="add-selected-label">
-        <div class="cart-section__header">
-          <p id="add-selected-label" class="cart-section__label">Produtos selecionados</p>
-          <span class="cart-section__badge">{{ form.selectedItems().length }}</span>
-        </div>
-
-        <div class="cart-section__list cart-section__list--selected" role="list" aria-label="Produtos selecionados">
-          @for (item of form.selectedItems(); track item.product.id) {
-            <div class="selected-item" role="listitem">
-              <img
-                class="product-item__img"
-                [src]="item.product.image"
-                [alt]="item.product.title"
-                loading="lazy"
-              />
-              <div class="product-item__info">
-                <span class="product-item__title">{{ item.product.title }}</span>
-                <span class="product-item__meta">${{ item.product.price | number:'1.2-2' }}</span>
-              </div>
-              <str-quantity-toggle
-                [quantity]="item.quantity"
-                [label]="item.product.title"
-                (decrease)="form.decreaseQuantity(item.product.id)"
-                (increase)="form.increaseQuantity(item.product.id)"
-              />
-              <button
-                type="button"
-                class="remove-btn"
-                [attr.aria-label]="'Remover ' + item.product.title + ' do carrinho'"
-                (click)="form.removeProduct(item.product.id)"
-              >
-                <str-icon name="delete" size="16" />
-              </button>
-            </div>
-          }
-        </div>
-      </section>
-    }
-
+    <app-cart-products-panel
+      searchInputId="cart-add-search"
+      [productsLoading]="form.productsLoading()"
+      [productsError]="form.productsError()"
+      [filteredProducts]="form.filteredProducts()"
+      [selectedItems]="form.selectedItems()"
+      [allProducts]="form.allProducts()"
+      [searchQuery]="form.searchQuery()"
+      (searchQueryChange)="form.searchQuery.set($event)"
+      (addProduct)="form.addProduct($event)"
+      (removeProduct)="form.removeProduct($event)"
+      (increaseQuantity)="form.increaseQuantity($event)"
+      (decreaseQuantity)="form.decreaseQuantity($event)"
+    >
+      <app-cart-add-skeleton skeleton />
+    </app-cart-products-panel>
   </div>
 
   <div class="cart-form__actions">

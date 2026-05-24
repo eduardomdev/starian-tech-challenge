@@ -30,7 +30,6 @@
   &__footer {
     @include str.flex-row(str.$space-12, center, flex-end);
     padding-top: str.$space-16;
-    border-top: 1px solid str.$color-border;
 
     str-button {
       width: auto;

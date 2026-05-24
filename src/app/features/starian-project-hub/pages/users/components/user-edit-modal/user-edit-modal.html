@@ -1,3 +1,6 @@
+@if (updateLoading()) {
+  <app-user-edit-skeleton />
+} @else {
 <form [formRoot]="editForm" class="edit-form" novalidate aria-labelledby="edit-user-dialog-title">
 
   <header class="edit-form__header">
@@ -39,3 +42,4 @@
   </div>
 
 </form>
+}
