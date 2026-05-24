@@ -42,6 +42,14 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'users',
+        data: { breadcrumb: [{ name: 'Starian Hub' }, { name: 'Usuários' }] },
+        loadComponent: () =>
+          import('./features/starian-project-hub/pages/users/users').then(
+            m => m.UsersPageComponent
+          ),
+      },
+      {
         path: 'profile',
         data: { breadcrumb: [{ name: 'Starian Hub' }, { name: 'Perfil' }] },
         loadComponent: () =>

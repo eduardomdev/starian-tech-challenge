@@ -1,0 +1,152 @@
+@use '../../../../../styles/imports' as str;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.users-page {
+  padding: str.$space-24;
+  height: 100%;
+  box-sizing: border-box;
+  @include str.flex-col(str.$space-24);
+}
+
+.users-header {
+  @include str.flex-col(str.$space-4);
+  flex-shrink: 0;
+}
+
+.table-wrapper {
+  flex: 1;
+  min-height: 0;
+
+  str-table {
+    height: 100%;
+  }
+}
+
+.users-toolbar {
+  @include str.flex-row(str.$space-12, center, space-between);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+
+  str-button {
+    width: auto;
+    flex-shrink: 0;
+  }
+}
+
+.users-filters {
+  @include str.flex-row(10px);
+  flex: 1;
+  min-width: 0;
+}
+
+.filter-search-input {
+  max-width: 380px;
+  min-width: 200px;
+  flex: 1;
+}
+
+.users-count {
+  font-size: str.$font-14;
+  color: str.$color-text-muted;
+}
+
+.users-count-filtered {
+  font-size: str.$font-12;
+  color: str.$color-text-placeholder;
+  margin-left: str.$space-4;
+}
+
+.col-id {
+  width: 56px;
+  white-space: nowrap;
+  color: str.$color-text-muted;
+  font-size: str.$font-14;
+}
+
+.col-name {
+  width: 180px;
+}
+
+.col-username {
+  width: 140px;
+}
+
+.col-email {
+  width: 100%;
+}
+
+.col-phone {
+  width: 148px;
+  white-space: nowrap;
+}
+
+.col-actions {
+  width: 112px;
+}
+
+th {
+  padding: 0 str.$space-16;
+  font-size: str.$font-12;
+  font-weight: str.$fw-regular;
+  color: str.$color-text-secondary;
+  letter-spacing: 0.05em;
+  text-align: left;
+  vertical-align: middle;
+}
+
+td {
+  padding: str.$space-12 str.$space-16;
+  vertical-align: middle;
+  border-bottom: 1px solid str.$color-border-faint;
+  font-size: str.$font-14;
+  color: str.$color-text-primary;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.user-name-cell {
+  @include str.flex-col(str.$space-2);
+  min-width: 0;
+}
+
+.user-fullname {
+  font-size: str.$font-14;
+  font-weight: str.$fw-medium;
+  color: str.$color-text-primary;
+  @include str.text-truncate;
+  display: block;
+}
+
+.user-username {
+  font-size: str.$font-14;
+  color: str.$color-text-secondary;
+}
+
+.user-email {
+  font-size: str.$font-14;
+  color: str.$color-text-secondary;
+  @include str.text-truncate;
+  display: block;
+  max-width: 260px;
+}
+
+.actions-cell {
+  @include str.flex-row(str.$space-8);
+}
+
+.action-btn {
+  @include str.btn-ghost(32px);
+  color: str.$color-text-secondary;
+  border-radius: str.$radius-md;
+  background: str.$color-bg-surface;
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

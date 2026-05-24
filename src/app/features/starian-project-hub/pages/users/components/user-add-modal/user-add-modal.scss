@@ -1,0 +1,31 @@
+@use '../../../../../../../styles/imports' as str;
+
+.add-form {
+  @include str.flex-col(0);
+  padding: str.$space-4 0;
+
+  &__header {
+    @include str.flex-col(str.$space-4);
+    margin-bottom: str.$space-24;
+  }
+
+  &__subtitle {
+    @include str.type-body;
+    margin: 0;
+  }
+
+  &__fields {
+    @include str.flex-col(str.$space-24);
+    margin-bottom: str.$space-24;
+  }
+
+  &__actions {
+    @include str.form-actions;
+    padding-top: str.$space-16;
+    border-top: 1px solid str.$color-border;
+
+    str-button {
+      width: auto;
+    }
+  }
+}

@@ -4,6 +4,7 @@ export const APP_ROUTES = {
   hub:       '/starian-hub',
   dashboard: '/starian-hub/dashboard',
   products:  '/starian-hub/products',
+  users:     '/starian-hub/users',
   profile:   '/starian-hub/profile',
 } as const;
 

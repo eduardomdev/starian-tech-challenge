@@ -14,6 +14,11 @@ export const STARIAN_PROJECT_HUB_SECTIONS: SidebarSection[] = [
         icon: 'trolley',
         route: '/starian-hub/products',
       },
+      {
+        label: 'Usuários',
+        icon: 'group',
+        route: '/starian-hub/users',
+      },
     ],
   },
 ];

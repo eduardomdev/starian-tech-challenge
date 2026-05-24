@@ -1,0 +1,79 @@
+<div class="cart-form" aria-labelledby="cart-add-dialog-title">
+
+  <header class="cart-form__header">
+    <p id="cart-add-dialog-title" class="title-font-20">Adicionar carrinho</p>
+    <p class="cart-form__subtitle">Preencha os dados para criar um novo carrinho.</p>
+  </header>
+
+  <div class="cart-form__fields">
+    <str-input
+      label="Data"
+      placeholder="AAAA-MM-DD"
+      inputId="cart-add-date"
+      [value]="cartDate()"
+      (valueChange)="cartDate.set($event)"
+    />
+
+    <div class="cart-form__products-section">
+      <div class="cart-form__products-header">
+        <p class="cart-form__products-label">Produtos</p>
+        <button
+          type="button"
+          class="add-product-btn"
+          (click)="addRow()"
+          aria-label="Adicionar produto ao carrinho"
+        >
+          <str-icon name="add" size="16" />
+          Adicionar produto
+        </button>
+      </div>
+
+      @if (productRows().length === 0) {
+        <p class="cart-form__empty-products">Nenhum produto adicionado.</p>
+      } @else {
+        <div class="cart-form__products-list" role="list" aria-label="Produtos do carrinho">
+          @for (row of productRows(); track $index; let i = $index) {
+            <div class="product-row" role="listitem">
+              <span class="product-row__index" aria-hidden="true">{{ i + 1 }}</span>
+              <str-input
+                label="ID do produto"
+                [placeholder]="'Ex: ' + (i + 1)"
+                [inputId]="'cart-add-pid-' + i"
+                [numbersOnly]="true"
+                [value]="row.productId"
+                (valueChange)="updateRow(i, 'productId', $event)"
+              />
+              <str-input
+                label="Quantidade"
+                placeholder="1"
+                [inputId]="'cart-add-qty-' + i"
+                [numbersOnly]="true"
+                [value]="row.quantity"
+                (valueChange)="updateRow(i, 'quantity', $event)"
+              />
+              <button
+                type="button"
+                class="remove-row-btn"
+                [attr.aria-label]="'Remover produto ' + (i + 1)"
+                (click)="removeRow(i)"
+                [disabled]="productRows().length === 1"
+              >
+                <str-icon name="delete" size="18" />
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="cart-form__actions">
+    <str-button type="button" size="md" variant="secondary" (click)="cancel()">
+      Cancelar
+    </str-button>
+    <str-button size="md" [loading]="addLoading()" (click)="submit()">
+      Adicionar
+    </str-button>
+  </div>
+
+</div>

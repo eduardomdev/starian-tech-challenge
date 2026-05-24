@@ -1,0 +1,41 @@
+<form [formRoot]="addForm" class="add-form" novalidate aria-labelledby="add-user-dialog-title">
+
+  <header class="add-form__header">
+    <p id="add-user-dialog-title" class="title-font-20">Adicionar usuário</p>
+    <p class="add-form__subtitle">Preencha os dados para cadastrar um novo usuário.</p>
+  </header>
+
+  <div class="add-form__fields">
+    <str-input
+      [formField]="addForm.username"
+      label="Username"
+      placeholder="Ex: johndoe"
+      inputId="add-username"
+    />
+
+    <str-input
+      [formField]="addForm.email"
+      label="E-mail"
+      placeholder="Ex: john@email.com"
+      inputId="add-email"
+    />
+
+    <str-input
+      [formField]="addForm.password"
+      label="Senha"
+      placeholder="Mínimo 6 caracteres"
+      inputId="add-password"
+      [type]="'password'"
+    />
+  </div>
+
+  <div class="add-form__actions">
+    <str-button type="button" size="md" variant="secondary" (click)="cancel()">
+      Cancelar
+    </str-button>
+    <str-button type="submit" size="md" [loading]="addLoading()">
+      Adicionar
+    </str-button>
+  </div>
+
+</form>

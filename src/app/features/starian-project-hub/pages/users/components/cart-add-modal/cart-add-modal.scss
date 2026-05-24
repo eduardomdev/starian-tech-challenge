@@ -1,0 +1,126 @@
+@use '../../../../../../../styles/imports' as str;
+
+.cart-form {
+  @include str.flex-col(0);
+  padding: str.$space-4 0;
+
+  &__header {
+    @include str.flex-col(str.$space-4);
+    margin-bottom: str.$space-24;
+  }
+
+  &__subtitle {
+    @include str.type-body;
+    margin: 0;
+  }
+
+  &__fields {
+    @include str.flex-col(str.$space-24);
+    margin-bottom: str.$space-24;
+  }
+
+  &__products-section {
+    @include str.flex-col(str.$space-12);
+  }
+
+  &__products-header {
+    @include str.flex-row(str.$space-12, center, space-between);
+  }
+
+  &__products-label {
+    font-size: str.$font-14;
+    font-weight: str.$fw-medium;
+    color: str.$color-text-primary;
+    margin: 0;
+  }
+
+  &__products-list {
+    @include str.flex-col(str.$space-12);
+  }
+
+  &__empty-products {
+    font-size: str.$font-14;
+    color: str.$color-text-muted;
+    text-align: center;
+    padding: str.$space-16;
+    background: str.$color-bg-muted;
+    border-radius: str.$radius-md;
+    margin: 0;
+  }
+
+  &__actions {
+    @include str.form-actions;
+    padding-top: str.$space-16;
+    border-top: 1px solid str.$color-border;
+
+    str-button {
+      width: auto;
+    }
+  }
+}
+
+.add-product-btn {
+  @include str.flex-row(str.$space-4, center);
+  padding: str.$space-4 str.$space-8;
+  font-size: str.$font-12;
+  font-weight: str.$fw-medium;
+  color: str.$color-interactive-accent;
+  background: none;
+  border: 1px solid str.$color-interactive-accent;
+  border-radius: str.$radius-md;
+  cursor: pointer;
+  transition: background str.$transition-fast;
+
+  &:hover {
+    background: str.$overlay-hover;
+  }
+
+  &:focus-visible {
+    outline: 2px solid str.$color-focus-shadow;
+    outline-offset: 2px;
+  }
+}
+
+.product-row {
+  @include str.flex-row(str.$space-12, flex-end);
+  background: str.$color-bg-muted;
+  border: 1px solid str.$color-border;
+  border-radius: str.$radius-md;
+  padding: str.$space-12;
+  gap: str.$space-12;
+
+  str-input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  str-input:first-of-type {
+    flex: 2;
+  }
+}
+
+.product-row__index {
+  font-size: str.$font-12;
+  color: str.$color-text-muted;
+  font-weight: str.$fw-medium;
+  min-width: 16px;
+  text-align: center;
+  padding-bottom: str.$space-4;
+}
+
+.remove-row-btn {
+  @include str.btn-ghost(32px);
+  color: str.$color-error;
+  border-radius: str.$radius-md;
+  flex-shrink: 0;
+  margin-bottom: str.$space-4;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.9);
+  }
+}

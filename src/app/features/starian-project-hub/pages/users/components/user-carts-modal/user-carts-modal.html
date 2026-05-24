@@ -1,0 +1,100 @@
+<div class="carts-modal" aria-labelledby="carts-dialog-title">
+
+  <header class="carts-modal__header">
+    <div class="carts-modal__title-group">
+      <p id="carts-dialog-title" class="title-font-20">Carrinhos de {{ userFullName() }}</p>
+      <p class="subtitle-font-14">Gerencie os carrinhos do usuário #{{ user.id }}.</p>
+    </div>
+    <str-button size="sm" iconName="add" iconPosition="left" (click)="openAddModal()">
+      Adicionar carrinho
+    </str-button>
+  </header>
+
+  <div class="carts-modal__content">
+
+    @if (loading()) {
+      <div class="carts-list" aria-busy="true">
+        @for (i of [0, 1, 2]; track i) {
+          <div class="cart-skeleton-row" aria-hidden="true">
+            <str-skeleton height="14px" width="40px" />
+            <str-skeleton height="14px" width="90px" />
+            <str-skeleton height="14px" width="64px" />
+            <div class="skeleton-actions">
+              <str-skeleton height="32px" width="32px" radius="6px" />
+              <str-skeleton height="32px" width="32px" radius="6px" />
+            </div>
+          </div>
+        }
+      </div>
+    } @else if (error()) {
+      <div class="carts-state carts-state--error" role="alert">
+        <p class="carts-state__text">Erro ao carregar os carrinhos. Tente novamente.</p>
+        <str-button size="sm" variant="secondary" (click)="cartsService.userCarts.reload()">
+          Tentar novamente
+        </str-button>
+      </div>
+    } @else if (carts().length === 0) {
+      <div class="carts-state">
+        <p class="carts-state__text">Nenhum carrinho encontrado para este usuário.</p>
+      </div>
+    } @else {
+      <div class="carts-table-wrapper" role="region" aria-label="Lista de carrinhos">
+        <table class="carts-table" aria-label="Carrinhos do usuário">
+          <thead>
+            <tr>
+              <th scope="col" class="col-cart-id">ID</th>
+              <th scope="col" class="col-cart-date">Data</th>
+              <th scope="col" class="col-cart-products">Produtos</th>
+              <th scope="col" class="col-cart-items">Total de itens</th>
+              <th scope="col" class="col-cart-actions">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (cart of carts(); track cart.id) {
+              <tr>
+                <td class="col-cart-id">#{{ cart.id }}</td>
+                <td class="col-cart-date">{{ cart.date | date: 'dd/MM/yyyy' }}</td>
+                <td class="col-cart-products">{{ cart.products.length }} produto{{ cart.products.length !== 1 ? 's' : '' }}</td>
+                <td class="col-cart-items">{{ totalItems(cart) }} item{{ totalItems(cart) !== 1 ? 's' : '' }}</td>
+                <td class="col-cart-actions">
+                  <div class="actions-cell">
+                    <button
+                      class="action-btn"
+                      type="button"
+                      strTooltip="Editar carrinho"
+                      strTooltipPosition="bottom"
+                      [tooltipShowDelay]="500"
+                      [attr.aria-label]="'Editar carrinho #' + cart.id"
+                      (click)="openEditModal(cart)"
+                    >
+                      <str-icon name="edit" size="18" />
+                    </button>
+                    <button
+                      class="action-btn action-btn--delete"
+                      type="button"
+                      strTooltip="Excluir carrinho"
+                      strTooltipPosition="bottom"
+                      [tooltipShowDelay]="500"
+                      [attr.aria-label]="'Excluir carrinho #' + cart.id"
+                      (click)="openDeleteModal(cart)"
+                    >
+                      <str-icon name="delete" size="18" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+  </div>
+
+  <footer class="carts-modal__footer">
+    <str-button size="md" variant="secondary" (click)="close()">
+      Fechar
+    </str-button>
+  </footer>
+
+</div>

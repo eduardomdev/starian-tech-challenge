@@ -1,0 +1,165 @@
+@use '../../../../../../../styles/imports' as str;
+
+.carts-modal {
+  @include str.flex-col(0);
+  padding: str.$space-4 0;
+
+  &__header {
+    @include str.flex-row(str.$space-16, flex-start, space-between);
+    flex-wrap: wrap;
+    gap: str.$space-12;
+    margin-bottom: str.$space-24;
+
+    str-button {
+      flex-shrink: 0;
+      width: auto;
+    }
+  }
+
+  &__title-group {
+    @include str.flex-col(str.$space-4);
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__content {
+    min-height: 200px;
+    margin-bottom: str.$space-24;
+  }
+
+  &__footer {
+    @include str.flex-row(str.$space-12, center, flex-end);
+    padding-top: str.$space-16;
+    border-top: 1px solid str.$color-border;
+
+    str-button {
+      width: auto;
+    }
+  }
+}
+
+// ── Table ────────────────────────────────────────────────────────────────────
+
+.carts-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid str.$color-border;
+  border-radius: str.$radius-md;
+}
+
+.carts-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    padding: str.$space-12 str.$space-16;
+    font-size: str.$font-12;
+    font-weight: str.$fw-regular;
+    color: str.$color-text-secondary;
+    letter-spacing: 0.05em;
+    text-align: left;
+    vertical-align: middle;
+    background: str.$color-bg-muted;
+    border-bottom: 1px solid str.$color-border;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: str.$space-12 str.$space-16;
+    vertical-align: middle;
+    border-bottom: 1px solid str.$color-border-faint;
+    font-size: str.$font-14;
+    color: str.$color-text-primary;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.col-cart-id {
+  width: 56px;
+  color: str.$color-text-muted;
+  white-space: nowrap;
+}
+
+.col-cart-date {
+  width: 110px;
+  white-space: nowrap;
+}
+
+.col-cart-products {
+  width: 120px;
+  white-space: nowrap;
+}
+
+.col-cart-items {
+  width: 120px;
+  white-space: nowrap;
+}
+
+.col-cart-actions {
+  width: 88px;
+}
+
+// ── Actions ──────────────────────────────────────────────────────────────────
+
+.actions-cell {
+  @include str.flex-row(str.$space-8);
+}
+
+.action-btn {
+  @include str.btn-ghost(32px);
+  color: str.$color-text-secondary;
+  border-radius: str.$radius-md;
+  background: str.$color-bg-surface;
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+// ── States ───────────────────────────────────────────────────────────────────
+
+.carts-state {
+  @include str.flex-col(str.$space-12);
+  align-items: center;
+  padding: str.$space-32 str.$space-16;
+  text-align: center;
+
+  &__text {
+    font-size: str.$font-14;
+    color: str.$color-text-muted;
+  }
+
+  &--error .carts-state__text {
+    color: str.$color-text-secondary;
+  }
+
+  str-button {
+    width: auto;
+  }
+}
+
+// ── Skeleton ─────────────────────────────────────────────────────────────────
+
+.carts-list {
+  @include str.flex-col(0);
+  border: 1px solid str.$color-border;
+  border-radius: str.$radius-md;
+  overflow: hidden;
+}
+
+.cart-skeleton-row {
+  @include str.flex-row(str.$space-24, center, flex-start);
+  padding: str.$space-12 str.$space-16;
+  border-bottom: 1px solid str.$color-border-faint;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.skeleton-actions {
+  @include str.flex-row(str.$space-8);
+  margin-left: auto;
+}

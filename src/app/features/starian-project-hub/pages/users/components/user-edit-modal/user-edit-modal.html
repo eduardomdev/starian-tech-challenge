@@ -1,0 +1,64 @@
+<form [formRoot]="editForm" class="edit-form" novalidate aria-labelledby="edit-user-dialog-title">
+
+  <header class="edit-form__header">
+    <p id="edit-user-dialog-title" class="title-font-20">Editar usuário</p>
+    <p class="subtitle-font-14">Usuário #{{ user.id }} · Atualize as informações abaixo.</p>
+  </header>
+
+  <div class="edit-form__fields">
+    <div class="edit-form__row">
+      <str-input
+        [formField]="editForm.firstname"
+        label="Primeiro nome"
+        placeholder="Ex: John"
+        inputId="edit-firstname"
+      />
+      <str-input
+        [formField]="editForm.lastname"
+        label="Último nome"
+        placeholder="Ex: Doe"
+        inputId="edit-lastname"
+      />
+    </div>
+
+    <div class="edit-form__row">
+      <str-input
+        [formField]="editForm.username"
+        label="Username"
+        placeholder="Ex: johndoe"
+        inputId="edit-username"
+      />
+      <str-input
+        [formField]="editForm.phone"
+        label="Telefone"
+        placeholder="Ex: 1-570-236-7033"
+        inputId="edit-phone"
+      />
+    </div>
+
+    <str-input
+      [formField]="editForm.email"
+      label="E-mail"
+      placeholder="Ex: john@email.com"
+      inputId="edit-email"
+    />
+
+    <str-input
+      [formField]="editForm.password"
+      label="Senha"
+      placeholder="Nova senha"
+      inputId="edit-password"
+      [type]="'password'"
+    />
+  </div>
+
+  <div class="edit-form__actions">
+    <str-button type="button" size="md" variant="secondary" (click)="cancel()">
+      Cancelar
+    </str-button>
+    <str-button type="submit" size="md" [loading]="updateLoading()">
+      Salvar alterações
+    </str-button>
+  </div>
+
+</form>
