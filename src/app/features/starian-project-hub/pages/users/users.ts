@@ -13,8 +13,8 @@ import { UsersTableRowSkeletonComponent } from './users-table-row-skeleton';
 import { UserAddModalComponent } from './components/user-add-modal/user-add-modal';
 import { UserEditModalComponent } from './components/user-edit-modal/user-edit-modal';
 import { UserCartsModalComponent } from './components/user-carts-modal/user-carts-modal';
-import { UsersService } from '@shared/services/users.service';
-import { UsersIntegrationService } from '../../services/users-integration.service';
+import { UserService } from '@shared/services/user.service';
+import { UserIntegrationService } from '../../services/user-integration/user-integration.service';
 import type { User } from '@shared/interfaces/user.interface';
 
 @Component({
@@ -35,19 +35,19 @@ import type { User } from '@shared/interfaces/user.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersPageComponent implements OnInit {
-  private readonly usersService = inject(UsersService);
+  private readonly userService = inject(UserService);
   private readonly dialogService = inject(DialogService);
-  private readonly integrationService = inject(UsersIntegrationService);
+  private readonly integrationService = inject(UserIntegrationService);
 
   protected readonly sortService = inject(SortService);
 
-  protected readonly loading = computed(() => this.usersService.users.isLoading());
-  protected readonly error = computed(() => this.usersService.users.error() !== undefined);
+  protected readonly loading = computed(() => this.userService.users.isLoading());
+  protected readonly error = computed(() => this.userService.users.error() !== undefined);
 
   protected readonly filterText = signal('');
 
   protected readonly filteredUsers = computed(() => {
-    const all = this.usersService.users.value() ?? [];
+    const all = this.userService.users.value() ?? [];
     const text = this.filterText().toLowerCase().trim();
     if (!text) return all;
     return all.filter(u =>
@@ -66,7 +66,7 @@ export class UsersPageComponent implements OnInit {
   protected readonly trackById = (_: number, item: User) => item.id;
 
   ngOnInit(): void {
-    this.usersService.users.reload();
+    this.userService.users.reload();
   }
 
   protected openAddModal(): void {
@@ -79,7 +79,7 @@ export class UsersPageComponent implements OnInit {
     });
 
     ref?.onClose?.subscribe((created) => {
-      if (created) this.usersService.users.reload();
+      if (created) this.userService.users.reload();
     });
   }
 

@@ -3,7 +3,7 @@ import { FormField, FormRoot, form, maxLength, required } from '@angular/forms/s
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
-import { UsersIntegrationService } from '../../../../services/users-integration.service';
+import { UserIntegrationService } from '../../../../services/user-integration/user-integration.service';
 import type { User } from '@shared/interfaces/user.interface';
 
 interface UserEditModel {
@@ -25,7 +25,7 @@ interface UserEditModel {
 export class UserEditModalComponent {
   private readonly ref = inject(DynamicDialogRef);
   private readonly config = inject(DynamicDialogConfig);
-  private readonly integrationService = inject(UsersIntegrationService);
+  private readonly integrationService = inject(UserIntegrationService);
 
   protected readonly user = this.config.data as User;
   protected readonly updateLoading = this.integrationService.updateLoading;

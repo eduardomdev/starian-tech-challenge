@@ -4,7 +4,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
 import { ToastrService } from '@shared/components/atoms/toastr/toastr.service';
-import { UsersIntegrationService } from '../../../../services/users-integration.service';
+import { UserIntegrationService } from '../../../../services/user-integration/user-integration.service';
 
 interface UserAddModel {
   username: string;
@@ -22,7 +22,7 @@ interface UserAddModel {
 export class UserAddModalComponent {
   private readonly ref = inject(DynamicDialogRef);
   private readonly toastr = inject(ToastrService);
-  private readonly integrationService = inject(UsersIntegrationService);
+  private readonly integrationService = inject(UserIntegrationService);
 
   protected readonly addLoading = this.integrationService.addLoading;
 

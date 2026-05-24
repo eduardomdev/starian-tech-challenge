@@ -1,23 +1,70 @@
 import { inject, Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { EMPTY, catchError, finalize, tap } from 'rxjs';
+
 import { ToastrService } from '@shared/components/atoms/toastr/toastr.service';
-import { UsersService } from '@shared/services/users.service';
+import { UserService } from '@shared/services/user.service';
+import { TokenService } from '@core/tokens/token.service';
+import { APP_ROUTES } from '@core/constants/app-routes.constant';
 import { nextUserId } from '@shared/utils/storage-id';
-import type { User, UpdateUserPayload } from '@shared/interfaces/user.interface';
+import type { UpdateUserPayload, User } from '@shared/interfaces/user.interface';
 import type { CreateUserPayload } from '@shared/interfaces/auth.interface';
 
 @Injectable({ providedIn: 'root' })
-export class UsersIntegrationService {
-  private readonly usersService = inject(UsersService);
+export class UserIntegrationService {
+  private readonly userService = inject(UserService);
+  private readonly tokenService = inject(TokenService);
   private readonly toastr = inject(ToastrService);
+  private readonly router = inject(Router);
+
+  readonly updateProfileLoading = signal(false);
+  readonly deleteAccountLoading = signal(false);
 
   readonly addLoading = signal(false);
   readonly updateLoading = signal(false);
   readonly deleteLoading = signal(false);
 
+  updateProfile(id: number, payload: UpdateUserPayload, onSuccess: (updated: User) => void): void {
+    this.updateProfileLoading.set(true);
+    this.userService
+      .updateUser(id, payload)
+      .pipe(
+        tap((updated) => {
+          this.toastr.success('Perfil atualizado com sucesso.');
+          onSuccess(updated);
+        }),
+        catchError(() => {
+          this.toastr.error('Erro ao atualizar perfil. Tente novamente.');
+          return EMPTY;
+        }),
+        finalize(() => this.updateProfileLoading.set(false)),
+      )
+      .subscribe();
+  }
+
+  deleteAccount(id: number, onSuccess?: () => void): void {
+    this.deleteAccountLoading.set(true);
+    this.userService
+      .deleteUser(id)
+      .pipe(
+        tap(() => {
+          this.toastr.success('Conta excluída com sucesso.');
+          onSuccess?.();
+          this.tokenService.removeToken();
+          this.router.navigate([APP_ROUTES.login]);
+        }),
+        catchError(() => {
+          this.toastr.error('Erro ao excluir conta. Tente novamente.');
+          return EMPTY;
+        }),
+        finalize(() => this.deleteAccountLoading.set(false)),
+      )
+      .subscribe();
+  }
+
   add(payload: Omit<CreateUserPayload, 'id'>, onSuccess: (created: User) => void): void {
     this.addLoading.set(true);
-    this.usersService
+    this.userService
       .addUser({ ...payload, id: nextUserId() })
       .pipe(
         tap((created) => {
@@ -35,7 +82,7 @@ export class UsersIntegrationService {
 
   update(id: number, payload: UpdateUserPayload, onSuccess: (updated: User) => void): void {
     this.updateLoading.set(true);
-    this.usersService
+    this.userService
       .updateUser(id, payload)
       .pipe(
         tap((updated) => {
@@ -53,7 +100,7 @@ export class UsersIntegrationService {
 
   delete(id: number, onSuccess: () => void): void {
     this.deleteLoading.set(true);
-    this.usersService
+    this.userService
       .deleteUser(id)
       .pipe(
         tap(() => {

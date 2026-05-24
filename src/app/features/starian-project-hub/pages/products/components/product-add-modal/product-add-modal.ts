@@ -5,7 +5,7 @@ import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
 import { StrSelectComponent } from '@shared/components/atoms/str-select/str-select.component';
 import { PRODUCT_CATEGORIES } from '@core/constants/product-categories.constant';
-import { ProductsIntegrationService } from '../../../../services/products-integration.service';
+import { ProductsIntegrationService } from '../../../../services/products-integration/products-integration.service';
 
 interface ProductAddModel {
   title: string;

@@ -11,6 +11,8 @@ export class UserService {
   private readonly http = inject(HttpClient);
   private readonly tokenService = inject(TokenService);
 
+  readonly users = httpResource<User[]>(() => `${environment.starianHubApi}/users`);
+
   readonly currentUser = httpResource<User>(() => {
     const id = this.tokenService.userId();
     return `${environment.starianHubApi}/users/${id}`;
@@ -22,6 +24,10 @@ export class UserService {
 
   login(data: LoginPayload): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.starianHubApi}/auth/login`, data);
+  }
+
+  addUser(payload: CreateUserPayload): Observable<User> {
+    return this.http.post<User>(`${environment.starianHubApi}/users`, payload);
   }
 
   updateUser(id: number, payload: UpdateUserPayload): Observable<User> {

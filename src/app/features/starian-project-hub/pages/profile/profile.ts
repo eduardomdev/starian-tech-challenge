@@ -10,7 +10,7 @@ import { TagComponent } from '@shared/components/atoms/str-tag/str-tag';
 import { ProfileSkeletonComponent } from './profile-skeleton';
 import { ConfirmModalComponent, type ConfirmModalData } from '@shared/components/molecules/confirm-modal/confirm-modal.component';
 import { UserService } from '@shared/services/user.service';
-import { UserIntegrationService } from '../../services/user-integration.service';
+import { UserIntegrationService } from '../../services/user-integration/user-integration.service';
 import { ToastrService } from '@shared/components/atoms/toastr/toastr.service';
 import { USER_ROLE_TAG_CONFIG } from '@core/constants/tag-user.constant';
 import type { UpdateUserPayload } from '@shared/interfaces/user.interface';
@@ -41,7 +41,7 @@ export class ProfilePageComponent implements OnInit {
   protected readonly loadError = computed(() => this.userService.currentUser.error() !== undefined);
   protected readonly user = computed(() => this.userService.currentUser.value());
 
-  protected readonly updateLoading = this.integrationService.updateLoading;
+  protected readonly updateLoading = this.integrationService.updateProfileLoading;
   protected readonly roleTagConfig = signal(USER_ROLE_TAG_CONFIG);
 
   protected readonly profileModel = signal<UpdateUserPayload>({
@@ -66,7 +66,7 @@ export class ProfilePageComponent implements OnInit {
         action: async (f) => {
           const currentUser = this.user();
           if (!currentUser) return;
-          this.integrationService.update(currentUser.id, f().value(), () => {
+          this.integrationService.updateProfile(currentUser.id, f().value(), () => {
             this.userService.currentUser.reload();
           });
         },
@@ -108,8 +108,8 @@ export class ProfilePageComponent implements OnInit {
         title: 'Excluir conta',
         description: 'Deseja realmente excluir sua conta? Esta ação não poderá ser desfeita.',
         confirmLabel: 'Excluir conta',
-        loading: this.integrationService.deleteLoading,
-        onConfirm: (close) => this.integrationService.delete(currentUser.id, close),
+        loading: this.integrationService.deleteAccountLoading,
+        onConfirm: (close) => this.integrationService.deleteAccount(currentUser.id, close),
       } satisfies ConfirmModalData,
     });
   }

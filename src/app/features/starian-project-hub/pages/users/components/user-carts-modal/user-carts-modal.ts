@@ -7,7 +7,7 @@ import { StrSkeletonComponent } from '@shared/components/atoms/str-skeleton/str-
 import { StrTooltipDirective } from '@shared/directives/str-tooltip/str-tooltip.directive';
 import { ConfirmModalComponent, type ConfirmModalData } from '@shared/components/molecules/confirm-modal/confirm-modal.component';
 import { CartsService } from '@shared/services/carts.service';
-import { CartsIntegrationService } from '../../../../services/carts-integration.service';
+import { CartsIntegrationService } from '../../../../services/carts-integration/carts-integration.service';
 import { CartAddModalComponent } from '../cart-add-modal/cart-add-modal';
 import { CartEditModalComponent } from '../cart-edit-modal/cart-edit-modal';
 import type { User } from '@shared/interfaces/user.interface';

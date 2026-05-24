@@ -11,7 +11,6 @@ export class CartsService {
 
   readonly userCarts = httpResource<Cart[]>(() => {
     const userId = this._userId();
-    if (!userId) return undefined;
     return `${environment.starianHubApi}/carts/user/${userId}`;
   });
 

@@ -15,8 +15,8 @@ import { StrButtonComponent } from '@shared/components/atoms/str-button/str-butt
 import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
 import { StrMultiSelectComponent } from '@shared/components/atoms/str-multi-select/str-multi-select.component';
 import { ProductsTableRowSkeletonComponent } from './products-table-row-skeleton';
-import { FilterProductsService } from '../../services/filter-products.service';
-import { ProductsIntegrationService } from '../../services/products-integration.service';
+import { FilterProductsService } from '../../services/filter-products/filter-products.service';
+import { ProductsIntegrationService } from '../../services/products-integration/products-integration.service';
 
 import type { Product } from '../../../../shared/interfaces/products.interface';
 import { ProductsService } from '@shared/services/products.service';

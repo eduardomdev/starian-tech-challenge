@@ -3,7 +3,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { StrInputComponent } from '@shared/components/atoms/str-input/str-input.component';
 import { StrButtonComponent } from '@shared/components/atoms/str-button/str-button.component';
 import { IconComponent } from '@shared/components/atoms/icon/icon';
-import { CartsIntegrationService } from '../../../../services/carts-integration.service';
+import { CartsIntegrationService } from '../../../../services/carts-integration/carts-integration.service';
 import type { CartProduct } from '@shared/interfaces/cart.interface';
 
 interface CartProductRow {
