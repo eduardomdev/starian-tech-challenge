@@ -1,6 +1,6 @@
 # Starian Tech Challenge — Angular 21
 
-> Starian Hub é uma aplicação construída com **Angular 21**, consumindo a [Fake Store API](https://fakestore-eapi.com) para simular um painel administrativo completo com autenticação, gestão de produtos, usuários e carrinhos.
+> Starian Hub é uma aplicação construída com **Angular 21**, consumindo a [Fake Store API](https://fakestoreapi.com/docs) para simular um painel administrativo completo com autenticação, gestão de produtos, usuários e carrinhos.
 
 ---
 
