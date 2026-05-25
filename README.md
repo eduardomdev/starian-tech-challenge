@@ -1,6 +1,6 @@
 # Starian Tech Challenge — Angular 21
 
-> Teste técnico para a vaga de Desenvolvedor Frontend na **Starian**. Aplicação SPA construída com **Angular 21**, consumindo a [Fake Store API](https://fakestore-eapi.com) para simular um painel administrativo completo com autenticação, gestão de produtos, usuários e carrinhos.
+> Starian Hub é uma aplicação construída com **Angular 21**, consumindo a [Fake Store API](https://fakestore-eapi.com) para simular um painel administrativo completo com autenticação, gestão de produtos, usuários e carrinhos.
 
 ---
 
@@ -28,7 +28,7 @@ CRUD completo em todos os domínios disponíveis na Fake Store API:
 
 ## ⚙️ Decisões Técnicas
 
-**Dependências externas mínimas** —  Todos os componentes de UI foram construídos manualmente para demonstrar componentização. De toda a suite PrimeNG, foi utilizado somente o `DialogService` para abertura de modais.
+**Dependências externas mínimas** —  Todos os componentes de UI foram construídos manualmente para demonstrar componentização.
 
 **Angular 21 — APIs modernas**
 - `Signal Forms` recurso de formularios Angular 21 para gerenciamento de formulários reativos integrados ao sistema de Signals
@@ -90,6 +90,8 @@ src/app/
 
 **Credenciais de teste:** `johnd / m38rmF$` · `mor_2314 / 83r5^_` · `kevinryan / kev02937@`
 
+> ⚠️ Mesmo que o fluxo de cadastro funcione corretamente (requisição enviada e respondida com sucesso), a Fake Store API não persiste o novo usuário. Utilize sempre uma das credenciais acima para acessar o sistema.
+
 ### Localmente
 
 ```bash
@@ -111,4 +113,4 @@ Coverage proxima a 80%, cobrindo guards, interceptor, services (auth, token, fil
 
 ---
 
-<p align="center">Desenvolvido por <strong>Eduardo Maciel</strong> · Angular 21 · 2025</p>
+<p align="center">Desenvolvido por <strong>Eduardo Maciel</strong> · Angular 21 · 2026</p>
